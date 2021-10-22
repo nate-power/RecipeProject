@@ -17,7 +17,7 @@ public class Recipe {
     private int cookTime;
     private int serving;
     private List<Rating> ratingList;
-    private Set<Ingredient> ingredientSet;
+    private Set<String> ingredientSet;
 
     public String getName() {
         return name;
@@ -87,11 +87,14 @@ public class Recipe {
         this.ratingList = ratingList;
     }
 
-    public Set<Ingredient> getIngredientSet() {
+    public Set<String> getIngredientSet() {
         return ingredientSet;
     }
 
-    public void setIngredientSet(Set<Ingredient> ingredientSet) {
+    public void setIngredientSet(Set<String> ingredientSet) {
         this.ingredientSet = ingredientSet;
+        // this setter will take a value, unit of measurement, and ingredient name
+        // combine them into one string comma seperating the three components
+        // ex. "1/2, cup, flour"
     }
 }
