@@ -5,7 +5,6 @@ public class Ingredient {
     private double measurement;
     // make enum for units (lb, oz, etc.)
 
-
     public String getName() {
         return name;
     }

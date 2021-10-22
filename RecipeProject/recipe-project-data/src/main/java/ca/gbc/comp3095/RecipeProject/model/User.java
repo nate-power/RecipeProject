@@ -51,6 +51,10 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
+    public Set<Recipe> getRecipeSet() {
+        return recipeSet;
+    }
+
     public void setRecipeSet(Set<Recipe> recipeSet) {
         this.recipeSet = recipeSet;
     }

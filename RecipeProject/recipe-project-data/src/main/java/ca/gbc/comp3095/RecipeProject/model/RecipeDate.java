@@ -6,7 +6,6 @@ public class RecipeDate {
     // make enum for days (Sunday-Saturday)
     // make enum for meal types (bfast, lunch, dinner, snack)
 
-
     public Recipe getRecipe() {
         return recipe;
     }

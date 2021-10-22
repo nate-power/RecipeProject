@@ -6,7 +6,6 @@ public class Rating {
     private Recipe recipe;
     // make enum of ratings (1-5)
 
-
     public User getUser() {
         return user;
     }
