@@ -9,7 +9,8 @@ public class User extends BaseEntity {
     private String email;
     private String firstName;
     private String lastName;
-    private Set<Recipe> recipeSet;
+    private Set<Recipe> favouriteRecipes;
+    private Set<Recipe> createdRecipes;
 
     public String getUserName() {
         return userName;
@@ -51,11 +52,19 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public Set<Recipe> getRecipeSet() {
-        return recipeSet;
+    public Set<Recipe> getFavouriteRecipes() {
+        return favouriteRecipes;
     }
 
-    public void setRecipeSet(Set<Recipe> recipeSet) {
-        this.recipeSet = recipeSet;
+    public void setFavouriteRecipes(Set<Recipe> favouriteRecipes) {
+        this.favouriteRecipes = favouriteRecipes;
+    }
+
+    public Set<Recipe> getCreatedRecipes() {
+        return createdRecipes;
+    }
+
+    public void setCreatedRecipes(Set<Recipe> createdRecipes) {
+        this.createdRecipes = createdRecipes;
     }
 }
