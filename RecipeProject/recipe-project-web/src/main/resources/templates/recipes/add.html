@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Recipe</title>
+</head>
+<body>
+<h1>Add Recipe</h1>
+
+<!--/*@thymesVar id="recipe" type="recipe"*/-->
+<form th:action="@{/recipe/add}" th:object="${recipe}" method="post">
+    <p>Recipe Name: <input type="text" name="name"></p>
+    <p>Description: <input type="text" name="description"></p>
+    <p>Prep Time: <input type="number" name="prepTime"></p>
+    <p>Cook Time: <input type="number" name="cookTime"></p>
+    <p>Servings: <input type="number" name="serving"></p>
+    <p>Ingredient: <input type="text" name="ingredient"></p>
+    <p><input type="submit" value="Add Recipe"></p>
+
+
+</form>
+
+</body>
+</html>
