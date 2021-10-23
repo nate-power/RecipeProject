@@ -7,14 +7,13 @@
 <body>
 <h1>Add Recipe</h1>
 
-<!--/*@thymesVar id="recipe" type="recipe"*/-->
-<form th:action="@{/recipe/add}" th:object="${recipe}" method="post">
-    <p>Recipe Name: <input type="text" name="name"></p>
-    <p>Description: <input type="text" name="description"></p>
-    <p>Prep Time: <input type="number" name="prepTime"></p>
-    <p>Cook Time: <input type="number" name="cookTime"></p>
-    <p>Servings: <input type="number" name="serving"></p>
-    <p>Ingredient: <input type="text" name="ingredient"></p>
+<form th:action="@{/createRecipe}" th:object="${recipe}" method="post">
+    <p>Recipe Name: <input type="text" id="name" th:field="*{name}"></p>
+    <p>Description: <input type="text" id="description" th:field="*{description}"></p>
+    <p>Prep Time: <input type="number" id="prepTime" th:field="*{prepTime}"></p>
+    <p>Cook Time: <input type="number" id="cookTime" th:field="*{cookTime}"></p>
+    <p>Servings: <input type="number" id="serving" th:field="*{serving}"></p>
+    <input type="hidden" id="id" th:field="*{id}">
     <p><input type="submit" value="Add Recipe"></p>
 
 

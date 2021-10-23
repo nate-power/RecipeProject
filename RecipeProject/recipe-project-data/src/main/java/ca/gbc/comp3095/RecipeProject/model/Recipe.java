@@ -1,10 +1,16 @@
 package ca.gbc.comp3095.RecipeProject.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
+@Entity
 public class Recipe {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private User user;
@@ -16,8 +22,29 @@ public class Recipe {
     private int prepTime;
     private int cookTime;
     private int serving;
-    private List<Rating> ratingList;
-    private Set<String> ingredientSet;
+//    private List<Rating> ratingList;
+//    private Set<String> ingredientSet;
+
+
+    public Recipe() {
+    }
+
+    public Recipe(Long id, String name, User user, String description, LocalDate dateUpdated, int prepTime, int cookTime, int serving) {
+        this.id = id;
+        this.name = name;
+        this.user = user;
+        this.description = description;
+        this.dateUpdated = dateUpdated;
+        this.prepTime = prepTime;
+        this.cookTime = cookTime;
+        this.serving = serving;
+    }
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -79,22 +106,22 @@ public class Recipe {
         this.serving = serving;
     }
 
-    public List<Rating> getRatingList() {
-        return ratingList;
-    }
+//    public List<Rating> getRatingList() {
+//        return ratingList;
+//    }
+//
+//    public void setRatingList(List<Rating> ratingList) {
+//        this.ratingList = ratingList;
+//    }
+//
+//    public Set<String> getIngredientSet() {
+//        return ingredientSet;
+//    }
 
-    public void setRatingList(List<Rating> ratingList) {
-        this.ratingList = ratingList;
-    }
-
-    public Set<String> getIngredientSet() {
-        return ingredientSet;
-    }
-
-    public void setIngredientSet(Set<String> ingredientSet) {
-        this.ingredientSet = ingredientSet;
-        // this setter will take a value, unit of measurement, and ingredient name
-        // combine them into one string comma seperating the three components
-        // ex. "1/2, cup, flour"
-    }
+//    public void setIngredientSet(Set<String> ingredientSet) {
+//        this.ingredientSet = ingredientSet;
+//        // this setter will take a value, unit of measurement, and ingredient name
+//        // combine them into one string comma seperating the three components
+//        // ex. "1/2, cup, flour"
+//    }
 }
