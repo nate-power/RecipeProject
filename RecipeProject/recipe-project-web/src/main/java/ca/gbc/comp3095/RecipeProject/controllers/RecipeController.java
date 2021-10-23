@@ -20,7 +20,8 @@ public class RecipeController {
     }
 
     @GetMapping({"/recipes", "/recipes/"} )
-    public String listRecipes() {
+    public String listRecipes(Model model) {
+        model.addAttribute("recipes", recipeService.getAllRecipes());
         return "recipes/index";
     }
 

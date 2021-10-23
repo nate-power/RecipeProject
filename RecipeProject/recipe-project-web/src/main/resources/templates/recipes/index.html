@@ -6,6 +6,22 @@
 </head>
 <body>
 <h1>here are all the recipes we have</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Prep Time</th>
+        <th>Cook Time</th>
+        <th>Servings</th>
+    </tr>
+    <tr th:each="recipe : ${recipes}">
+        <td th:text="${recipe.getName()}"></td>
+        <td th:text="${recipe.getDescription()}"></td>
+        <td th:text="${recipe.getPrepTime()}"></td>
+        <td th:text="${recipe.getCookTime()}"></td>
+        <td th:text="${recipe.getServing()}"></td>
+    </tr>
+</table>
 
 </body>
 </html>

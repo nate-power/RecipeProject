@@ -1,4 +1,4 @@
-package ca.gbc.comp3095.RecipeProject.repository;
+package ca.gbc.comp3095.RecipeProject.repositories;
 
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import org.springframework.data.repository.CrudRepository;

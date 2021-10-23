@@ -1,8 +1,7 @@
 package ca.gbc.comp3095.RecipeProject.services;
 
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
-import ca.gbc.comp3095.RecipeProject.repository.RecipeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import ca.gbc.comp3095.RecipeProject.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class RecipeService {
         if(result.size() > 0) {
             return result;
         } else {
-            return new ArrayList<Recipe>();
+            return new ArrayList<>();
         }
     }
 
