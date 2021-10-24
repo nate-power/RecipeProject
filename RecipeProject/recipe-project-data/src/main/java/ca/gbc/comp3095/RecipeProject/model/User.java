@@ -1,31 +1,58 @@
 package ca.gbc.comp3095.RecipeProject.model;
 
+import javax.persistence.*;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Set;
 
+@Entity
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User extends BaseEntity {
 
-    private String userName;
-    private String passWord;
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
+
     private String email;
+
+    @Column(name = "firstname")
     private String firstName;
+
+    @Column(name = "lastname")
     private String lastName;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Recipe> favouriteRecipes;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Recipe> createdRecipes;
 
-    public String getUserName() {
-        return userName;
+    public User() { }
+
+    public User(String username, String password, String email, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getUsername() {
+        return username;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {

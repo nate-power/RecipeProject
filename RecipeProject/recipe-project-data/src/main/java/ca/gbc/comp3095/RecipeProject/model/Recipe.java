@@ -6,44 +6,31 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Recipe {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Recipe extends BaseEntity{
 
     private String name;
-    private User user;
+    private Long userId;
     private String description;
     private final LocalDate dateCreated = LocalDate.now();
-    private LocalDate dateUpdated;
     // make enum for Accessors (public private)
     // make enum for Categories
     private int prepTime;
     private int cookTime;
     private int serving;
-//    private List<Rating> ratingList;
 //    private Set<String> ingredientSet;
 
 
     public Recipe() {
     }
 
-    public Recipe(Long id, String name, User user, String description, LocalDate dateUpdated, int prepTime, int cookTime, int serving) {
-        this.id = id;
+    // used for bootstrap data
+    public Recipe(String name, Long userId, String description, int prepTime, int cookTime, int serving) {
         this.name = name;
-        this.user = user;
+        this.userId = userId;
         this.description = description;
-        this.dateUpdated = dateUpdated;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.serving = serving;
-    }
-
-    public Long getId() { return id; }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -54,12 +41,12 @@ public class Recipe {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getDescription() {
@@ -72,14 +59,6 @@ public class Recipe {
 
     public LocalDate getDateCreated() {
         return dateCreated;
-    }
-
-    public LocalDate getDateUpdated() {
-        return dateUpdated;
-    }
-
-    public void setDateUpdated(LocalDate dateUpdated) {
-        this.dateUpdated = dateUpdated;
     }
 
     public int getPrepTime() {

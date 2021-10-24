@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Recipes</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
 </head>
 <body>
-<h1>here are all the recipes we have</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Prep Time</th>
-        <th>Cook Time</th>
-        <th>Servings</th>
-    </tr>
-    <tr th:each="recipe : ${recipes}">
-        <td th:text="${recipe.getName()}"></td>
-        <td th:text="${recipe.getDescription()}"></td>
-        <td th:text="${recipe.getPrepTime()}"></td>
-        <td th:text="${recipe.getCookTime()}"></td>
-        <td th:text="${recipe.getServing()}"></td>
-    </tr>
-</table>
-
+    <p sec:authorize="isAuthenticated()"><a class="btn btn-primary" th:href="@{/logout}">Logout</a></p>
+    <h1>Welcome <span sec:authentication="name">User</span></h1>
+    <h2>here are all the recipes we have lmao</h2>
+    <table class="table table-bordered table-striped w-50">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Prep Time</th>
+            <th>Cook Time</th>
+            <th>Servings</th>
+            <th>Created By</th>
+        </tr>
+        <tr th:each="recipe : ${recipes}">
+            <td>
+                <a th:href="@{/recipe/{name}/{id}(name=${recipe.name}, id=${recipe.id})}" th:text="${recipe.name}"></a>
+            </td>
+            <td th:text="${recipe.description}"></td>
+            <td th:text="${recipe.prepTime}"></td>
+            <td th:text="${recipe.cookTime}"></td>
+            <td th:text="${recipe.serving}"></td>
+            <td th:text="${recipe.userId}"></td>
+        </tr>
+    </table>
 </body>
 </html>
