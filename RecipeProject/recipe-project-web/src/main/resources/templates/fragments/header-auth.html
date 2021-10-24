@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="auth-header">
+    <a class="navbar-brand" th:href="@{/}">Recipe Project</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Recipes
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{/}">All Recipes</a>
+                    <a class="dropdown-item" href="#">Created Recipes</a>
+                    <a class="dropdown-item" href="#">Favourite Recipes</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Recipe Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Meal Planner</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav my-2 my-lg-0 mr-3">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/recipe/add}">Create a Recipe</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="mdo" width="28" height="28" class="rounded-circle">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <p sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/logout}">Sign out</a></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

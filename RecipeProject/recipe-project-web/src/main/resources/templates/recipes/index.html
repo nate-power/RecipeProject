@@ -6,7 +6,7 @@
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
 </head>
 <body>
-    <p sec:authorize="isAuthenticated()"><a class="btn btn-primary" th:href="@{/logout}">Logout</a></p>
+    <div th:insert="fragments/header-auth :: auth-header"></div>
     <h1>Welcome <span sec:authentication="name">User</span></h1>
     <h2>here are all the recipes we have lmao</h2>
     <table class="table table-bordered table-striped w-50">
@@ -29,7 +29,6 @@
             <td th:text="${recipe.userId}"></td>
         </tr>
     </table>
-    <a class="btn btn-primary" th:href="@{/recipe/add}">Add a Recipe</a>
     <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>

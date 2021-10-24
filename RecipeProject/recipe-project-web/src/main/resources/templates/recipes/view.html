@@ -2,33 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title th:text="${recipe} ? ${recipe.name} : '404 - Page Not Found'"></title>
+  <title th:text="${recipe.name}"></title>
   <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
 </head>
 <body>
-  <div th:switch="${recipe}">
-    <h1 th:case="null">Error 404 - Page Not Found</h1>
-    <div th:case="*">
-      <h1 th:text="${recipe.name}"></h1>
-      <table class="table table-bordered table-striped">
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Prep Time</th>
-          <th>Cook Time</th>
-          <th>Servings</th>
-        </tr>
-        <tr>
-          <td th:text="${recipe.name}"></td>
-          <td th:text="${recipe.description}"></td>
-          <td th:text="${recipe.prepTime}"></td>
-          <td th:text="${recipe.cookTime}"></td>
-          <td th:text="${recipe.serving}"></td>
-        </tr>
-      </table>
-      <a class="btn btn-primary" th:href="@{/}">Back To Recipes</a>
-    </div>
-  </div>
+  <div th:insert="fragments/header-auth :: auth-header"></div>
+  <h1 th:text="${recipe.name}"></h1>
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Prep Time</th>
+      <th>Cook Time</th>
+      <th>Servings</th>
+    </tr>
+    <tr>
+      <td th:text="${recipe.name}"></td>
+      <td th:text="${recipe.description}"></td>
+      <td th:text="${recipe.prepTime}"></td>
+      <td th:text="${recipe.cookTime}"></td>
+      <td th:text="${recipe.serving}"></td>
+    </tr>
+  </table>
+  <a class="btn btn-primary" th:href="@{/}">Back To Recipes</a>
   <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
   <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
   <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
