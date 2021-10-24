@@ -47,15 +47,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/js/**",
                 "/css/**",
                 "/img/**",
-                "/webjars/**"
-        ).permitAll().anyRequest().authenticated().and()
-                .formLogin().loginPage("/login")
-                .successHandler(successHandler)
-                .permitAll().and().logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
+                "/webjars/**",
+                "/h2/**" // used for testing only*
+        ).permitAll().anyRequest().authenticated()
+                // next section allows use of H2 console for testing and should be removed for production***
+                .and()
+                .headers().frameOptions().disable()
+                .and()
+                .csrf().ignoringAntMatchers("/h2/**")
+                // H2 access script ends here
+                .and()
+                .formLogin().loginPage("/login").successHandler(successHandler).permitAll()
+                .and()
+                .logout().invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
-                .permitAll();
+                .logoutSuccessUrl("/login?logout").permitAll();
     }
 }
