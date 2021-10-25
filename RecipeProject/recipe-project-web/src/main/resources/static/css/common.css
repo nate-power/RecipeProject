@@ -1,1 +1,19 @@
 /* use this file to fix fixed bottom footer from overlapping content */
+
+html {
+    min-height: calc(100vh - 58px);
+    border-left: 58px solid #343a40;
+    border-right: 58px solid #343a40;
+    margin-bottom: 58px;
+}
+
+#footer {
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#main {
+    margin-top: 58px;
+}

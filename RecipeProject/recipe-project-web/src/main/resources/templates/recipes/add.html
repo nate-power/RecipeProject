@@ -7,24 +7,24 @@
     <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
 </head>
 <body>
-    <div th:insert="fragments/header-auth :: auth-header"></div>
-    <h1>Add a Recipe</h1>
+    <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
+    <h1 class="text-center">Add a Recipe</h1>
     <hr class="my-3"/>
-    <div class="container mt-5">
-        <div class="row jumbotron jumbotron-fluid">
-            <div class="col">
-                <p class="">To add a new recipe, you must first specify the information for the recipe.</p>
-                <ul>
-                    <li>Your recipe needs a catchy name where you and other foodies can find it easily</li>
-                    <li>Your recipe needs a good description so people following it know what they are in for</li>
-                    <li>Your recipe should specify an accurate prep and cook time for the recipe; time management is important!</li>
-                </ul>
+    <div class="container-fluid">
+        <form th:action="@{/createRecipe}" th:object="${recipe}" method="post">
+            <h2>Add Recipe Information</h2>
+            <div class="row jumbotron jumbotron-fluid">
+                <div class="col">
+                    <p class="">To add a new recipe, you must first specify the information for the recipe:</p>
+                    <ul>
+                        <li>Your recipe needs a catchy name where you and other users can find it easily.</li>
+                        <li>Your recipe needs a good description so people following it know what they are in for.</li>
+                        <li>Your recipe should specify an accurate prep and cook time for the recipe; time management is important!</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h2 class="text-center">Add Recipe Information</h2>
-                <form th:action="@{/createRecipe}" th:object="${recipe}" method="post">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
                     <div class="form-group">
                         <label for="name">Name: </label>
                         <input type="text" class="form-control" id="name" name="name" autofocus="autofocus" required th:field="*{name}" />
@@ -45,6 +45,7 @@
                         <label for="serving">Serving: </label>
                         <input type="number" min="1" class="form-control" id="serving" name="serving" value="1" required th:field="*{serving}" />
                     </div>
+                    <!-- INCLUDE AT THE END OF FORM
                     <input type="hidden" id="id" name="id" th:field="*{id}">
                     <div class="form-group">
                         <div class="row">
@@ -54,9 +55,30 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                    -->
+                </div>
             </div>
-        </div>
+            <hr class="my-3"/>
+            <h2>Add Ingredients</h2>
+            <div class="row jumbotron jumbotron-fluid">
+                <div class="col">
+                    <p class="">Now, we must include the ingredients to make your masterpiece!</p>
+                    <ul>
+                        <li>Enter ingredients on a separate line in the field below.</li>
+                        <li>To ensure users can change serving size when viewing the recipe, enter ingredients in the following format: ex. 1 cup flour</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="form-group">
+                        <label for="ingredients">Ingredients: </label>
+                        <textarea class="form-control" id="ingredients" name="ingredients" required placeholder="Put each ingredient on it's own line."></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- INCLUDE SUBMIT AND BACK BUTTONS HERE -->
+        </form>
     </div>
     <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>

@@ -7,7 +7,7 @@
   <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
 </head>
 <body>
-  <div th:insert="fragments/header-auth :: auth-header"></div>
+  <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
   <h1 th:text="${recipe.name}"></h1>
   <table class="table table-bordered table-striped">
     <tr>
