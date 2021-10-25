@@ -3,6 +3,7 @@ package ca.gbc.comp3095.RecipeProject.model;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Set;
 
 @Entity

@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
-    <h1 class="text-center">Add a Recipe</h1>
+    <h1 class="text-center mt-2">Add a Recipe</h1>
     <hr class="my-3"/>
     <div class="container-fluid">
         <form th:action="@{/createRecipe}" th:object="${recipe}" method="post">
@@ -34,6 +34,23 @@
                         <textarea class="form-control" id="description" name="description" required th:field="*{description}"></textarea>
                     </div>
                     <div class="form-group">
+                        <label for="category">Category: </label>
+                        <br/>
+                        <select id="category" name="category" required th:field="*{category}">
+                            <!-- turn this into an enum for Recipe class and do a for each loop to list them -->
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Lunch">Lunch</option>
+                            <option value="Dinner">Dinner</option>
+                            <option value="Appetizers">Appetizers</option>
+                            <option value="Desserts">Desserts</option>
+                            <option value="Salads">Salads</option>
+                            <option value="Soups">Soups</option>
+                            <option value="Baked Goods">Baked Goods</option>
+                            <option value="Vegetarian">Vegetarian</option>
+                            <option value="Vegan">Vegan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="prepTime">Prep Time: </label>
                         <input type="number" min="1" class="form-control" id="prepTime" name="prepTime" value="1" required th:field="*{prepTime}" />
                     </div>
@@ -45,17 +62,6 @@
                         <label for="serving">Serving: </label>
                         <input type="number" min="1" class="form-control" id="serving" name="serving" value="1" required th:field="*{serving}" />
                     </div>
-                    <!-- INCLUDE AT THE END OF FORM
-                    <input type="hidden" id="id" name="id" th:field="*{id}">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-6 col-sm-offset-3">
-                                <input type="submit" name="login" id="login" class="form-control btn btn-primary" value="Add Recipe"/>
-                                <a class="btn btn-primary mt-3" th:href="@{/}">Cancel</a>
-                            </div>
-                        </div>
-                    </div>
-                    -->
                 </div>
             </div>
             <hr class="my-3"/>
@@ -73,11 +79,39 @@
                 <div class="col-lg-6 mx-auto">
                     <div class="form-group">
                         <label for="ingredients">Ingredients: </label>
-                        <textarea class="form-control" id="ingredients" name="ingredients" required placeholder="Put each ingredient on it's own line."></textarea>
+                        <textarea rows="6" class="form-control" id="ingredients" name="ingredients" required placeholder="Put each ingredient on it's own line."></textarea>
                     </div>
                 </div>
             </div>
-            <!-- INCLUDE SUBMIT AND BACK BUTTONS HERE -->
+            <hr class="my-3"/>
+            <h2>Add Steps</h2>
+            <div class="row jumbotron jumbotron-fluid">
+                <div class="col">
+                    <p class="">Let's show everyone interested in your recipe how to make it!</p>
+                    <ul>
+                        <li>Enter steps on a separate line in the field below, just like you did for ingredients.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="form-group">
+                        <label for="steps">Steps: </label>
+                        <textarea rows="6" class="form-control" id="steps" name="steps" required placeholder="Put each step on it's own line."></textarea>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3"/>
+            <input type="hidden" id="id" name="id" th:field="*{id}">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="row">
+                    <div class="col-sm-4 mx-auto">
+                        <h4 class="text-center">Make sure you double-check your creation!</h4>
+                        <h5 class="text-center">When you are ready, you can submit.</h5>
+                        <input type="submit" name="add-recipe" id="add-recipe" class="form-control btn btn-primary" value="Add Recipe"/>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>

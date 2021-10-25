@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 @Controller
 public class RecipeController {
@@ -45,7 +47,19 @@ public class RecipeController {
     }
 
     @PostMapping("/createRecipe" )
-    public String saveRecipe(Recipe recipe) {
+    public String saveRecipe(Recipe recipe, @RequestParam Map<String, String> stringMap) {
+        String ingredients = stringMap.get("ingredients");
+        String[] ingredientsArr = ingredients.split("\\n");
+        ingredients = String.join("^", ingredientsArr);
+        recipe.setIngredients(ingredients);
+
+        String steps = stringMap.get("steps");
+        String[] stepsArr = steps.split("\\n");
+        steps = String.join("^", stepsArr);
+        recipe.setSteps(steps);
+
+        recipe.setName(Recipe.uppercaseName(recipe.getName()));
+
         recipeService.save(recipe);
         return "redirect:/recipes";
     }

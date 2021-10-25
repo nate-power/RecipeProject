@@ -12,12 +12,12 @@ public class Recipe extends BaseEntity{
     private Long userId;
     private String description;
     private final LocalDate dateCreated = LocalDate.now();
-    // make enum for Accessors (public private)
-    // make enum for Categories
+    private String category;
     private int prepTime;
     private int cookTime;
     private int serving;
-//    private Set<String> ingredientSet;
+    private String ingredients;
+    private String steps;
 
 
     public Recipe() {
@@ -61,6 +61,10 @@ public class Recipe extends BaseEntity{
         return dateCreated;
     }
 
+    public String getCategory() { return category; }
+
+    public void setCategory(String category) { this.category = category; }
+
     public int getPrepTime() {
         return prepTime;
     }
@@ -85,22 +89,24 @@ public class Recipe extends BaseEntity{
         this.serving = serving;
     }
 
-//    public List<Rating> getRatingList() {
-//        return ratingList;
-//    }
-//
-//    public void setRatingList(List<Rating> ratingList) {
-//        this.ratingList = ratingList;
-//    }
-//
-//    public Set<String> getIngredientSet() {
-//        return ingredientSet;
-//    }
+    public String getIngredients() { return ingredients; }
 
-//    public void setIngredientSet(Set<String> ingredientSet) {
-//        this.ingredientSet = ingredientSet;
-//        // this setter will take a value, unit of measurement, and ingredient name
-//        // combine them into one string comma seperating the three components
-//        // ex. "1/2, cup, flour"
-//    }
+    public void setIngredients(String ingredients) { this.ingredients = ingredients; }
+
+    public String getSteps() { return steps; }
+
+    public void setSteps(String steps) { this.steps = steps; }
+
+    public static String uppercaseName(String name) {
+        String uppercaseWord = "";
+        String[] words = name.toLowerCase().split("\\s");
+
+        for (String word : words) {
+            String firstLetter = word.substring(0, 1);
+            String restOfWord = word.substring(1);
+            uppercaseWord += firstLetter.toUpperCase() + restOfWord + " ";
+        }
+        return uppercaseWord.trim();
+    }
+
 }

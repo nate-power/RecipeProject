@@ -8,15 +8,12 @@
 </head>
 <body>
     <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
-    <h1>Welcome <span sec:authentication="name">User</span></h1>
+    <h1 class="mt-2">Welcome <span sec:authentication="name">User</span></h1>
     <h2>here are all the recipes we have lmao</h2>
     <table class="table table-bordered table-striped w-50">
         <tr>
             <th>Name</th>
             <th>Description</th>
-            <th>Prep Time</th>
-            <th>Cook Time</th>
-            <th>Servings</th>
             <th>Created By</th>
         </tr>
         <tr th:each="recipe : ${recipes}">
@@ -24,9 +21,6 @@
                 <a th:href="@{/recipe/{name}/{id}(name=${recipe.name}, id=${recipe.id})}" th:text="${recipe.name}"></a>
             </td>
             <td th:text="${recipe.description}"></td>
-            <td th:text="${recipe.prepTime}"></td>
-            <td th:text="${recipe.cookTime}"></td>
-            <td th:text="${recipe.serving}"></td>
             <td th:text="${recipe.userId}"></td>
         </tr>
     </table>
