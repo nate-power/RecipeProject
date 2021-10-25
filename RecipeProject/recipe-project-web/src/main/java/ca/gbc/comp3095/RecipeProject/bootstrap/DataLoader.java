@@ -27,16 +27,26 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Recipe recipe1 = new Recipe("Spaghetti", null, "cook noodles and cover in sauce", 1, 2, 3);
-        Recipe recipe2 = new Recipe("Pizza", null, "sauce then cheese then bake", 3, 2, 5);
-        Recipe recipe3 = new Recipe("Ice Cream", null, "make it very cold", 4, 2, 4);
+        Recipe recipe1 = new Recipe("Spaghetti", 2L, "cook noodles and cover in sauce", LocalDate.now().minusDays(64),
+                1, 2, 3, "1 cup sauce^2 cups cheese",
+                "Make the dough^Put toppings on^Bake until it's ready");
+        Recipe recipe2 = new Recipe("Pizza", 1L, "sauce then cheese then bake", LocalDate.now().minusDays(43), 3, 2, 5, "", "");
+        Recipe recipe3 = new Recipe("Ice Cream", 3L, "make it very cold", LocalDate.now().minusDays(28), 4, 2, 4, "", "");
         recipeService.save(recipe1);
         recipeService.save(recipe2);
         recipeService.save(recipe3);
 
         //Test user Account
-        User user = new User("test", "test","test@test.com", "Test", "User");
-        userService.save(user);
+        User user1 = new User("bob-ruthers", "test","bob_ruthers@test.com", "Bob", "Ruthers");
+        userService.save(user1);
+
+        User user2 = new User("mollyringwald123", "test","molly_ringwald@test.com", "Molly", "Ringwald");
+        userService.save(user2);
+
+        User user3 = new User("ana-is-cool", "test","ana_de_armas@test.com", "Ana de", "Armas");
+        userService.save(user3);
+
+
 
     }
 }

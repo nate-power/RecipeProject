@@ -26,3 +26,27 @@ html {
 #add-recipe-button {
     min-width: 118px;
 }
+
+#login-img {
+    background-image: url('../img/login-splash.jpg');
+}
+
+#register-img {
+    background-image: url('../img/register-splash.jpg');
+}
+
+.login-splash {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-register-container {
+    background-color: rgba(255,255,255, 0.7);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    border-radius: 25px;
+}

@@ -7,28 +7,44 @@
   <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
 </head>
 <body>
-  <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
-  <h1 class="mt-2" th:text="${recipe.name}"></h1>
-  <table class="table table-bordered table-striped">
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Prep Time</th>
-      <th>Cook Time</th>
-      <th>Servings</th>
-    </tr>
-    <tr>
-      <td th:text="${recipe.name}"></td>
-      <td th:text="${recipe.description}"></td>
-      <td th:text="${recipe.prepTime}"></td>
-      <td th:text="${recipe.cookTime}"></td>
-      <td th:text="${recipe.serving}"></td>
-    </tr>
-  </table>
-  <a class="btn btn-primary" th:href="@{/}">Back To Recipes</a>
-  <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-  <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-  <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
-  <div th:insert="fragments/footer :: footer"></div>
+<div id="main" th:insert="fragments/header-auth :: auth-header"></div>
+<h1 class="mt-2" th:text="${recipe.name}"></h1>
+<h3 class="mt-2" th:text="${recipe.description}"></h3>
+<div class="card" style="width: 18rem;">
+  <div class="card-header">Details</div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" th:text="${'Prep time: ' + recipe.prepTime}"></li>
+    <li class="list-group-item" th:text="${'Cook time: ' + recipe.cookTime}"></li>
+    <li class="list-group-item" th:text="${'Servings: ' + recipe.serving}"></li>
+    <li class="list-group-item" th:text="${'Category: ' + recipe.category}"></li>
+  </ul>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h4>Recipe Steps</h4>
+    </div>
+    <div class="col">
+      <h4>Ingredients</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ul class="list-group list-group-flush" th:each="step, iterStat : ${steps}">
+        <li class="list-group-item" th:text="${iterStat.index + 1 + '. ' + step}"></li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="list-group list-group-flush" th:each="ingredient : ${ingredients}">
+        <li class="list-group-item" th:text="${ingredient}"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" th:href="@{/}">Back To Recipes</a>
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

@@ -29,6 +29,11 @@ public class RecipeServiceImpl implements CrudService<Recipe, Long>, RecipeServi
 
     @Override
     public Iterable<Recipe> findAll() {
-        return recipeRepository.findAll();
+        return recipeRepository.findAllByOrderByDateCreatedDesc();
+    }
+
+    @Override
+    public Iterable<Recipe> findByQuery(String query) {
+        return recipeRepository.findAllByQuery(query);
     }
 }

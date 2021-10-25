@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.getUsername + ' (' + user.getFirstName() + ' ' + user.getLastName() + ')'}"></title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
+</head>
+<body>
+    <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
+    <div class="jumbotron jumbotron-fluid">
+        <h1 class="ml-4">Your Profile</h1>
+    </div>
+    <div class="container mt-5">
+        <div class="row mx-auto">
+            <div class="col-lg">
+                <img th:src="@{/img/user-icon.png}" alt="mdo" width="250" height="250" class="rounded-circle">
+                <h3 class="text-capitalize font-weight-bold" th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h3>
+                <h4 class="text-muted" th:text="${user.getUsername()}"></h4>
+                <h4 class="text-muted" th:text="${user.getEmail()}"></h4>
+            </div>
+        </div>
+
+    </div>
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+    <div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

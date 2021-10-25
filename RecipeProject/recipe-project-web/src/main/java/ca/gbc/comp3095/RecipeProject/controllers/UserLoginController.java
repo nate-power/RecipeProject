@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/login")
 public class UserLoginController {
 
     // if authenticated user tries to access login page, it will redirect them to recipes/index.html
-    @RequestMapping("/login")
+    @GetMapping
     public String checkUserAuthLogin() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {

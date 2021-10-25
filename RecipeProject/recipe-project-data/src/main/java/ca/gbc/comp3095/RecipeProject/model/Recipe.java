@@ -2,8 +2,6 @@ package ca.gbc.comp3095.RecipeProject.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Recipe extends BaseEntity{
@@ -11,7 +9,7 @@ public class Recipe extends BaseEntity{
     private String name;
     private Long userId;
     private String description;
-    private final LocalDate dateCreated = LocalDate.now();
+    private LocalDate dateCreated;
     private String category;
     private int prepTime;
     private int cookTime;
@@ -19,18 +17,20 @@ public class Recipe extends BaseEntity{
     private String ingredients;
     private String steps;
 
-
     public Recipe() {
     }
 
     // used for bootstrap data
-    public Recipe(String name, Long userId, String description, int prepTime, int cookTime, int serving) {
+    public Recipe(String name, Long userId, String description, LocalDate dateCreated, int prepTime, int cookTime, int serving, String ingredients, String steps) {
         this.name = name;
         this.userId = userId;
         this.description = description;
+        this.dateCreated = dateCreated;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.serving = serving;
+        this.ingredients = ingredients;
+        this.steps = steps;
     }
 
     public String getName() {
@@ -60,6 +60,8 @@ public class Recipe extends BaseEntity{
     public LocalDate getDateCreated() {
         return dateCreated;
     }
+
+    public void setDateCreated(LocalDate dateCreated) { this.dateCreated = dateCreated; }
 
     public String getCategory() { return category; }
 
@@ -108,5 +110,4 @@ public class Recipe extends BaseEntity{
         }
         return uppercaseWord.trim();
     }
-
 }

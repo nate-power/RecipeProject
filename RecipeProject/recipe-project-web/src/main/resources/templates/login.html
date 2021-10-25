@@ -6,11 +6,11 @@
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
     <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
 </head>
-<body>
+<body id="login-img" class="login-splash">
     <div th:insert="fragments/header-anon :: header"></div>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-lg-4 mx-auto">
+            <div class="col-md-3 login-register-container">
                 <h1 class="text-center">User Login</h1>
                 <form th:action="@{/login}" method="post">
                     <div th:if="${param.error}">
