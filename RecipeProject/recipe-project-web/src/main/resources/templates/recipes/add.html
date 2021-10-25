@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <title>Add Recipe</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
 </head>
 <body>
     <div th:insert="fragments/header-auth :: auth-header"></div>
+    <h1>Add a Recipe</h1>
+    <hr class="my-3"/>
     <div class="container mt-5">
+        <div class="row jumbotron jumbotron-fluid">
+            <div class="col">
+                <p class="">To add a new recipe, you must first specify the information for the recipe.</p>
+                <ul>
+                    <li>Your recipe needs a catchy name where you and other foodies can find it easily</li>
+                    <li>Your recipe needs a good description so people following it know what they are in for</li>
+                    <li>Your recipe should specify an accurate prep and cook time for the recipe; time management is important!</li>
+                </ul>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-lg-6 mx-auto">
-                <h1 class="text-center">Add a Recipe</h1>
+            <div class="col">
+                <h2 class="text-center">Add Recipe Information</h2>
                 <form th:action="@{/createRecipe}" th:object="${recipe}" method="post">
                     <div class="form-group">
                         <label for="name">Name: </label>
