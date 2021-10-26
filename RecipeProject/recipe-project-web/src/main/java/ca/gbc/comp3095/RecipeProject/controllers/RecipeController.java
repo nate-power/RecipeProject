@@ -1,8 +1,11 @@
 package ca.gbc.comp3095.RecipeProject.controllers;
 
+import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import ca.gbc.comp3095.RecipeProject.services.RecipeServiceImpl;
 import ca.gbc.comp3095.RecipeProject.services.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Map;
 
 @Controller
 public class RecipeController {
 
     private final RecipeServiceImpl recipeService;
+
     private final UserServiceImpl userService;
 
     public RecipeController(RecipeServiceImpl recipeServiceImpl, UserServiceImpl userService) {
@@ -24,10 +29,29 @@ public class RecipeController {
         this.userService = userService;
     }
 
-    @GetMapping({"/", "/recipes", "/recipes/", "/recipes/index"} )
-    public String listRecipes(Model model) {
-        model.addAttribute("recipes", recipeService.findAll());
+    @GetMapping({"/", "/recipes", "/recipes/", "/recipes/{category}"} )
+    public String listRecipes(Model model, @PathVariable(required = false) String category) {
         model.addAttribute("users", userService.findAll());
+        String categoryPath;
+        if (category != null) {
+            boolean isCategory = false;
+            for (RecipeCategories categoryName : RecipeCategories.values()) {
+                if (categoryName.getDisplay().toLowerCase().equals(category.toLowerCase())) {
+                    isCategory = true;
+                    model.addAttribute("recipes", recipeService.findAllByCategory(categoryName));
+                    break;
+                }
+            }
+            categoryPath = Recipe.uppercaseName(category);
+            if (!isCategory) {
+                return "errors/error-404";
+            }
+        }
+        else {
+            model.addAttribute("recipes", recipeService.findAll());
+            categoryPath = "All Recipes";
+        }
+        model.addAttribute("category", categoryPath);
         return "recipes/index";
     }
 
@@ -48,6 +72,7 @@ public class RecipeController {
     @GetMapping({"/recipe/add", "/recipe/add/"} )
     public String createRecipe(Model model) {
         model.addAttribute("recipe", new Recipe());
+        model.addAttribute("categories", RecipeCategories.values());
         return "recipes/add";
     }
 

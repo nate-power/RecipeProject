@@ -39,16 +39,7 @@
                         <select id="category" name="category" required th:field="*{category}">
                             <!-- turn this into an enum for Recipe class and do a for each loop to list them -->
                             <option value="" selected>Select your option</option>
-                            <option value="Breakfast">Breakfast</option>
-                            <option value="Lunch">Lunch</option>
-                            <option value="Dinner">Dinner</option>
-                            <option value="Appetizers">Appetizers</option>
-                            <option value="Desserts">Desserts</option>
-                            <option value="Salads">Salads</option>
-                            <option value="Soups">Soups</option>
-                            <option value="Baked Goods">Baked Goods</option>
-                            <option value="Vegetarian">Vegetarian</option>
-                            <option value="Vegan">Vegan</option>
+                            <option th:each="category : ${categories}" th:value="${category}" th:text="${category.getDisplay()}"></option>
                         </select>
                     </div>
                     <div class="form-group">

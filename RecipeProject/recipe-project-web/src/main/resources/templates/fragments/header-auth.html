@@ -17,16 +17,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" th:href="@{/}">All Recipes</a>
-                    <a class="dropdown-item" href="#">Breakfast</a>
-                    <a class="dropdown-item" href="#">Lunch</a>
-                    <a class="dropdown-item" href="#">Dinner</a>
-                    <a class="dropdown-item" href="#">Appetizers</a>
-                    <a class="dropdown-item" href="#">Desserts</a>
-                    <a class="dropdown-item" href="#">Main Dishes</a>
-                    <a class="dropdown-item" href="#">Salads</a>
-                    <a class="dropdown-item" href="#">Soups</a>
-                    <a class="dropdown-item" href="#">Vegetarian/Vegan</a>
-                    <a class="dropdown-item" href="#">Baked Goods</a>
+                    <a class="dropdown-item" th:each="category : ${T(ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories).values()}"
+                       th:href="@{/recipes/{category}(category=${category.getDisplay().toLowerCase()})}" th:text="${category.getDisplay()}"></a>
                 </div>
             </li>
             <li class="nav-item">
@@ -37,9 +29,6 @@
             </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0 mr-3">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/recipe/add}">Create a Recipe</a>
-            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img th:src="@{/img/user-icon.png}" alt="mdo" width="24" height="24" class="rounded-circle border-light">

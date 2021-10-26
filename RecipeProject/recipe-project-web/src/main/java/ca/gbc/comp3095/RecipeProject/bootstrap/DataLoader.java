@@ -1,5 +1,6 @@
 package ca.gbc.comp3095.RecipeProject.bootstrap;
 
+import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import ca.gbc.comp3095.RecipeProject.model.User;
 import ca.gbc.comp3095.RecipeProject.services.RecipeServiceImpl;
@@ -27,11 +28,12 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Recipe recipe1 = new Recipe("Spaghetti", 2L, "cook noodles and cover in sauce", LocalDate.now().minusDays(64),
+        Recipe recipe1 = new Recipe("Spaghetti", 2L, "cook noodles and cover in sauce cook noodles and cover in sauce " +
+                "cook noodles and cover in saucecook noodles and cover in sauce", LocalDate.now().minusDays(64), RecipeCategories.BREAKFAST,
                 1, 2, 3, "1 cup sauce^2 cups cheese",
                 "Make the dough^Put toppings on^Bake until it's ready");
-        Recipe recipe2 = new Recipe("Pizza", 1L, "sauce then cheese then bake", LocalDate.now().minusDays(43), 3, 2, 5, "", "");
-        Recipe recipe3 = new Recipe("Ice Cream", 3L, "make it very cold", LocalDate.now().minusDays(28), 4, 2, 4, "", "");
+        Recipe recipe2 = new Recipe("Pizza", 1L, "sauce then cheese then bake", LocalDate.now().minusDays(43), RecipeCategories.LUNCH, 3, 2, 5, "", "");
+        Recipe recipe3 = new Recipe("Ice Cream", 3L, "make it very cold", LocalDate.now().minusDays(28),RecipeCategories.DINNER, 4, 2, 4, "", "");
         recipeService.save(recipe1);
         recipeService.save(recipe2);
         recipeService.save(recipe3);

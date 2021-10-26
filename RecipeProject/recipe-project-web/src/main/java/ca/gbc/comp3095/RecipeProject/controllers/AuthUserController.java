@@ -3,6 +3,7 @@ package ca.gbc.comp3095.RecipeProject.controllers;
 import ca.gbc.comp3095.RecipeProject.model.User;
 import ca.gbc.comp3095.RecipeProject.security.UserPrincipal;
 import ca.gbc.comp3095.RecipeProject.services.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

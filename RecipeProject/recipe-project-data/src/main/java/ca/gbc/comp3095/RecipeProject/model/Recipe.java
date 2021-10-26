@@ -1,5 +1,7 @@
 package ca.gbc.comp3095.RecipeProject.model;
 
+import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -10,7 +12,8 @@ public class Recipe extends BaseEntity{
     private Long userId;
     private String description;
     private LocalDate dateCreated;
-    private String category;
+    @Enumerated
+    private RecipeCategories category;
     private int prepTime;
     private int cookTime;
     private int serving;
@@ -21,11 +24,12 @@ public class Recipe extends BaseEntity{
     }
 
     // used for bootstrap data
-    public Recipe(String name, Long userId, String description, LocalDate dateCreated, int prepTime, int cookTime, int serving, String ingredients, String steps) {
+    public Recipe(String name, Long userId, String description, LocalDate dateCreated, RecipeCategories category, int prepTime, int cookTime, int serving, String ingredients, String steps) {
         this.name = name;
         this.userId = userId;
         this.description = description;
         this.dateCreated = dateCreated;
+        this.category = category;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.serving = serving;
@@ -63,9 +67,9 @@ public class Recipe extends BaseEntity{
 
     public void setDateCreated(LocalDate dateCreated) { this.dateCreated = dateCreated; }
 
-    public String getCategory() { return category; }
+    public RecipeCategories getCategory() { return category; }
 
-    public void setCategory(String category) { this.category = category; }
+    public void setCategory(RecipeCategories category) { this.category = category; }
 
     public int getPrepTime() {
         return prepTime;
@@ -110,4 +114,5 @@ public class Recipe extends BaseEntity{
         }
         return uppercaseWord.trim();
     }
+
 }
