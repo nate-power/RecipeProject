@@ -11,7 +11,7 @@
     <h1 class="text-center mt-2">Add a Recipe</h1>
     <hr class="my-3"/>
     <div class="container-fluid">
-        <form th:action="@{/createRecipe}" th:object="${recipe}" method="post">
+        <form th:action="@{/createRecipe}" th:object="${recipe}" method="post" autocomplete="off">
             <h2>Add Recipe Information</h2>
             <div class="row jumbotron jumbotron-fluid">
                 <div class="col">
