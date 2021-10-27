@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipes</title>
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+  <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
+</head>
+<body>
+<div id="main" th:insert="fragments/header-auth :: auth-header"></div>
+<h2>Meal Plan</h2>
+<ul class="col-auto mb-3" th:each="meal : ${meals}">
+  <li th:text="${recipes.findById(meal.recipeId).name}"></li>
+  <li th:text="${meal.date}"></li>
+</ul>
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

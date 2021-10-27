@@ -1,24 +1,37 @@
 package ca.gbc.comp3095.RecipeProject.model;
 
-public class RecipeDate {
-    private Recipe recipe;
-    private Schedule schedule;
-    // make enum for days (Sunday-Saturday)
-    // make enum for meal types (bfast, lunch, dinner, snack)
+import org.springframework.format.annotation.DateTimeFormat;
 
-    public Recipe getRecipe() {
-        return recipe;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.time.LocalDate;
+
+@Entity
+public class RecipeDate extends BaseEntity{
+    private Long recipeId;
+    private LocalDate date;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public RecipeDate(Long recipeId, LocalDate date, User user) {
+        this.recipeId = recipeId;
+        this.date = date;
+        this.user = user;
     }
 
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    public RecipeDate() {}
+
+    public Long getRecipeId() {
+        return recipeId;
     }
 
-    public Schedule getSchedule() {
-        return schedule;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
+    public User getUser() {
+        return user;
     }
 }

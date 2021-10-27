@@ -3,7 +3,7 @@ package ca.gbc.comp3095.RecipeProject.model;
 import java.time.LocalDate;
 import java.util.Set;
 
-public class Schedule {
+public class Schedule extends BaseEntity{
 
     private LocalDate startDate;
     private LocalDate endDate;

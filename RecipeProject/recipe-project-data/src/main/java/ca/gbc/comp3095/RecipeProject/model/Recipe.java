@@ -3,21 +3,36 @@ package ca.gbc.comp3095.RecipeProject.model;
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
 public class Recipe extends BaseEntity{
 
     private String name;
+
     private Long userId;
+
     private String description;
+
     private LocalDate dateCreated;
+
     @Enumerated
     private RecipeCategories category;
+
     private int prepTime;
+
+
     private int cookTime;
+
+
     private int serving;
+
     private String ingredients;
+
     private String steps;
 
     public Recipe() {

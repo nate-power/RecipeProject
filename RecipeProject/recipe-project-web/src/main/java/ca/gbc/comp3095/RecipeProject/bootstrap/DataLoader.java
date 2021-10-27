@@ -46,9 +46,9 @@ public class DataLoader implements CommandLineRunner {
         userService.save(user2);
 
         User user3 = new User("ana-is-cool", "test","ana_de_armas@test.com", "Ana de", "Armas");
+        user3.addToSchedule(LocalDate.now().plusDays(3), 1L);
+        user3.addToSchedule(LocalDate.now(), 2L);
+        user3.addToSchedule(LocalDate.now().plusDays(10), 3L);
         userService.save(user3);
-
-
-
     }
 }

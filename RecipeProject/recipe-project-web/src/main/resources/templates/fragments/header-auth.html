@@ -25,7 +25,7 @@
                 <a class="nav-link" th:href="@{/search}">Recipe Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Meal Planner</a>
+                <a class="nav-link" th:href="@{/schedule/{username}(username=${#authentication.name})}">Meal Planner</a>
             </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0 mr-3">

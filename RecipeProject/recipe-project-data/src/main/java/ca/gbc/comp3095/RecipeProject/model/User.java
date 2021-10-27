@@ -1,27 +1,40 @@
 package ca.gbc.comp3095.RecipeProject.model;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Locale;
-import java.util.Set;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.util.*;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User extends BaseEntity {
 
     @Column(name = "username")
+    @NotEmpty
+    @Size(min = 5)
     private String username;
 
     @Column(name = "password")
+    @NotEmpty
+    @Size(min = 4)
     private String password;
 
+    @Column(name = "email")
+    @Email
+    @NotEmpty
     private String email;
 
     @Column(name = "firstname")
+    @NotEmpty
+    @Size(min = 2, max = 24)
     private String firstName;
 
     @Column(name = "lastname")
+    @NotEmpty
+    @Size(min = 2, max = 24)
     private String lastName;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -29,6 +42,9 @@ public class User extends BaseEntity {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Recipe> createdRecipes;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<RecipeDate> schedule = new ArrayList<>();
 
     public User() { }
 
@@ -94,5 +110,15 @@ public class User extends BaseEntity {
 
     public void setCreatedRecipes(Set<Recipe> createdRecipes) {
         this.createdRecipes = createdRecipes;
+    }
+
+    public RecipeDate addToSchedule(LocalDate date, Long recipeId) {
+        RecipeDate recipeDate = new RecipeDate(recipeId, date, this);
+        schedule.add(recipeDate);
+        return recipeDate;
+    }
+
+    public List<RecipeDate> getSchedule() {
+        return schedule;
     }
 }

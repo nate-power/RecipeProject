@@ -8,7 +8,7 @@
 </head>
 <body id="register-img" class="login-splash">
     <div th:insert="fragments/header-anon :: header"></div>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-3 login-register-container">
                 <h1 class="text-center">Create an Account</h1>
@@ -22,31 +22,36 @@
                         <label class="control-label" for="firstName">
                             First Name
                         </label>
-                        <input id="firstName" class="form-control" th:field="*{firstName}" required autofocus="autofocus"/>
+                        <input id="firstName" class="form-control" th:field="*{firstName}" placeholder="First Name" autofocus="autofocus"/>
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="lastName">
                             Last Name
                         </label>
-                        <input id="lastName" class="form-control" th:field="*{lastName}" required/>
+                        <input id="lastName" class="form-control" th:field="*{lastName}" placeholder="Last Name"/>
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="email">
                             Email
                         </label>
-                        <input id="email" type="email" class="form-control" th:field="*{email}" required/>
+                        <input id="email" type="email" class="form-control" th:field="*{email}" placeholder="Email"/>
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="username">
                             Username
                         </label>
-                        <input id="username" class="form-control" th:field="*{username}" required/>
+                        <input id="username" class="form-control" th:field="*{username}" placeholder="Username"/>
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="password">
                             Password
                         </label>
-                        <input id="password" type="password" class="form-control" th:field="*{password}" required/>
+                        <input id="password" type="password" class="form-control" th:field="*{password}" placeholder="Password"/>
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                     </div>
                     <div class="form-group">
                         <div class="row">

@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Map;
@@ -21,7 +20,6 @@ import java.util.Map;
 public class RecipeController {
 
     private final RecipeServiceImpl recipeService;
-
     private final UserServiceImpl userService;
 
     public RecipeController(RecipeServiceImpl recipeServiceImpl, UserServiceImpl userService) {
@@ -65,11 +63,12 @@ public class RecipeController {
         model.addAttribute("recipe", recipe);
         model.addAttribute("ingredients", ingredients);
         model.addAttribute("steps", steps);
+        model.addAttribute("user", userService.findUser());
 
         return "recipes/view";
     }
 
-    @GetMapping({"/recipe/add", "/recipe/add/"} )
+    @GetMapping("/recipe/add" )
     public String createRecipe(Model model) {
         model.addAttribute("recipe", new Recipe());
         model.addAttribute("categories", RecipeCategories.values());
@@ -88,7 +87,7 @@ public class RecipeController {
     }
 
     @PostMapping("/createRecipe" )
-    public String saveRecipe(Recipe recipe, @RequestParam Map<String, String> stringMap) {
+    public String saveRecipe(@ModelAttribute("recipe") @Valid Recipe recipe, @RequestParam Map<String, String> stringMap, Model model) {
         String ingredients = stringMap.get("ingredients");
         String[] ingredientsArr = ingredients.split("\\n");
         ingredients = String.join("^", ingredientsArr);
