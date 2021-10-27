@@ -32,8 +32,8 @@ public class DataLoader implements CommandLineRunner {
                 "cook noodles and cover in saucecook noodles and cover in sauce", LocalDate.now().minusDays(64), RecipeCategories.BREAKFAST,
                 1, 2, 3, "1 cup sauce^2 cups cheese",
                 "Make the dough^Put toppings on^Bake until it's ready");
-        Recipe recipe2 = new Recipe("Pizza", 1L, "sauce then cheese then bake", LocalDate.now().minusDays(43), RecipeCategories.LUNCH, 3, 2, 5, "", "");
-        Recipe recipe3 = new Recipe("Ice Cream", 3L, "make it very cold", LocalDate.now().minusDays(28),RecipeCategories.DINNER, 4, 2, 4, "", "");
+        Recipe recipe2 = new Recipe("Pizza", 1L, "sauce then cheese then bake", LocalDate.now().minusDays(43), RecipeCategories.LUNCH, 3, 2, 5, "sauce^cheese", "sauce me up baby");
+        Recipe recipe3 = new Recipe("Ice Cream", 3L, "make it very cold", LocalDate.now().minusDays(28),RecipeCategories.DINNER, 4, 2, 4, "ice^cream", "ice the cream plz");
         recipeService.save(recipe1);
         recipeService.save(recipe2);
         recipeService.save(recipe3);

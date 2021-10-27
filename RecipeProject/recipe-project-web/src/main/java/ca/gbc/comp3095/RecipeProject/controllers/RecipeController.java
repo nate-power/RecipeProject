@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -54,7 +55,7 @@ public class RecipeController {
     }
 
     @GetMapping("recipe/{name}/{id}")
-    public String viewRecipe(Model model, @PathVariable String name, @PathVariable Long id)
+    public String viewRecipe(Model model, @PathVariable Long id)
     {
         Recipe recipe = recipeService.findById(id);
         String[] ingredients = recipe.getIngredients().split("\\^");
@@ -68,7 +69,7 @@ public class RecipeController {
         return "recipes/view";
     }
 
-    @GetMapping("/recipe/add" )
+    @GetMapping("/recipes/add" )
     public String createRecipe(Model model) {
         model.addAttribute("recipe", new Recipe());
         model.addAttribute("categories", RecipeCategories.values());
@@ -86,8 +87,13 @@ public class RecipeController {
         return "recipes/index";
     }
 
-    @PostMapping("/createRecipe" )
-    public String saveRecipe(@ModelAttribute("recipe") @Valid Recipe recipe, @RequestParam Map<String, String> stringMap, Model model) {
+    @PostMapping("/recipes/add" )
+    public String saveRecipe(@ModelAttribute("recipe") @Valid Recipe recipe, BindingResult result,
+                             @RequestParam Map<String, String> stringMap, @RequestParam("category") RecipeCategories category, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("categories", RecipeCategories.values());
+            return "recipes/add";
+        }
         String ingredients = stringMap.get("ingredients");
         String[] ingredientsArr = ingredients.split("\\n");
         ingredients = String.join("^", ingredientsArr);
@@ -103,6 +109,6 @@ public class RecipeController {
         recipe.setDateCreated(LocalDate.now());
 
         recipeService.save(recipe);
-        return "redirect:/recipes";
+        return "redirect:/recipes/" + category.getDisplay().toLowerCase();
     }
 }

@@ -3,19 +3,18 @@ package ca.gbc.comp3095.RecipeProject.model;
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
 public class Recipe extends BaseEntity{
 
+    @NotEmpty(message = "Recipe name is mandatory")
     private String name;
 
     private Long userId;
 
+    @NotEmpty(message = "Recipe description is mandatory")
     private String description;
 
     private LocalDate dateCreated;
@@ -23,16 +22,22 @@ public class Recipe extends BaseEntity{
     @Enumerated
     private RecipeCategories category;
 
+    @NotNull
+    @Min(value = 1)
     private int prepTime;
 
-
+    @NotNull
+    @Min(value = 1)
     private int cookTime;
 
-
+    @NotNull
+    @Min(value = 1)
     private int serving;
 
+    @NotEmpty(message = "You must include ingredients!")
     private String ingredients;
 
+    @NotEmpty(message = "You must include steps!")
     private String steps;
 
     public Recipe() {
@@ -128,6 +133,12 @@ public class Recipe extends BaseEntity{
             uppercaseWord += firstLetter.toUpperCase() + restOfWord + " ";
         }
         return uppercaseWord.trim();
+    }
+
+    public static String hyphenateName(String name) {
+        String word = "";
+        String[] words = name.toLowerCase().split(" ");
+        return String.join("-", words);
     }
 
 }

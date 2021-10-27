@@ -5,16 +5,19 @@
     <title>Recipes</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
     <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
-    <h1 class="mt-2" th:text="${category}">></h1>
-    <h2>here are all the recipes we have lmao</h2>
-    <div class="container-fluid mt-4">
+    <div class="jumbotron jumbotron-fluid">
+        <h1 class="mt-2 ml-3" th:text="${category}">></h1>
+    </div>
+    <hr class="my-3"/>
+    <div class="container-fluid">
         <div class="row">
             <div class="col-auto mb-3">
                 <div class="card" style="width: 18rem;" >
-                    <a th:href="@{/recipe/add}"><img class="card-img-top" th:src="@{/img/add.png}" alt="Create a Recipe" width="100" height="100"></a>
+                    <a th:href="@{/recipes/add}"><img class="card-img-top" th:src="@{/img/add.png}" alt="Create a Recipe" width="100" height="100"></a>
                     <div class="card-body">
                         <h5 class="card-title">Create a Recipe</h5>
                     </div>
@@ -22,17 +25,18 @@
             </div>
             <div class="col-auto mb-3" th:each="recipe : ${recipes}">
                 <div class="card h-100" style="width: 18rem;" >
-                    <a th:href="@{/recipe/{name}/{id}(name=${recipe.name}, id=${recipe.id})}">
+                    <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}">
                         <img class="card-img-top" th:src="@{/img/user-icon.png}" th:alt="${recipe.name}" width="100" height="100"></a>
                     <div class="card-body">
-                        <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${recipe.name}, id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
-                        <p class="card-text" th:text="${recipe.description}"></p>
+                        <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
+                        <p class="card-text truncate" th:text="${recipe.description}"></p>
                         <p class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></p>
                     </div>
                     <div class="card-footer">
                     <span th:each="user : ${users}">
                         <span th:if="${user.id == recipe.getUserId()}">
-                            <small class="text-muted" th:text="${'Created by: ' + user.firstName + ' ' + user.lastName + ' - ' + recipe.dateCreated}"></small>
+                            <small class="text-muted" th:text="${'Created by: ' + user.firstName + ' ' + user.lastName}"></small>
+                            <small class="text-muted d-block" th:text="${recipe.dateCreated}"></small>
                         </span>
                     </span>
                     </div>

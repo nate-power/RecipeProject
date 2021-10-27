@@ -5,13 +5,14 @@
     <title>Login</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
     <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
 </head>
 <body id="login-img" class="login-splash">
     <div th:insert="fragments/header-anon :: header"></div>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-3 login-register-container">
-                <h1 class="text-center">User Login</h1>
+                <h1 class="text-center mt-2">User Login</h1>
                 <form th:action="@{/login}" method="post">
                     <div th:if="${param.error}">
                         <div class="alert alert-danger">

@@ -5,6 +5,7 @@
   <title th:text="${recipe.name}"></title>
   <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
   <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
@@ -13,10 +14,10 @@
 <div class="card" style="width: 18rem;">
   <div class="card-header">Details</div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item" th:text="${'Prep time: ' + recipe.prepTime}"></li>
-    <li class="list-group-item" th:text="${'Cook time: ' + recipe.cookTime}"></li>
+    <li class="list-group-item" th:text="${'Prep time: ' + recipe.prepTime + ' mins'}"></li>
+    <li class="list-group-item" th:text="${'Cook time: ' + recipe.cookTime + ' mins'}"></li>
     <li class="list-group-item" th:text="${'Servings: ' + recipe.serving}"></li>
-    <li class="list-group-item" th:text="${'Category: ' + recipe.category}"></li>
+    <li class="list-group-item" th:text="${'Category: ' + recipe.category.getDisplay().toLowerCase()}"></li>
   </ul>
 </div>
 <div class="container-fluid">
@@ -41,12 +42,11 @@
     </div>
   </div>
 </div>
-<a class="btn btn-primary" th:href="@{/schedule/add/{id}/{username}(username = ${user.username}, id = ${recipe.id})}">Add to Schedule</a>
 <a class="btn btn-primary" th:href="@{/}">Back To Recipes</a>
 <form th:action="@{/schedule/add/{id}/{username}(username = ${user.username}, id = ${recipe.id})}">
   <label for="calendar">Meal Date</label>
   <input type="date" id="calendar" name="date" required/>
-  <input type="submit" value="Add to Schedule">
+  <input type="submit" class="btn btn-dark" value="Add to Schedule">
 </form>
 <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
