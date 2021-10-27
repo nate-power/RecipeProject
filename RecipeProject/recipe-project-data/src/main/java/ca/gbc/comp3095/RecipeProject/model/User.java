@@ -2,7 +2,6 @@ package ca.gbc.comp3095.RecipeProject.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -37,14 +36,8 @@ public class User extends BaseEntity {
     @Size(min = 2, max = 24)
     private String lastName;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Recipe> favouriteRecipes;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Recipe> createdRecipes;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<RecipeDate> schedule = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private Set<RecipeDate> recipeDates = new HashSet<>();
 
     public User() { }
 
@@ -96,29 +89,24 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public Set<Recipe> getFavouriteRecipes() {
-        return favouriteRecipes;
+    public Set<RecipeDate> getRecipeDates() {
+        return recipeDates;
     }
 
-    public void setFavouriteRecipes(Set<Recipe> favouriteRecipes) {
-        this.favouriteRecipes = favouriteRecipes;
+    public void setRecipeDates(Set<RecipeDate> recipeDates) {
+        this.recipeDates = recipeDates;
     }
 
-    public Set<Recipe> getCreatedRecipes() {
-        return createdRecipes;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId());
     }
 
-    public void setCreatedRecipes(Set<Recipe> createdRecipes) {
-        this.createdRecipes = createdRecipes;
-    }
-
-    public RecipeDate addToSchedule(LocalDate date, Long recipeId) {
-        RecipeDate recipeDate = new RecipeDate(recipeId, date, this);
-        schedule.add(recipeDate);
-        return recipeDate;
-    }
-
-    public List<RecipeDate> getSchedule() {
-        return schedule;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

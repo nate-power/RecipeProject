@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService, CrudService<User, Long> {
 
     @Override
     public User findById(Long id) {
-        Optional<User> recipe = userRepository.findById(id);
-        return recipe.orElse(null);
+        Optional<User> user = userRepository.findById(id);
+        return user.orElse(null);
     }
 }

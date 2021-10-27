@@ -2,6 +2,9 @@ package ca.gbc.comp3095.RecipeProject.controllers;
 
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
+import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
+import ca.gbc.comp3095.RecipeProject.model.User;
+import ca.gbc.comp3095.RecipeProject.services.RecipeDateServiceImpl;
 import ca.gbc.comp3095.RecipeProject.services.RecipeServiceImpl;
 import ca.gbc.comp3095.RecipeProject.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +25,12 @@ public class RecipeController {
 
     private final RecipeServiceImpl recipeService;
     private final UserServiceImpl userService;
+    private RecipeDateServiceImpl recipeDateService;
 
-    public RecipeController(RecipeServiceImpl recipeServiceImpl, UserServiceImpl userService) {
-        this.recipeService = recipeServiceImpl;
+    public RecipeController(RecipeServiceImpl recipeService, UserServiceImpl userService, RecipeDateServiceImpl recipeDateService) {
+        this.recipeService = recipeService;
         this.userService = userService;
+        this.recipeDateService = recipeDateService;
     }
 
     @GetMapping({"/", "/recipes", "/recipes/", "/recipes/{category}"} )
@@ -65,6 +70,7 @@ public class RecipeController {
         model.addAttribute("ingredients", ingredients);
         model.addAttribute("steps", steps);
         model.addAttribute("user", userService.findUser());
+        model.addAttribute("recipeDate", new RecipeDate());
 
         return "recipes/view";
     }

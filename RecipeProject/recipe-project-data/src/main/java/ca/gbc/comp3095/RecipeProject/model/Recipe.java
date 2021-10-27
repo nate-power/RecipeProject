@@ -3,8 +3,11 @@ package ca.gbc.comp3095.RecipeProject.model;
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.*;
 
 @Entity
 public class Recipe extends BaseEntity{
@@ -39,6 +42,9 @@ public class Recipe extends BaseEntity{
 
     @NotEmpty(message = "You must include steps!")
     private String steps;
+
+    @OneToMany(mappedBy = "recipe")
+    private Set<RecipeDate> recipeDates = new HashSet<>();
 
     public Recipe() {
     }
@@ -122,6 +128,27 @@ public class Recipe extends BaseEntity{
     public String getSteps() { return steps; }
 
     public void setSteps(String steps) { this.steps = steps; }
+
+    public Set<RecipeDate> getRecipeDates() {
+        return recipeDates;
+    }
+
+    public void setRecipeDates(Set<RecipeDate> recipeDates) {
+        this.recipeDates = recipeDates;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
     public static String uppercaseName(String name) {
         String uppercaseWord = "";

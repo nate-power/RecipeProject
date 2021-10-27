@@ -5,30 +5,48 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 @Entity
 public class RecipeDate extends BaseEntity{
-    private Long recipeId;
-    private LocalDate date;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
-    public RecipeDate(Long recipeId, LocalDate date, User user) {
-        this.recipeId = recipeId;
-        this.date = date;
-        this.user = user;
-    }
+    private LocalDate date;
+
+    @ManyToOne
+    @JoinColumn(name="recipe_recipe_date")
+    private Recipe recipe;
+
+    @ManyToOne
+    @JoinColumn(name = "user_recipe_date")
+    private User user;
 
     public RecipeDate() {}
 
-    public Long getRecipeId() {
-        return recipeId;
+    public RecipeDate(LocalDate date, Recipe recipe, User user) {
+        this.date = date;
+        this.recipe = recipe;
+        this.user= user;
     }
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
     }
 
     public User getUser() {

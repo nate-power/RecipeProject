@@ -2,7 +2,9 @@ package ca.gbc.comp3095.RecipeProject.bootstrap;
 
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
+import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
 import ca.gbc.comp3095.RecipeProject.model.User;
+import ca.gbc.comp3095.RecipeProject.services.RecipeDateServiceImpl;
 import ca.gbc.comp3095.RecipeProject.services.RecipeServiceImpl;
 import ca.gbc.comp3095.RecipeProject.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +19,20 @@ public class DataLoader implements CommandLineRunner {
 
     private final RecipeServiceImpl recipeService;
     private final UserServiceImpl userService;
+    private final RecipeDateServiceImpl recipeDateService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public DataLoader(RecipeServiceImpl recipeService, UserServiceImpl userService) {
+    public DataLoader(RecipeServiceImpl recipeService, UserServiceImpl userService, RecipeDateServiceImpl recipeDateService) {
         this.recipeService = recipeService;
         this.userService = userService;
+        this.recipeDateService = recipeDateService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        //Recipes
         Recipe recipe1 = new Recipe("Spaghetti", 2L, "cook noodles and cover in sauce cook noodles and cover in sauce " +
                 "cook noodles and cover in saucecook noodles and cover in sauce", LocalDate.now().minusDays(64), RecipeCategories.BREAKFAST,
                 1, 2, 3, "1 cup sauce^2 cups cheese",
@@ -38,7 +43,7 @@ public class DataLoader implements CommandLineRunner {
         recipeService.save(recipe2);
         recipeService.save(recipe3);
 
-        //Test user Account
+        //Test user Accounts
         User user1 = new User("bob-ruthers", "test","bob_ruthers@test.com", "Bob", "Ruthers");
         userService.save(user1);
 
@@ -46,9 +51,15 @@ public class DataLoader implements CommandLineRunner {
         userService.save(user2);
 
         User user3 = new User("ana-is-cool", "test","ana_de_armas@test.com", "Ana de", "Armas");
-        user3.addToSchedule(LocalDate.now().plusDays(3), 1L);
-        user3.addToSchedule(LocalDate.now(), 2L);
-        user3.addToSchedule(LocalDate.now().plusDays(10), 3L);
         userService.save(user3);
+
+        //Recipe Dates
+        RecipeDate recipeDate1 = new RecipeDate(LocalDate.now().plusDays(3), recipe1, user3);
+        recipeDateService.save(recipeDate1);
+        RecipeDate recipeDate2 = new RecipeDate(LocalDate.now(), recipe2, user3);
+        recipeDateService.save(recipeDate2);
+        RecipeDate recipeDate3 = new RecipeDate(LocalDate.now().plusDays(10), recipe3, user3);
+        recipeDateService.save(recipeDate3);
+
     }
 }

@@ -43,9 +43,10 @@
   </div>
 </div>
 <a class="btn btn-primary" th:href="@{/}">Back To Recipes</a>
-<form th:action="@{/schedule/add/{id}/{username}(username = ${user.username}, id = ${recipe.id})}">
-  <label for="calendar">Meal Date</label>
-  <input type="date" id="calendar" name="date" required/>
+<form th:action="@{/meal-planner}" th:object="${recipeDate}" th:method="post">
+  <label th:for="date">Meal Date</label>
+  <input type="date" id="date" name = "date" th:fields="*{date}" required/>
+  <input type="hidden" id="recipeId" name="recipeId" th:value="${recipe.getId()}"/>
   <input type="submit" class="btn btn-dark" value="Add to Schedule">
 </form>
 <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>

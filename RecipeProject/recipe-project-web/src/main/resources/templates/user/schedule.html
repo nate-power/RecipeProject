@@ -2,18 +2,137 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="UTF-8">
-  <title>Recipes</title>
+  <title>Meal Planner</title>
   <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
   <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
-<h2>Meal Plan</h2>
-<ul class="col-auto mb-3" th:each="meal : ${meals}">
-  <li th:text="${recipes.findById(meal.recipeId).name}"></li>
-  <li th:text="${meal.date}"></li>
-</ul>
+<h1>Meal Plan</h1>
+
+<div class="accordion" id="mealAccordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <strong>Today's Meals</strong>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#mealAccordion">
+      <div class="card-body">
+        <ul class="list-group" th:each="meal_today : ${meals_today}">
+          <li class="list-group-item">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h3 class="card-title" th:text="${meal_today.recipe.name}"></h3>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_today.date}"></h6>
+                <p class="card-text truncate" th:text="${meal_today.recipe.description}"></p>
+                <p class="card-text" th:text="${'Prep Time: ' + meal_today.recipe.prepTime + ' Cook Time: ' + meal_today.recipe.cookTime}"></p>
+                <form th:action="@{/meal-planner/delete/{id}(id=${meal_today.getId()})}" th:method="post">
+                  <a class="btn btn-primary" th:href="@{/recipe/{name}/{id}(id = ${meal_today.recipe.getId()},
+                   name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_today.recipe.name)})}">Go To Recipe</a>
+                  <input type="submit" class="btn btn-danger" th:value="Delete">
+                </form>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <strong>This Week's Meals</strong>
+          <small class="d-block" th:text="${sunday +  ' to ' + saturday}"></small>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#mealAccordion">
+      <div class="card-body">
+        <ul class="list-group" th:each="meal_this_week : ${meals_this_week}">
+          <li class="list-group-item">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h3 class="card-title" th:text="${meal_this_week.recipe.name}"></h3>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_this_week.date}"></h6>
+                <p class="card-text truncate" th:text="${meal_this_week.recipe.description}"></p>
+                <p class="card-text" th:text="${'Prep Time: ' + meal_this_week.recipe.prepTime + ' Cook Time: ' + meal_this_week.recipe.cookTime}"></p>
+                <form th:action="@{/meal-planner/delete/{id}(id=${meal_this_week.getId()})}" th:method="post">
+                  <a class="btn btn-primary" th:href="@{/recipe/{name}/{id}(id = ${meal_this_week.recipe.getId()},
+                   name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_this_week.recipe.name)})}">Go To Recipe</a>
+                  <input type="submit" class="btn btn-danger" th:value="Delete">
+                </form>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <strong>Upcoming Meals</strong>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#mealAccordion">
+      <div class="card-body">
+        <ul class="list-group" th:each="meal_future : ${meals_future}">
+          <li class="list-group-item">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h3 class="card-title" th:text="${meal_future.recipe.name}"></h3>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_future.date}"></h6>
+                <p class="card-text truncate" th:text="${meal_future.recipe.description}"></p>
+                <p class="card-text" th:text="${'Prep Time: ' + meal_future.recipe.prepTime + ' Cook Time: ' + meal_future.recipe.cookTime}"></p>
+                <form th:action="@{/meal-planner/delete/{id}(id=${meal_future.getId()})}" th:method="post">
+                  <a class="btn btn-primary" th:href="@{/recipe/{name}/{id}(id = ${meal_future.recipe.getId()},
+                   name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_future.recipe.name)})}">Go To Recipe</a>
+                  <input type="submit" class="btn btn-danger" th:value="Delete">
+                </form>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          <strong>Past Meals</strong>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#mealAccordion">
+      <div class="card-body">
+        <ul class="list-group" th:each="meal_past : ${meals_past}">
+          <li class="list-group-item">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h3 class="card-title" th:text="${meal_past.recipe.name}"></h3>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_past.date}"></h6>
+                <p class="card-text truncate" th:text="${meal_past.recipe.description}"></p>
+                <p class="card-text" th:text="${'Prep Time: ' + meal_past.recipe.prepTime + ' Cook Time: ' + meal_past.recipe.cookTime}"></p>
+                <form th:action="@{/meal-planner/delete/{id}(id=${meal_past.getId()})}" th:method="post">
+                  <a class="btn btn-primary" th:href="@{/recipe/{name}/{id}(id = ${meal_past.recipe.getId()},
+                   name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_past.recipe.name)})}">Go To Recipe</a>
+                  <input type="submit" class="btn btn-danger" th:value="Delete">
+                </form>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
