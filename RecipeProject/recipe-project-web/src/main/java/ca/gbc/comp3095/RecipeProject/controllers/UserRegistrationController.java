@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,6 +38,20 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") @Valid User user, BindingResult result) {
+
+        // check if username already exists
+        if (userService.userExistsUsername(user.getUsername())) {
+            result.addError(new FieldError("user", "username", "Username already exists."));
+        }
+        // check if email already exists
+        if (userService.userExistsEmail(user.getEmail())) {
+            result.addError(new FieldError("user", "email", "Email already in use by another account."));
+        }
+        // check password for any spaces
+        if (user.getPassword().contains(" ")) {
+            result.addError(new FieldError("user", "password", "Password cannot contain any spaces.") );
+        }
+
         if (result.hasErrors()) {
             return "/registration";
         }

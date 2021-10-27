@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -15,9 +16,12 @@ public class Recipe extends BaseEntity{
     @NotEmpty(message = "Recipe name is mandatory")
     private String name;
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private User user;
 
     @NotEmpty(message = "Recipe description is mandatory")
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private LocalDate dateCreated;
@@ -50,9 +54,9 @@ public class Recipe extends BaseEntity{
     }
 
     // used for bootstrap data
-    public Recipe(String name, Long userId, String description, LocalDate dateCreated, RecipeCategories category, int prepTime, int cookTime, int serving, String ingredients, String steps) {
+    public Recipe(String name, User user, String description, LocalDate dateCreated, RecipeCategories category, int prepTime, int cookTime, int serving, String ingredients, String steps) {
         this.name = name;
-        this.userId = userId;
+        this.user = user;
         this.description = description;
         this.dateCreated = dateCreated;
         this.category = category;
@@ -71,12 +75,12 @@ public class Recipe extends BaseEntity{
         this.name = name;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDescription() {

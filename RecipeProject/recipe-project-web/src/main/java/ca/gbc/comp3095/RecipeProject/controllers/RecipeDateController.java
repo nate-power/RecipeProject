@@ -16,7 +16,6 @@ import static java.time.DayOfWeek.SATURDAY;
 import static java.time.temporal.TemporalAdjusters.next;
 import static java.time.temporal.TemporalAdjusters.previous;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -26,7 +25,7 @@ public class RecipeDateController {
 
     private final UserServiceImpl userService;
     private final RecipeDateServiceImpl recipeDateService;
-    private RecipeServiceImpl recipeService;
+    private final RecipeServiceImpl recipeService;
 
     public RecipeDateController(UserServiceImpl userService, RecipeDateServiceImpl recipeDateService, RecipeServiceImpl recipeService) {
         this.userService = userService;
@@ -71,8 +70,4 @@ public class RecipeDateController {
         return "redirect:/meal-planner";
 
     }
-
-
-
-
 }

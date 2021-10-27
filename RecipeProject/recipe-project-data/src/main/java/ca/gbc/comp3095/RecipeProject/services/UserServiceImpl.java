@@ -1,6 +1,5 @@
 package ca.gbc.comp3095.RecipeProject.services;
 
-import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import ca.gbc.comp3095.RecipeProject.model.User;
 import ca.gbc.comp3095.RecipeProject.repositories.UserRepository;
 import ca.gbc.comp3095.RecipeProject.security.UserPrincipal;
@@ -57,5 +56,25 @@ public class UserServiceImpl implements UserService, CrudService<User, Long> {
     public User findById(Long id) {
         Optional<User> user = userRepository.findById(id);
         return user.orElse(null);
+    }
+
+    @Override
+    public boolean userExistsUsername(String username) {
+        for (User user : userRepository.findAll()) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean userExistsEmail(String email) {
+        for (User user : userRepository.findAll()) {
+            if (user.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

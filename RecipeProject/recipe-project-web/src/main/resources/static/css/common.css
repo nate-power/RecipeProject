@@ -92,5 +92,9 @@ nav {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+/* make this only on the div for the recipe cards */
+#profile-recipe-view {
+    overflow-y: auto;
+    max-height: 75vh;
+}
 

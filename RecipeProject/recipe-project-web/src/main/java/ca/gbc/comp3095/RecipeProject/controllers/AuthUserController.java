@@ -33,6 +33,7 @@ public class AuthUserController {
     public String getProfile(Model model, @PathVariable String username) {
         if (userService.findUser().getUsername().equals(username)) {
             model.addAttribute("user", userService.findUser());
+            model.addAttribute("recipes", recipeService.findAllByUser(userService.findUser()));
             return "/user/profile";
         }
         return "errors/error-404";

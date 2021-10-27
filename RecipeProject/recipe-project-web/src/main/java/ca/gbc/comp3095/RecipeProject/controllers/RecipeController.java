@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,7 +36,6 @@ public class RecipeController {
 
     @GetMapping({"/", "/recipes", "/recipes/", "/recipes/{category}"} )
     public String listRecipes(Model model, @PathVariable(required = false) String category) {
-        model.addAttribute("users", userService.findAll());
         String categoryPath;
         if (category != null) {
             boolean isCategory = false;
@@ -63,8 +63,8 @@ public class RecipeController {
     public String viewRecipe(Model model, @PathVariable Long id)
     {
         Recipe recipe = recipeService.findById(id);
-        String[] ingredients = recipe.getIngredients().split("\\^");
-        String[] steps = recipe.getSteps().split("\\^");
+        String[] ingredients = recipe.getIngredients().split("\\n");
+        String[] steps = recipe.getSteps().split("\\n");
 
         model.addAttribute("recipe", recipe);
         model.addAttribute("ingredients", ingredients);
@@ -101,17 +101,13 @@ public class RecipeController {
             return "recipes/add";
         }
         String ingredients = stringMap.get("ingredients");
-        String[] ingredientsArr = ingredients.split("\\n");
-        ingredients = String.join("^", ingredientsArr);
-        recipe.setIngredients(ingredients);
-
         String steps = stringMap.get("steps");
+        String[] ingredientsArr = ingredients.split("\\n");
         String[] stepsArr = steps.split("\\n");
-        steps = String.join("^", stepsArr);
-        recipe.setSteps(steps);
+        // REMOVE EMPTY ELEMENTS AND BUILD ARRAY AND STRING BACK UP AGAIN
 
         recipe.setName(Recipe.uppercaseName(recipe.getName()));
-        recipe.setUserId(userService.findUser().getId());
+        recipe.setUser(userService.findUser());
         recipe.setDateCreated(LocalDate.now());
 
         recipeService.save(recipe);

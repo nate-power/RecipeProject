@@ -3,8 +3,8 @@ package ca.gbc.comp3095.RecipeProject.model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.util.*;
 
 @Entity
@@ -13,31 +13,34 @@ public class User extends BaseEntity {
 
     @Column(name = "username")
     @NotEmpty
-    @Size(min = 5)
+    @Size(min = 5, max = 20, message = "Username must be between 5 and 20 characters long.")
     private String username;
 
     @Column(name = "password")
     @NotEmpty
-    @Size(min = 4)
+    @Size(min = 4, message = "Password must be at least 4 characters long")
     private String password;
 
     @Column(name = "email")
-    @Email
+    @Email(message = "Please enter valid email format.")
     @NotEmpty
     private String email;
 
     @Column(name = "firstname")
     @NotEmpty
-    @Size(min = 2, max = 24)
+    @Size(min = 2, max = 24, message = "First name must be between 2 and 24 characters long.")
     private String firstName;
 
     @Column(name = "lastname")
     @NotEmpty
-    @Size(min = 2, max = 24)
+    @Size(min = 2, max = 24, message = "Last name must be between 2 and 24 characters long.")
     private String lastName;
 
     @OneToMany(mappedBy = "user")
     private Set<RecipeDate> recipeDates = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Recipe> recipeSet = new HashSet<>();
 
     public User() { }
 
@@ -89,13 +92,13 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public Set<RecipeDate> getRecipeDates() {
-        return recipeDates;
-    }
+    public Set<RecipeDate> getRecipeDates() { return recipeDates; }
 
-    public void setRecipeDates(Set<RecipeDate> recipeDates) {
-        this.recipeDates = recipeDates;
-    }
+    public void setRecipeDates(Set<RecipeDate> recipeDates) { this.recipeDates = recipeDates; }
+
+    public Set<Recipe> getRecipeSet() { return recipeSet; }
+
+    public void setRecipeSet(Set<Recipe> recipeSet) { this.recipeSet = recipeSet; }
 
     @Override
     public boolean equals(Object o) {

@@ -33,12 +33,8 @@
                         <p class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></p>
                     </div>
                     <div class="card-footer">
-                    <span th:each="user : ${users}">
-                        <span th:if="${user.id == recipe.getUserId()}">
-                            <small class="text-muted" th:text="${'Created by: ' + user.firstName + ' ' + user.lastName}"></small>
-                            <small class="text-muted d-block" th:text="${recipe.dateCreated}"></small>
-                        </span>
-                    </span>
+                        <small class="text-muted" th:text="${'Created by: ' + recipe.user.firstName + ' ' + recipe.user.lastName}"></small>
+                        <small class="text-muted d-block" th:text="${recipe.dateCreated}"></small>
                     </div>
                 </div>
             </div>

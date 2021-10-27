@@ -8,6 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
+        <div th:insert="fragments/header-error :: header-error"></div>
         <div class="container jumbotron w-50">
             <h1 class="text-center"> An unknown error has occurred. </h1>
             <br/>
@@ -15,5 +16,6 @@
                 <a class="btn btn-primary text-center" th:href="@{/}">Go Home</a>
             </div>
         </div>
+        <div th:insert="fragments/footer :: footer"></div>
     </body>
 </html>
