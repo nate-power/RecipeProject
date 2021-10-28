@@ -40,7 +40,6 @@
                         <label th:for="category">Category: </label>
                         <br/>
                         <select required th:field="*{category}">
-                            <!-- turn this into an enum for Recipe class and do a for each loop to list them -->
                             <option th:each="category : ${categories}" th:value="${category}" th:text="${category.getDisplay()}"></option>
                         </select>
                     </div>
