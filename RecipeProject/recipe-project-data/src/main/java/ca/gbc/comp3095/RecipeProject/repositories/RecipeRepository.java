@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
@@ -20,5 +21,5 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
             "lower(r.category) like lower(concat('%', concat(:query, '%')))")
     List<Recipe> findAllByQuery(@Param("query") String query);
     Iterable<Recipe> findAllByCategoryOrderByDateCreatedDesc(RecipeCategories category);
-    Iterable<Recipe> findAllByUserOrderByDateCreated(User user);
+    Iterable<Recipe> findAllByUserOrderByDateCreatedDesc(User user);
 }

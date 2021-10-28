@@ -42,6 +42,9 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user")
     private Set<Recipe> recipeSet = new HashSet<>();
 
+    @ManyToMany(mappedBy = "userFavourites", fetch = FetchType.EAGER)
+    private Set<Recipe> favouriteRecipes = new HashSet<>();
+
     public User() { }
 
     public User(String username, String password, String email, String firstName, String lastName) {
@@ -99,6 +102,10 @@ public class User extends BaseEntity {
     public Set<Recipe> getRecipeSet() { return recipeSet; }
 
     public void setRecipeSet(Set<Recipe> recipeSet) { this.recipeSet = recipeSet; }
+
+    public Set<Recipe> getFavouriteRecipes() { return favouriteRecipes; }
+
+    public void setFavouriteRecipes(Set<Recipe> favouriteRecipes) { this.favouriteRecipes = favouriteRecipes; }
 
     @Override
     public boolean equals(Object o) {

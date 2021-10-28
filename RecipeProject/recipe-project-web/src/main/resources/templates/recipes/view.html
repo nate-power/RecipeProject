@@ -22,12 +22,15 @@
         <form th:action="@{/meal-planner}" th:object="${recipeDate}" th:method="post">
           <label class="d-block" for="date">Meal Date: </label>
           <input type=date id="date" name="date" th:fields="*{date}" required/>
-          <input type="hidden" id="recipeId" name="recipeId" th:value="${recipe.getId()}"/>
+          <input type="hidden" id="recipeId" name="recipeId" th:value="${recipe.id}"/>
           <input type="submit" class="btn btn-dark" value="Add to Meal Planner">
         </form>
-        <form th:action="@{/}" th:method="post">
-          <input type="submit" class="btn btn-dark d-block mt-5" value="Add to Favourites">
-        </form>
+        <div th:with="methodName=${favourites.contains(recipe) ? '/favourite/delete' : '/favourite/add'}">
+          <form th:action="@{${methodName}}" th:method="post">
+            <input type="hidden" id="id" name="id" th:value="${recipe.id}">
+            <input type="submit" class="btn btn-dark d-block mt-5" th:value="${favourites.contains(recipe)} ? 'Remove from Favourites' : 'Add to Favourites' ">
+          </form>
+        </div>
       </div>
     </div>
     <div class="col-lg-2 mt-2">

@@ -33,7 +33,7 @@
                 <form th:action="@{/meal-planner/delete/{id}(id=${meal_today.getId()})}" th:method="post">
                   <a class="btn btn-primary" th:href="@{/recipe/{name}/{id}(id = ${meal_today.recipe.getId()},
                    name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_today.recipe.name)})}">Go To Recipe</a>
-                  <input type="submit" class="btn btn-danger" th:value="Delete">
+                  <input type="submit" class="btn btn-danger" th:value="Remove">
                 </form>
               </div>
             </div>

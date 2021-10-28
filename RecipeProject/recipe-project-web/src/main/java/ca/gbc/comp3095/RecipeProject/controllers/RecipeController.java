@@ -71,6 +71,7 @@ public class RecipeController {
         model.addAttribute("steps", steps);
         model.addAttribute("user", userService.findUser());
         model.addAttribute("recipeDate", new RecipeDate());
+        model.addAttribute("favourites", userService.findUser().getFavouriteRecipes());
 
         return "recipes/view";
     }

@@ -7,6 +7,7 @@ import ca.gbc.comp3095.RecipeProject.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class RecipeServiceImpl implements CrudService<Recipe, Long>, RecipeService{
@@ -46,7 +47,7 @@ public class RecipeServiceImpl implements CrudService<Recipe, Long>, RecipeServi
 
     @Override
     public Iterable<Recipe> findAllByUser(User user) {
-        return recipeRepository.findAllByUserOrderByDateCreated(user);
+        return recipeRepository.findAllByUserOrderByDateCreatedDesc(user);
     }
 
 

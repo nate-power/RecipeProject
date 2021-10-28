@@ -7,6 +7,8 @@ import ca.gbc.comp3095.RecipeProject.security.UserPrincipal;
 import ca.gbc.comp3095.RecipeProject.services.RecipeDateServiceImpl;
 import ca.gbc.comp3095.RecipeProject.services.RecipeServiceImpl;
 import ca.gbc.comp3095.RecipeProject.services.UserServiceImpl;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,8 +36,31 @@ public class AuthUserController {
         if (userService.findUser().getUsername().equals(username)) {
             model.addAttribute("user", userService.findUser());
             model.addAttribute("recipes", recipeService.findAllByUser(userService.findUser()));
+            model.addAttribute("favourites", userService.findUser().getFavouriteRecipes());
             return "/user/profile";
         }
         return "errors/error-404";
+    }
+
+    @PostMapping("/favourite/add")
+    public String addFavourite(@RequestParam("id") Long id) {
+        User user = userService.findUser();
+        Recipe recipe = recipeService.findById(id);
+        user.getFavouriteRecipes().add(recipe);
+        recipe.getUserFavourites().add(user);
+        userService.save(user);
+        recipeService.save(recipe);
+        return "redirect:/recipe/" + Recipe.hyphenateName(recipe.getName()) + '/' + recipe.getId();
+    }
+
+    @PostMapping("/favourite/delete")
+    public String deleteFavourite(@RequestParam("id") Long id) {
+        User user = userService.findUser();
+        Recipe recipe = recipeService.findById(id);
+        user.getFavouriteRecipes().remove(recipe);
+        recipe.getUserFavourites().remove(user);
+        userService.save(user);
+        recipeService.save(recipe);
+        return "redirect:/recipe/" + Recipe.hyphenateName(recipe.getName()) + '/' + recipe.getId();
     }
 }

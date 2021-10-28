@@ -50,6 +50,10 @@ public class Recipe extends BaseEntity{
     @OneToMany(mappedBy = "recipe")
     private Set<RecipeDate> recipeDates = new HashSet<>();
 
+    @ManyToMany()
+    @JoinTable(name = "favourite_recipes", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> userFavourites = new HashSet<>();
+
     public Recipe() {
     }
 
@@ -79,9 +83,7 @@ public class Recipe extends BaseEntity{
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public void setUser(User user) { this.user = user; }
 
     public String getDescription() {
         return description;
@@ -141,12 +143,20 @@ public class Recipe extends BaseEntity{
         this.recipeDates = recipeDates;
     }
 
+    public Set<User> getUserFavourites() {
+        return userFavourites;
+    }
+
+    public void setUserFavourites(Set<User> userFavourites) {
+        this.userFavourites = userFavourites;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(getId(), user.getId());
+        Recipe recipe = (Recipe) o;
+        return Objects.equals(getId(), recipe.getId());
     }
 
     @Override

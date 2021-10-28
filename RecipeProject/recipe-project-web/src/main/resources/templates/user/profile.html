@@ -12,6 +12,7 @@
     <div class="jumbotron jumbotron-fluid">
         <h1 class="ml-4">Your Profile</h1>
     </div>
+    <!-- TURN THIS INTO AN ACCORDION FOR MY RECIPES AND MY FAVOURITES  -->
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-lg-4">
@@ -47,17 +48,17 @@
             <div class="col-lg-8 profile-recipe-view">
                 <h2>My Favourite Recipes</h2>
                 <div class="row">
-                    <div class="col-auto mb-1" th:each="recipe : ${recipes}">
+                    <div class="col-auto mb-1" th:each="favourite : ${favourites}">
                         <div class="card h-100" style="width: 18rem;" >
-                            <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}">
-                                <img class="card-img-top" th:src="@{/img/user-icon.png}" th:alt="${recipe.name}" width="50" height="50"></a>
+                            <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(favourite.name)}, id=${favourite.id})}">
+                                <img class="card-img-top" th:src="@{/img/user-icon.png}" th:alt="${favourite.name}" width="50" height="50"></a>
                             <div class="card-body">
-                                <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
-                                <p class="card-text truncate" th:text="${recipe.description}"></p>
-                                <p class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></p>
+                                <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(favourite.name)}, id=${favourite.id})}" th:text="${favourite.name}"></a></h5>
+                                <p class="card-text truncate" th:text="${favourite.description}"></p>
+                                <p class="card-text" th:text="${'Category - ' + favourite.category.getDisplay()}"></p>
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted d-block" th:text="${'Created on: ' + recipe.dateCreated}"></small>
+                                <small class="text-muted d-block" th:text="${'Created on: ' + favourite.dateCreated}"></small>
                             </div>
                         </div>
                     </div>
