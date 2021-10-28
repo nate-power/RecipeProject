@@ -43,11 +43,11 @@ public class RecipeDateController {
         LocalDate saturday = LocalDate.now().with(next(SATURDAY));
         String saturdayStr = saturday.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
 
-
+        model.addAttribute("current_day", LocalDate.now());
         model.addAttribute("meals_today", recipeDateService.findAllByUserToday(user, LocalDate.now()));
-        model.addAttribute("meals_this_week", recipeDateService.findAllByUser(user, LocalDate.now().plusDays(1), saturday));
+        model.addAttribute("meals_this_week", recipeDateService.findAllByUser(user, sunday, saturday));
         model.addAttribute("meals_future", recipeDateService.findAllByUserGreater(user, saturday));
-        model.addAttribute("meals_past", recipeDateService.findAllByUserLess(user, LocalDate.now()));
+        model.addAttribute("meals_past", recipeDateService.findAllByUserLess(user, sunday));
         model.addAttribute("sunday", sundayStr);
         model.addAttribute("saturday", saturdayStr);
         return "user/schedule";

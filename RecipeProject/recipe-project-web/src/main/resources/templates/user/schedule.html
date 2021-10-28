@@ -29,7 +29,8 @@
                 <h3 class="card-title" th:text="${meal_today.recipe.name}"></h3>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_today.date}"></h6>
                 <p class="card-text truncate" th:text="${meal_today.recipe.description}"></p>
-                <p class="card-text" th:text="${'Prep Time: ' + meal_today.recipe.prepTime + ' Cook Time: ' + meal_today.recipe.cookTime}"></p>
+                <p class="card-text" th:text="${'Prep Time: ' + meal_today.recipe.prepTime + ' min(s)'}"></p>
+                <p class="card-text" th:text="${'Cook Time: ' + meal_today.recipe.cookTime + ' min(s)'}"></p>
                 <form th:action="@{/meal-planner/delete/{id}(id=${meal_today.getId()})}" th:method="post">
                   <a class="btn btn-primary" th:href="@{/recipe/{name}/{id}(id = ${meal_today.recipe.getId()},
                    name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_today.recipe.name)})}">Go To Recipe</a>
@@ -56,15 +57,17 @@
         <ul class="list-group" th:each="meal_this_week : ${meals_this_week}">
           <li class="list-group-item">
             <div class="card" style="width: 18rem;">
-              <div class="card-body">
+              <div class="card-body" th:classappend="${meal_this_week.date == current_day} ? 'bg-light'">
                 <h3 class="card-title" th:text="${meal_this_week.recipe.name}"></h3>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_this_week.date}"></h6>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="${meal_this_week.date == current_day} ? '(today)'"></h6>
                 <p class="card-text truncate" th:text="${meal_this_week.recipe.description}"></p>
-                <p class="card-text" th:text="${'Prep Time: ' + meal_this_week.recipe.prepTime + ' Cook Time: ' + meal_this_week.recipe.cookTime}"></p>
+                <p class="card-text" th:text="${'Prep Time: ' + meal_this_week.recipe.prepTime + ' min(s)'}"></p>
+                <p class="card-text" th:text="${'Cook Time: ' + meal_this_week.recipe.cookTime + ' min(s)'}"></p>
                 <form th:action="@{/meal-planner/delete/{id}(id=${meal_this_week.getId()})}" th:method="post">
                   <a class="btn btn-primary" th:href="@{/recipe/{name}/{id}(id = ${meal_this_week.recipe.getId()},
                    name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_this_week.recipe.name)})}">Go To Recipe</a>
-                  <input type="submit" class="btn btn-danger" th:value="Delete">
+                  <input type="submit" class="btn btn-danger" th:value="Remove">
                 </form>
               </div>
             </div>
@@ -90,11 +93,12 @@
                 <h3 class="card-title" th:text="${meal_future.recipe.name}"></h3>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_future.date}"></h6>
                 <p class="card-text truncate" th:text="${meal_future.recipe.description}"></p>
-                <p class="card-text" th:text="${'Prep Time: ' + meal_future.recipe.prepTime + ' Cook Time: ' + meal_future.recipe.cookTime}"></p>
+                <p class="card-text" th:text="${'Prep Time: ' + meal_future.recipe.prepTime + ' min(s)'}"></p>
+                <p class="card-text" th:text="${'Cook Time: ' + meal_future.recipe.cookTime + ' min(s)'}"></p>
                 <form th:action="@{/meal-planner/delete/{id}(id=${meal_future.getId()})}" th:method="post">
                   <a class="btn btn-primary" th:href="@{/recipe/{name}/{id}(id = ${meal_future.recipe.getId()},
                    name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_future.recipe.name)})}">Go To Recipe</a>
-                  <input type="submit" class="btn btn-danger" th:value="Delete">
+                  <input type="submit" class="btn btn-danger" th:value="Remove">
                 </form>
               </div>
             </div>
@@ -120,11 +124,12 @@
                 <h3 class="card-title" th:text="${meal_past.recipe.name}"></h3>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_past.date}"></h6>
                 <p class="card-text truncate" th:text="${meal_past.recipe.description}"></p>
-                <p class="card-text" th:text="${'Prep Time: ' + meal_past.recipe.prepTime + ' Cook Time: ' + meal_past.recipe.cookTime}"></p>
+                <p class="card-text" th:text="${'Prep Time: ' + meal_past.recipe.prepTime + ' min(s)'}"></p>
+                <p class="card-text" th:text="${'Cook Time: ' + meal_past.recipe.cookTime + ' min(s)'}"></p>
                 <form th:action="@{/meal-planner/delete/{id}(id=${meal_past.getId()})}" th:method="post">
                   <a class="btn btn-primary" th:href="@{/recipe/{name}/{id}(id = ${meal_past.recipe.getId()},
                    name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_past.recipe.name)})}">Go To Recipe</a>
-                  <input type="submit" class="btn btn-danger" th:value="Delete">
+                  <input type="submit" class="btn btn-danger" th:value="Remove">
                 </form>
               </div>
             </div>
