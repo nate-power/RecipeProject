@@ -13,52 +13,57 @@
         <h1 class="ml-4">Your Profile</h1>
     </div>
     <div class="container-fluid mt-5">
-        <div id="profile-recipe-view" class="row">
+        <div class="row">
             <div class="col-lg-4">
-                <div class=" container-fluid">
+                <div class="container-fluid">
                     <img th:src="@{/img/user-icon.png}" alt="mdo" width="250" height="250" class="rounded-circle">
                     <h3 class="text-capitalize font-weight-bold" th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h3>
                     <h4 class="text-muted" th:text="${user.getUsername()}"></h4>
                     <h4 class="text-muted" th:text="${user.getEmail()}"></h4>
                 </div>
-
             </div>
-            <h2>My Recipes</h2>
-            <div class="col-auto mb-3" th:each="recipe : ${recipes}">
-                <div class="card h-100" style="width: 18rem;" >
-                    <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}">
-                        <img class="card-img-top" th:src="@{/img/user-icon.png}" th:alt="${recipe.name}" width="50" height="50"></a>
-                    <div class="card-body">
-                        <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
-                        <p class="card-text truncate" th:text="${recipe.description}"></p>
-                        <p class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted d-block" th:text="${'Created on: ' + recipe.dateCreated}"></small>
+            <div class="col-lg-8 profile-recipe-view">
+                <h2>My Recipes</h2>
+                <div class="row">
+                    <div class="col-auto mb-1" th:each="recipe : ${recipes}">
+                        <div class="card h-100" style="width: 18rem;" >
+                            <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}">
+                                <img class="card-img-top" th:src="@{/img/user-icon.png}" th:alt="${recipe.name}" width="50" height="50"></a>
+                            <div class="card-body">
+                                <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
+                                <p class="card-text truncate" th:text="${recipe.description}"></p>
+                                <p class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted d-block" th:text="${'Created on: ' + recipe.dateCreated}"></small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <hr class="my-5"/>
-        <div class="row">
-            <h2>My Favourite Recipes</h2>
-            <div class="col-auto mb-3" th:each="recipe : ${recipes}">
-                <div class="card h-100" style="width: 18rem;" >
-                    <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}">
-                        <img class="card-img-top" th:src="@{/img/user-icon.png}" th:alt="${recipe.name}" width="50" height="50"></a>
-                    <div class="card-body">
-                        <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
-                        <p class="card-text truncate" th:text="${recipe.description}"></p>
-                        <p class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted d-block" th:text="${'Created on: ' + recipe.dateCreated}"></small>
+        <hr class="my-3"/>
+        <div class="row justify-content-end">
+            <div class="col-lg-8 profile-recipe-view">
+                <h2>My Favourite Recipes</h2>
+                <div class="row">
+                    <div class="col-auto mb-1" th:each="recipe : ${recipes}">
+                        <div class="card h-100" style="width: 18rem;" >
+                            <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}">
+                                <img class="card-img-top" th:src="@{/img/user-icon.png}" th:alt="${recipe.name}" width="50" height="50"></a>
+                            <div class="card-body">
+                                <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
+                                <p class="card-text truncate" th:text="${recipe.description}"></p>
+                                <p class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted d-block" th:text="${'Created on: ' + recipe.dateCreated}"></small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
     <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
