@@ -49,7 +49,7 @@ public class DataLoader implements CommandLineRunner {
         //Recipes
         Recipe recipe1 = new Recipe(
                 "Spaghetti",
-                user2,
+                user3,
                 "cook noodles and cover in sauce cook noodles and cover in sauce " +
                 "cook noodles and cover in saucecook noodles and cover in saucecook noodles and cover in sauce cook noodles and cover in sauce" +
                 "cook noodles and cover in sauce cook noodles and cover in sauce" +
@@ -72,7 +72,7 @@ public class DataLoader implements CommandLineRunner {
 
         Recipe recipe2 = new Recipe(
                 "Pizza",
-                user1,
+                user3,
                 "sauce then cheese then bake",
                 LocalDate.now().minusDays(43),
                 RecipeCategories.LUNCH,

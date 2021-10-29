@@ -6,6 +6,7 @@ import ca.gbc.comp3095.RecipeProject.model.User;
 import ca.gbc.comp3095.RecipeProject.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -31,22 +32,22 @@ public class RecipeServiceImpl implements CrudService<Recipe, Long>, RecipeServi
     }
 
     @Override
-    public Iterable<Recipe> findAll() {
+    public List<Recipe> findAll() {
         return recipeRepository.findAllByOrderByDateCreatedDesc();
     }
 
     @Override
-    public Iterable<Recipe> findByQuery(String query) {
+    public List<Recipe> findByQuery(String query) {
         return recipeRepository.findAllByQuery(query);
     }
 
     @Override
-    public Iterable<Recipe> findAllByCategory(RecipeCategories category) {
+    public List<Recipe> findAllByCategory(RecipeCategories category) {
         return recipeRepository.findAllByCategoryOrderByDateCreatedDesc(category);
     }
 
     @Override
-    public Iterable<Recipe> findAllByUser(User user) {
+    public List<Recipe> findAllByUser(User user) {
         return recipeRepository.findAllByUserOrderByDateCreatedDesc(user);
     }
 

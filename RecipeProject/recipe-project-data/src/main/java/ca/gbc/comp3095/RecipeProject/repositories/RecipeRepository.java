@@ -15,11 +15,11 @@ import java.util.Set;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-    Iterable<Recipe> findAllByOrderByDateCreatedDesc();
+    List<Recipe> findAllByOrderByDateCreatedDesc();
     @Query("select r from Recipe r where lower(r.name) like lower(concat('%', concat(:query, '%'))) or " +
             "lower(r.description) like lower(concat('%', concat(:query, '%'))) or " +
             "lower(r.category) like lower(concat('%', concat(:query, '%')))")
     List<Recipe> findAllByQuery(@Param("query") String query);
-    Iterable<Recipe> findAllByCategoryOrderByDateCreatedDesc(RecipeCategories category);
-    Iterable<Recipe> findAllByUserOrderByDateCreatedDesc(User user);
+    List<Recipe> findAllByCategoryOrderByDateCreatedDesc(RecipeCategories category);
+    List<Recipe> findAllByUserOrderByDateCreatedDesc(User user);
 }

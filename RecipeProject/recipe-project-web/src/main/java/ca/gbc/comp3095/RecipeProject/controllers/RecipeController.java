@@ -94,7 +94,8 @@ public class RecipeController {
     @GetMapping("/recipes/search")
     public String retrieveRecipeSearch(@RequestParam("query") String query, Model model) {
         model.addAttribute("recipes", recipeService.findByQuery(query));
-        return "recipes/index";
+        model.addAttribute("query", query);
+        return "recipes/search";
     }
 
     @PostMapping("/recipes/add" )

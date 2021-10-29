@@ -9,14 +9,35 @@
 </head>
 <body>
 <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
-<h1 class="mt-2">Search for recipes</h1>
-
-<form th:action="@{/recipes/search}">
-  <label for="searchBar">Search</label>
-  <input type="text" id="searchBar" name="query" required>
-  <input type="submit" class="form-control btn btn-primary" value="Search Recipes"/>
+<div class="jumbotron jumbotron-fluid">
+  <h1 class="ml-4">Search for Recipes</h1>
+</div>
+<form class="ml-4" th:action="@{/recipes/search}">
+  <label class="d-block" for="searchBar">Search by Recipe name or description: </label>
+  <input type="text" id="searchBar" maxlength="24" name="query" required placeholder="24 characters or less">
+  <input type="submit" class="btn btn-dark" value="Search Recipes"/>
 </form>
-
+<hr class="my-3"/>
+<div class="container-fluid">
+  <h6 class="mx-auto text-muted" th:text="${recipes != null} ? 'Search for \'' + ${query} + '\' has returned ' + ${recipes.size()} + ' result(s).'"></h6>
+  <div class="row">
+    <div class="col-auto mb-3" th:each="recipe : ${recipes}">
+      <div class="card h-100" style="width: 14rem;" >
+        <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}">
+          <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default.jpg}" th:alt="${recipe.name}" width="100" height="100"></a>
+        <div class="card-body">
+          <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
+          <small class="card-text truncate" th:text="${recipe.description}"></small>
+          <small class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></small>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted" th:text="${'Created by: ' + recipe.user.firstName + ' ' + recipe.user.lastName}"></small>
+          <small class="text-muted d-block" th:text="${recipe.dateCreated}"></small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>

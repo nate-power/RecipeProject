@@ -69,11 +69,13 @@ nav {
 /* Track */
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
+    border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #888;
+    border-radius: 10px;
 }
 
 /* Handle on hover */
@@ -83,23 +85,39 @@ nav {
 
 .card-img-top {
     width: 100%;
-    height: 15vw;
+    height: 192px;
     object-fit: cover;
     border: 1px solid darkgrey;
 }
 
 .truncate {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;;
 }
 
 .profile-recipe-view {
     overflow-y: auto;
-    max-height: 55vh;
+    max-height: 42vh;
+    overflow-x: hidden;
 }
 
 #profile-name:hover {
     text-decoration: underline;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-size: 12px;
+}
+::-moz-placeholder { /* Firefox 19+ */
+    font-size: 12px;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    font-size: 12px;
+}
+:-moz-placeholder { /* Firefox 18- */
+    font-size: 12px;
 }
 
