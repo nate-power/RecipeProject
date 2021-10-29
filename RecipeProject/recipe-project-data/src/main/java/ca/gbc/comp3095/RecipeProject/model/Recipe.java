@@ -40,9 +40,11 @@ public class Recipe extends BaseEntity{
     @Min(value = 1)
     private int serving;
 
+    @Lob
     @NotEmpty(message = "You must include ingredients!")
     private String ingredients;
 
+    @Lob
     @NotEmpty(message = "You must include steps!")
     private String steps;
 
