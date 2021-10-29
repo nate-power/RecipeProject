@@ -29,7 +29,7 @@
                     <div class="col-auto mb-1" th:each="recipe : ${recipes}">
                         <div class="card h-100" style="width: 18rem;" >
                             <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}">
-                                <img class="card-img-top" th:src="@{/img/user-icon.png}" th:alt="${recipe.name}" width="50" height="50"></a>
+                                <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default.jpg}" th:alt="${recipe.name}" width="50" height="50"></a>
                             <div class="card-body">
                                 <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
                                 <p class="card-text truncate" th:text="${recipe.description}"></p>
@@ -51,7 +51,7 @@
                     <div class="col-auto mb-1" th:each="favourite : ${favourites}">
                         <div class="card h-100" style="width: 18rem;" >
                             <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(favourite.name)}, id=${favourite.id})}">
-                                <img class="card-img-top" th:src="@{/img/user-icon.png}" th:alt="${favourite.name}" width="50" height="50"></a>
+                                <img class="card-img-top" th:src="${favourite.photoData != ''} ? ${favourite.photoData} : @{/img/img-default.jpg}" th:alt="${favourite.name}" width="50" height="50"></a>
                             <div class="card-body">
                                 <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(favourite.name)}, id=${favourite.id})}" th:text="${favourite.name}"></a></h5>
                                 <p class="card-text truncate" th:text="${favourite.description}"></p>

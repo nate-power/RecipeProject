@@ -12,7 +12,7 @@
     <h1 class="text-center mt-2">Add a Recipe</h1>
     <hr class="my-3"/>
     <div class="container-fluid">
-        <form th:action="@{/recipes/add}" th:object="${recipe}" method="post" autocomplete="off">
+        <form th:action="@{/recipes/add}" th:object="${recipe}" method="post" autocomplete="off" enctype="multipart/form-data">
             <h2>Add Recipe Information</h2>
             <div class="row jumbotron jumbotron-fluid">
                 <div class="col">
@@ -96,6 +96,21 @@
                         <label th:for="steps">Steps: </label>
                         <textarea rows="6" class="form-control" th:field="*{steps}" placeholder="Put each step on it's own line."></textarea>
                         <div class="alert alert-warning" th:errors="*{steps}"></div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3"/>
+            <h2>Add Image</h2>
+            <div class="row jumbotron jumbotron-fluid">
+                <div class="col">
+                    <p>Adding an image of your recipe is optional, but it will help generate interest from others!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="form-group">
+                        <label>Photos: </label>
+                        <input type="file" name="image" accept="image/png, image/jpeg" />
                     </div>
                 </div>
             </div>

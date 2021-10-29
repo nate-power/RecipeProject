@@ -15,9 +15,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.Locale;
 import java.util.Map;
 
@@ -96,7 +99,8 @@ public class RecipeController {
 
     @PostMapping("/recipes/add" )
     public String saveRecipe(@ModelAttribute("recipe") @Valid Recipe recipe, BindingResult result,
-                             @RequestParam Map<String, String> stringMap, @RequestParam("category") RecipeCategories category, Model model) {
+                             @RequestParam Map<String, String> stringMap, @RequestParam("category") RecipeCategories category,
+                             Model model, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         if (result.hasErrors()) {
             model.addAttribute("categories", RecipeCategories.values());
             return "recipes/add";
@@ -110,6 +114,12 @@ public class RecipeController {
         recipe.setName(Recipe.uppercaseName(recipe.getName()));
         recipe.setUser(userService.findUser());
         recipe.setDateCreated(LocalDate.now());
+
+        if (multipartFile.isEmpty()) {
+            recipe.setPhotoData("");
+        } else {
+            recipe.setPhotoData(Base64.getEncoder().encodeToString(multipartFile.getBytes()));
+        }
 
         recipeService.save(recipe);
         return "redirect:/recipes/" + category.getDisplay().toLowerCase();

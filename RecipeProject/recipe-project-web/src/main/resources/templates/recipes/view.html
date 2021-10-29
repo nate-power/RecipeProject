@@ -14,6 +14,7 @@
   <a class="btn btn-outline-dark mt-2" th:href="@{/}">Back To Recipes</a>
   <div class="row w-100">
     <div class="col-lg-6 mt-2">
+      <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default-banner.jpg}" th:alt="${recipe.name}" width="100" height="100">
       <h1 class="mt-2" th:text="${recipe.name}"></h1>
       <h6 class="mt-2" th:text="${recipe.description}"></h6>
     </div>
@@ -28,7 +29,7 @@
         <div th:with="methodName=${favourites.contains(recipe) ? '/favourite/delete' : '/favourite/add'}">
           <form th:action="@{${methodName}}" th:method="post">
             <input type="hidden" id="id" name="id" th:value="${recipe.id}">
-            <input type="submit" class="btn btn-dark d-block mt-5" th:value="${favourites.contains(recipe)} ? 'Remove from Favourites' : 'Add to Favourites' ">
+            <input type="submit" class="btn d-block mt-5" th:classappend="${favourites.contains(recipe)} ? 'btn-danger' : 'btn-dark'" th:value="${favourites.contains(recipe)} ? 'Remove from Favourites' : 'Add to Favourites' ">
           </form>
         </div>
       </div>
@@ -44,7 +45,6 @@
           <li class="list-group-item" th:text="${'Created by: ' + recipe.user.firstName + ' ' + recipe.user.lastName}"></li>
         </ul>
       </div>
-
     </div>
   </div>
 </div>

@@ -12,6 +12,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 
 @Component
@@ -44,7 +47,10 @@ public class DataLoader implements CommandLineRunner {
         userService.save(user3);
 
         //Recipes
-        Recipe recipe1 = new Recipe("Spaghetti", user2, "cook noodles and cover in sauce cook noodles and cover in sauce " +
+        Recipe recipe1 = new Recipe(
+                "Spaghetti",
+                user2,
+                "cook noodles and cover in sauce cook noodles and cover in sauce " +
                 "cook noodles and cover in saucecook noodles and cover in saucecook noodles and cover in sauce cook noodles and cover in sauce" +
                 "cook noodles and cover in sauce cook noodles and cover in sauce" +
                 "cook noodles and cover in sauce cook noodles and cover in sauce" +
@@ -53,11 +59,44 @@ public class DataLoader implements CommandLineRunner {
                 "cook noodles and cover in sauce cook noodles and cover in sauce" +
                 "cook noodles and cover in sauce cook noodles and cover in sauce" +
                 "cook noodles and cover in sauce cook noodles and cover in sauce" +
-                "cook noodles and cover in sauce cook noodles and cover in sauce", LocalDate.now().minusDays(64), RecipeCategories.BREAKFAST,
-                1, 2, 3, "1 cup sauce\n2 cups cheese",
-                "Make the dough\nPut toppings on\nBake until it's ready");
-        Recipe recipe2 = new Recipe("Pizza", user1, "sauce then cheese then bake", LocalDate.now().minusDays(43), RecipeCategories.LUNCH, 3, 2, 5, "sauce\ncheese", "sauce me up baby");
-        Recipe recipe3 = new Recipe("Ice Cream", user3, "make it very cold", LocalDate.now().minusDays(28),RecipeCategories.DINNER, 4, 2, 4, "ice\ncream", "ice the cream plz");
+                "cook noodles and cover in sauce cook noodles and cover in sauce",
+                LocalDate.now().minusDays(64),
+                RecipeCategories.BREAKFAST,
+                1,
+                2,
+                3,
+                "1 cup sauce\n2 cups cheese",
+                "Make the dough\nPut toppings on\nBake until it's ready",
+                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                                "static/img/data_loader_imgs/spaghetti-image.txt"), StandardCharsets.US_ASCII)));
+
+        Recipe recipe2 = new Recipe(
+                "Pizza",
+                user1,
+                "sauce then cheese then bake",
+                LocalDate.now().minusDays(43),
+                RecipeCategories.LUNCH,
+                3,
+                2,
+                5,
+                "sauce\ncheese",
+                "sauce me up baby",
+                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                                "static/img/data_loader_imgs/pizza-image.txt"), StandardCharsets.US_ASCII)));
+
+        Recipe recipe3 = new Recipe(
+                "Ice Cream",
+                user3,
+                "make it very cold",
+                LocalDate.now().minusDays(28),
+                RecipeCategories.DINNER,
+                4,
+                2,
+                4,
+                "ice\ncream",
+                "ice the cream plz",
+                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                                "static/img/data_loader_imgs/ice-cream-image.txt"), StandardCharsets.US_ASCII)));
         recipeService.save(recipe1);
         recipeService.save(recipe2);
         recipeService.save(recipe3);

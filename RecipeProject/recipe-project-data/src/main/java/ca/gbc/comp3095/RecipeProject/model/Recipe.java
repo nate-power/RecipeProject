@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -54,11 +53,17 @@ public class Recipe extends BaseEntity{
     @JoinTable(name = "favourite_recipes", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> userFavourites = new HashSet<>();
 
+    @Lob
+    @Column(nullable=true)
+    private String photoData;
+
     public Recipe() {
     }
 
     // used for bootstrap data
-    public Recipe(String name, User user, String description, LocalDate dateCreated, RecipeCategories category, int prepTime, int cookTime, int serving, String ingredients, String steps) {
+    public Recipe(String name, User user, String description, LocalDate dateCreated,
+                  RecipeCategories category, int prepTime, int cookTime, int serving, String ingredients,
+                  String steps, Optional<String> photoData) {
         this.name = name;
         this.user = user;
         this.description = description;
@@ -69,6 +74,7 @@ public class Recipe extends BaseEntity{
         this.serving = serving;
         this.ingredients = ingredients;
         this.steps = steps;
+        this.photoData = photoData.orElse("");
     }
 
     public String getName() {
@@ -151,6 +157,12 @@ public class Recipe extends BaseEntity{
         this.userFavourites = userFavourites;
     }
 
+    public String getPhotoData() {
+        return Objects.equals(photoData, "") ? photoData : "data:image/jpeg;charset=utf-8;base64," + photoData;
+    }
+
+    public void setPhotoData(String photoData) { this.photoData = photoData; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -181,5 +193,4 @@ public class Recipe extends BaseEntity{
         String[] words = name.toLowerCase().split(" ");
         return String.join("-", words);
     }
-
 }
