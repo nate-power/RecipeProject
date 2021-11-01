@@ -23,35 +23,35 @@
                         <label class="control-label" for="firstName">
                             First Name
                         </label>
-                        <input id="firstName" class="form-control" th:field="*{firstName}" placeholder="First Name" autofocus="autofocus"/>
+                        <input id="firstName" class="form-control" th:field="*{firstName}" placeholder="First Name" autofocus="autofocus" required/>
                         <div class="alert alert-warning"  th:errors="*{firstName}"></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="lastName">
                             Last Name
                         </label>
-                        <input id="lastName" class="form-control" th:field="*{lastName}" placeholder="Last Name"/>
+                        <input id="lastName" class="form-control" th:field="*{lastName}" placeholder="Last Name" required/>
                         <div class="alert alert-warning" th:errors="*{lastName}"></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="email">
                             Email
                         </label>
-                        <input id="email" type="email" class="form-control" th:field="*{email}" placeholder="Email"/>
+                        <input id="email" type="email" class="form-control" th:field="*{email}" placeholder="Email" required/>
                         <div class="alert alert-warning" th:errors="*{email}"></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="username">
                             Username
                         </label>
-                        <input id="username" class="form-control" th:field="*{username}" placeholder="Username"/>
+                        <input id="username" class="form-control" th:field="*{username}" placeholder="Username" required/>
                         <div class="alert alert-warning" th:errors="*{username}"></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="password">
                             Password
                         </label>
-                        <input id="password" type="password" class="form-control" th:field="*{password}" placeholder="Password"/>
+                        <input id="password" type="password" class="form-control" th:field="*{password}" placeholder="Password" required/>
                         <div class="alert alert-warning" th:errors="*{password}"></div>
                     </div>
                     <div class="form-group">
