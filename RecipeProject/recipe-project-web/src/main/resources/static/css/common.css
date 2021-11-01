@@ -119,3 +119,8 @@ nav {
     font-size: 12px;
 }
 
+.wrap-text {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+

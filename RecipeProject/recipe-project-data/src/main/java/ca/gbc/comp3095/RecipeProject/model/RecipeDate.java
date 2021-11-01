@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Entity
 public class RecipeDate extends BaseEntity{
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @ManyToOne

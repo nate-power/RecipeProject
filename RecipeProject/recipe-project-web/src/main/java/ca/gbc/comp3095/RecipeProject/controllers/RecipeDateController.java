@@ -4,6 +4,7 @@ import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
 import ca.gbc.comp3095.RecipeProject.model.User;
 import ca.gbc.comp3095.RecipeProject.services.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,10 +51,12 @@ public class RecipeDateController {
     }
 
     @PostMapping("/meal-planner")
-    public String setRecipeDate(@ModelAttribute("recipeDate") RecipeDate recipeDate, @RequestParam("recipeId") Long recipeId) {
+    public String setRecipeDate(@ModelAttribute("recipeDate") RecipeDate recipeDate, @RequestParam("recipeId") Long recipeId,
+                                @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         Recipe recipe = recipeService.findById(recipeId);
         User user = userService.findUser();
 
+        recipeDate.setDate(date);
         recipeDate.setRecipe(recipe);
         recipeDate.setUser(user);
         recipeDateService.save(recipeDate);
