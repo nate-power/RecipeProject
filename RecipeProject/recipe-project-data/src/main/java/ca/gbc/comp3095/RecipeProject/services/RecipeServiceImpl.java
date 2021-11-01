@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class RecipeServiceImpl implements CrudService<Recipe, Long>, RecipeService{
+public class RecipeServiceImpl implements RecipeService{
 
     private final RecipeRepository recipeRepository;
 

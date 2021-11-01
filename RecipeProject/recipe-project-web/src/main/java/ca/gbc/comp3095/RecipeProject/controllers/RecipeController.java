@@ -3,17 +3,11 @@ package ca.gbc.comp3095.RecipeProject.controllers;
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
-import ca.gbc.comp3095.RecipeProject.model.User;
-import ca.gbc.comp3095.RecipeProject.services.RecipeDateServiceImpl;
-import ca.gbc.comp3095.RecipeProject.services.RecipeServiceImpl;
-import ca.gbc.comp3095.RecipeProject.services.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import ca.gbc.comp3095.RecipeProject.services.RecipeService;
+import ca.gbc.comp3095.RecipeProject.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,20 +15,17 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Base64;
-import java.util.Locale;
 import java.util.Map;
 
 @Controller
 public class RecipeController {
 
-    private final RecipeServiceImpl recipeService;
-    private final UserServiceImpl userService;
-    private RecipeDateServiceImpl recipeDateService;
+    private final RecipeService recipeService;
+    private final UserService userService;
 
-    public RecipeController(RecipeServiceImpl recipeService, UserServiceImpl userService, RecipeDateServiceImpl recipeDateService) {
+    public RecipeController(RecipeService recipeService, UserService userService) {
         this.recipeService = recipeService;
         this.userService = userService;
-        this.recipeDateService = recipeDateService;
     }
 
     @GetMapping({"/", "/recipes", "/recipes/", "/recipes/{category}"} )

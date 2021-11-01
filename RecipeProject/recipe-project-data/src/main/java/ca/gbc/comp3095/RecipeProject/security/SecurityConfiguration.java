@@ -1,9 +1,9 @@
 package ca.gbc.comp3095.RecipeProject.security;
 
 import ca.gbc.comp3095.RecipeProject.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,11 +16,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final AuthenticationSuccessHandler successHandler;
 
-    @Autowired
-    private AuthenticationSuccessHandler successHandler;
+    public SecurityConfiguration(@Lazy UserService userService, AuthenticationSuccessHandler successHandler) {
+        this.userService = userService;
+        this.successHandler = successHandler;
+    }
 
     @Bean
     public BCryptPasswordEncoder pwEncode() {

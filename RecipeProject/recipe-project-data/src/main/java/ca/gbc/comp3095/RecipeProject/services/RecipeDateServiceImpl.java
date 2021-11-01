@@ -6,10 +6,11 @@ import ca.gbc.comp3095.RecipeProject.repositories.RecipeDateRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RecipeDateServiceImpl implements CrudService<RecipeDate, Long>, RecipeDateService {
+public class RecipeDateServiceImpl implements RecipeDateService {
 
     private final RecipeDateRepository recipeDateRepository;
 
@@ -24,7 +25,7 @@ public class RecipeDateServiceImpl implements CrudService<RecipeDate, Long>, Rec
     }
 
     @Override
-    public Iterable<RecipeDate> findAll() {
+    public List<RecipeDate> findAll() {
         return recipeDateRepository.findAll();
     }
 
@@ -34,19 +35,19 @@ public class RecipeDateServiceImpl implements CrudService<RecipeDate, Long>, Rec
         return recipeDate.orElse(null);
     }
 
-    public Iterable<RecipeDate> findAllByUser(User user, LocalDate date1, LocalDate date2) {
+    public List<RecipeDate> findAllByUser(User user, LocalDate date1, LocalDate date2) {
         return recipeDateRepository.findAllByUserAndDateGreaterThanEqualAndDateLessThanEqualOrderByDate(user, date1, date2);
     }
 
-    public Iterable<RecipeDate> findAllByUserToday(User user, LocalDate date) {
+    public List<RecipeDate> findAllByUserToday(User user, LocalDate date) {
         return recipeDateRepository.findAllByUserAndDateOrderByDate(user, date);
     }
 
-    public Iterable<RecipeDate> findAllByUserLess(User user, LocalDate date) {
+    public List<RecipeDate> findAllByUserLess(User user, LocalDate date) {
         return recipeDateRepository.findAllByUserAndDateLessThanOrderByDate(user, date);
     }
 
-    public Iterable<RecipeDate> findAllByUserGreater(User user, LocalDate date) {
+    public List<RecipeDate> findAllByUserGreater(User user, LocalDate date) {
         return recipeDateRepository.findAllByUserAndDateGreaterThanOrderByDate(user, date);
     }
 

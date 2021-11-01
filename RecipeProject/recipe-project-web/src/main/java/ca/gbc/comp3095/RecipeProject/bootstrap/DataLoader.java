@@ -4,12 +4,8 @@ import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
 import ca.gbc.comp3095.RecipeProject.model.User;
-import ca.gbc.comp3095.RecipeProject.services.RecipeDateServiceImpl;
-import ca.gbc.comp3095.RecipeProject.services.RecipeServiceImpl;
-import ca.gbc.comp3095.RecipeProject.services.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import ca.gbc.comp3095.RecipeProject.services.*;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -20,14 +16,11 @@ import java.time.LocalDate;
 @Component
 public class DataLoader implements CommandLineRunner {
 
-    private final RecipeServiceImpl recipeService;
-    private final UserServiceImpl userService;
-    private final RecipeDateServiceImpl recipeDateService;
+    private final RecipeService recipeService;
+    private final UserService userService;
+    private final RecipeDateService recipeDateService;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    public DataLoader(RecipeServiceImpl recipeService, UserServiceImpl userService, RecipeDateServiceImpl recipeDateService) {
+    public DataLoader(RecipeService recipeService, UserService userService, RecipeDateService recipeDateService) {
         this.recipeService = recipeService;
         this.userService = userService;
         this.recipeDateService = recipeDateService;

@@ -1,5 +1,3 @@
-/* use this file to fix fixed bottom footer from overlapping content */
-
 html {
     min-height: calc(100vh - 58px);
     border-left: 58px solid burlywood;

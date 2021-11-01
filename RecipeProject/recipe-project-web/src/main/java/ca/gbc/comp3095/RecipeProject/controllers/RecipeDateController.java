@@ -3,11 +3,7 @@ package ca.gbc.comp3095.RecipeProject.controllers;
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
 import ca.gbc.comp3095.RecipeProject.model.User;
-import ca.gbc.comp3095.RecipeProject.services.CrudService;
-import ca.gbc.comp3095.RecipeProject.services.RecipeDateServiceImpl;
-import ca.gbc.comp3095.RecipeProject.services.RecipeServiceImpl;
-import ca.gbc.comp3095.RecipeProject.services.UserServiceImpl;
-import org.springframework.security.access.prepost.PostAuthorize;
+import ca.gbc.comp3095.RecipeProject.services.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,11 +19,11 @@ import java.time.format.FormatStyle;
 @Controller
 public class RecipeDateController {
 
-    private final UserServiceImpl userService;
-    private final RecipeDateServiceImpl recipeDateService;
-    private final RecipeServiceImpl recipeService;
+    private final UserService userService;
+    private final RecipeDateService recipeDateService;
+    private final RecipeService recipeService;
 
-    public RecipeDateController(UserServiceImpl userService, RecipeDateServiceImpl recipeDateService, RecipeServiceImpl recipeService) {
+    public RecipeDateController(UserService userService, RecipeDateService recipeDateService, RecipeService recipeService) {
         this.userService = userService;
         this.recipeDateService = recipeDateService;
         this.recipeService = recipeService;

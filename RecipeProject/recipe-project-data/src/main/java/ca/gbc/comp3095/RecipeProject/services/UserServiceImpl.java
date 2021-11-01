@@ -3,25 +3,24 @@ package ca.gbc.comp3095.RecipeProject.services;
 import ca.gbc.comp3095.RecipeProject.model.User;
 import ca.gbc.comp3095.RecipeProject.repositories.UserRepository;
 import ca.gbc.comp3095.RecipeProject.security.UserPrincipal;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService, CrudService<User, Long> {
+public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -33,8 +32,14 @@ public class UserServiceImpl implements UserService, CrudService<User, Long> {
     }
 
     @Override
-    public Iterable<User> findAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User findById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        return user.orElse(null);
     }
 
     @Override
@@ -50,12 +55,6 @@ public class UserServiceImpl implements UserService, CrudService<User, Long> {
     public User findUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ((UserPrincipal) principal).getUser();
-    }
-
-    @Override
-    public User findById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        return user.orElse(null);
     }
 
     @Override

@@ -1,8 +1,7 @@
 package ca.gbc.comp3095.RecipeProject.controllers;
 
 import ca.gbc.comp3095.RecipeProject.model.User;
-import ca.gbc.comp3095.RecipeProject.services.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import ca.gbc.comp3095.RecipeProject.services.UserService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,9 +17,9 @@ import javax.validation.Valid;
 @RequestMapping("/registration")
 public class UserRegistrationController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
-    public UserRegistrationController(UserServiceImpl userService) {
+    public UserRegistrationController(UserService userService) {
         this.userService = userService;
     }
 
