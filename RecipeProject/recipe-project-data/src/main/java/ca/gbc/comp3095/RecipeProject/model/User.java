@@ -3,12 +3,11 @@ package ca.gbc.comp3095.RecipeProject.model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = {"email", "username"}))
 public class User extends BaseEntity {
 
     @Column(name = "username")
@@ -18,12 +17,12 @@ public class User extends BaseEntity {
 
     @Column(name = "password")
     @NotEmpty
-    @Size(min = 4, message = "Password must be at least 4 characters long")
     private String password;
 
     @Column(name = "email")
     @Email(message = "Please enter valid email format.")
     @NotEmpty
+    @Size(min = 5, max = 70, message = "Email must be between 5 and 70 characters long.")
     private String email;
 
     @Column(name = "firstname")

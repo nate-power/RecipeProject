@@ -8,6 +8,7 @@ import ca.gbc.comp3095.RecipeProject.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class RecipeController {
@@ -93,25 +95,37 @@ public class RecipeController {
     public String saveRecipe(@ModelAttribute("recipe") @Valid Recipe recipe, BindingResult result,
                              @RequestParam Map<String, String> stringMap, @RequestParam("category") RecipeCategories category,
                              Model model, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        if (!multipartFile.getContentType().equals("image/jpeg") || !multipartFile.getContentType().equals("image/jpg")
+                || !multipartFile.getContentType().equals("image/png")) {
+            if (multipartFile.getSize() > 2097152) {
+                result.addError(new FieldError("recipe", "photoData", "Please upload an image that is less than 2MB!"));
+            }
+        }
+        else {
+            if (!multipartFile.isEmpty()) {
+                result.addError(new FieldError("recipe", "photoData", "Uploaded image must be a jpeg or png."));
+            }
+        }
+
         if (result.hasErrors()) {
             model.addAttribute("categories", RecipeCategories.values());
             return "recipes/add";
         }
-        String ingredients = stringMap.get("ingredients");
-        String steps = stringMap.get("steps");
-        String[] ingredientsArr = ingredients.split("\\n");
-        String[] stepsArr = steps.split("\\n");
-        // REMOVE EMPTY ELEMENTS AND BUILD ARRAY AND STRING BACK UP AGAIN
-
-        recipe.setName(Recipe.uppercaseName(recipe.getName()));
-        recipe.setUser(userService.findUser());
-        recipe.setDateCreated(LocalDate.now());
 
         if (multipartFile.isEmpty()) {
             recipe.setPhotoData("");
         } else {
             recipe.setPhotoData(Base64.getEncoder().encodeToString(multipartFile.getBytes()));
         }
+        String ingredients = stringMap.get("ingredients");
+        String steps = stringMap.get("steps");
+        String[] ingredientsArr = ingredients.split("\\n");
+        String[] stepsArr = steps.split("\\n");
+        // REMOVE EMPTY ELEMENTS AND BUILD ARRAY AND STRING BACK UP AGAIN, maybe
+
+        recipe.setName(Recipe.uppercaseName(recipe.getName()));
+        recipe.setUser(userService.findUser());
+        recipe.setDateCreated(LocalDate.now());
 
         recipeService.save(recipe);
         return "redirect:/recipes/" + category.getDisplay().toLowerCase();

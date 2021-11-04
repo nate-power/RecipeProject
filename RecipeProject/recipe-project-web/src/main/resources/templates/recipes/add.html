@@ -111,6 +111,7 @@
                     <div class="form-group">
                         <label>Photos: </label>
                         <input type="file" name="image" accept="image/png, image/jpeg" />
+                        <div class="alert alert-warning" th:errors="*{photoData}"></div>
                     </div>
                 </div>
             </div>

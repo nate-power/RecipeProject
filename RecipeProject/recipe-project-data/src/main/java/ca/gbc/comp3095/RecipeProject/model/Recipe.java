@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.nio.file.NoSuchFileException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -40,12 +41,12 @@ public class Recipe extends BaseEntity{
     @Min(value = 1)
     private int serving;
 
-    @Lob
     @NotEmpty(message = "You must include ingredients!")
+    @Column(columnDefinition = "TEXT")
     private String ingredients;
 
-    @Lob
     @NotEmpty(message = "You must include steps!")
+    @Column(columnDefinition = "TEXT")
     private String steps;
 
     @OneToMany(mappedBy = "recipe")
@@ -59,13 +60,12 @@ public class Recipe extends BaseEntity{
     @Column(nullable=true)
     private String photoData;
 
-    public Recipe() {
-    }
+    public Recipe() { }
 
     // used for bootstrap data
     public Recipe(String name, User user, String description, LocalDate dateCreated,
                   RecipeCategories category, int prepTime, int cookTime, int serving, String ingredients,
-                  String steps, Optional<String> photoData) {
+                  String steps) {
         this.name = name;
         this.user = user;
         this.description = description;
@@ -76,7 +76,6 @@ public class Recipe extends BaseEntity{
         this.serving = serving;
         this.ingredients = ingredients;
         this.steps = steps;
-        this.photoData = photoData.orElse("");
     }
 
     public String getName() {

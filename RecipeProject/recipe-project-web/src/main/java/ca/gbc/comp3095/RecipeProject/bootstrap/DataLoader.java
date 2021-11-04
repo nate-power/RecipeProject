@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 
@@ -70,9 +71,15 @@ public class DataLoader implements CommandLineRunner {
                         "package directions, but check for doneness a minute or two before the suggested cooking time." +
                         "\nTake the sauce off of the heat, and then stir in the basil. Toss in the cooked pasta, and " +
                         "then leave for a minute so that the pasta absorbs some of the sauce. Toss again, and then " +
-                        "serve with parmesan sprinkled on top.",
-                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                        "static/img/data_loader_imgs/spaghetti-image.txt"), StandardCharsets.US_ASCII)));
+                        "serve with parmesan sprinkled on top."
+        );
+        try {
+            recipe1.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                    "static/img/data_loader_imgs/spaghetti-image.txt"), StandardCharsets.US_ASCII));
+        }
+        catch (NoSuchFileException e) {
+            recipe1.setPhotoData("");
+        }
 
         Recipe recipe2 = new Recipe(
                 "Homemade Margherita Pizza",
@@ -109,9 +116,15 @@ public class DataLoader implements CommandLineRunner {
                         "Make it thinner than you think it should be, as it will slightly shrink and puff up during " +
                         "baking.\nSprinkle semolina onto an upside down baking sheet and place the stretched crust " +
                         "onto it. Add the sauce, mozzarella and basil.\nSlide the pizza onto the preheated pizza " +
-                        "stone or pan. Bake for 15 minutes, or until the crust and cheese are golden brown.\n",
-                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                        "static/img/data_loader_imgs/pizza-image.txt"), StandardCharsets.US_ASCII)));
+                        "stone or pan. Bake for 15 minutes, or until the crust and cheese are golden brown.\n"
+        );
+        try {
+            recipe2.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                    "static/img/data_loader_imgs/pizza-image.txt"), StandardCharsets.US_ASCII));
+        }
+        catch (NoSuchFileException e) {
+            recipe2.setPhotoData("");
+        }
 
         Recipe recipe3 = new Recipe(
                 "Vanilla Ice Cream",
@@ -128,9 +141,16 @@ public class DataLoader implements CommandLineRunner {
                         "Stir in the heavy cream and vanilla.\nCover and refrigerate for at least 2 hours.\n" +
                         "Start the ice cream machine and slowly pour in the mixture. Let mix until thickened, " +
                         "around 25 minutes.\n Ice cream can be enjoyed immediately. Store in an airtight container " +
-                        "in the freezer.",
-                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                        "static/img/data_loader_imgs/ice-cream-image.txt"), StandardCharsets.US_ASCII)));
+                        "in the freezer."
+        );
+        try {
+            recipe3.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                    "static/img/data_loader_imgs/ice-cream-image.txt"), StandardCharsets.US_ASCII));
+        }
+        catch (NoSuchFileException e) {
+            recipe3.setPhotoData("");
+        }
+
         Recipe recipe4 = new Recipe(
                 "Miso Glazed Salmon",
                 user1,
@@ -154,10 +174,16 @@ public class DataLoader implements CommandLineRunner {
                         "the oven.\nTurn the salmon over once and cook another 6 minutes in the oven.\nTurn it back " +
                         "and glaze with miso marinade with a brush and put the tray back to the oven for one minute." +
                         "\nServe the glazed salmon on top of the soba noodles or bed of rice\nGarnish with roasted " +
-                        "sesame seeds and finely chopped green shallots.",
-                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                        "static/img/data_loader_imgs/miso-salmon-image.txt"), StandardCharsets.US_ASCII))
+                        "sesame seeds and finely chopped green shallots."
         );
+        try {
+            recipe4.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                    "static/img/data_loader_imgs/miso-salmon-image.txt"), StandardCharsets.US_ASCII));
+        }
+        catch (NoSuchFileException e) {
+            recipe4.setPhotoData("");
+        }
+
         Recipe recipe5 = new Recipe(
                 "Old Fashioned Pancakes",
                 user2,
@@ -175,10 +201,17 @@ public class DataLoader implements CommandLineRunner {
                         "center and pour in the milk, egg and melted butter; mix until smooth.\nHeat a lightly oiled " +
                         "griddle or frying pan over medium-high heat. Pour or scoop the batter onto the griddle, " +
                         "using approximately 1/4 cup for each pancake. Brown on both sides.\nThat's it! Serve with " +
-                        "lots of syrup and love.",
-                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                        "static/img/data_loader_imgs/pancakes-image.txt"), StandardCharsets.US_ASCII))
+                        "lots of syrup and love."
         );
+        try {
+            recipe5.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                    "static/img/data_loader_imgs/pancakes-image.txt"), StandardCharsets.US_ASCII));
+        }
+        catch (NoSuchFileException e) {
+            recipe5.setPhotoData("");
+        }
+
+
         Recipe recipe6 = new Recipe(
                 "Mediterranean Pasta Salad",
                 user1,
@@ -202,10 +235,16 @@ public class DataLoader implements CommandLineRunner {
                         "it doesn’t stick together) and let it cool to room temp.\nTransfer to a large bowl with " +
                         "the tomatoes, chickpeas, arugula, cucumbers, feta cheese, basil, parsley, mint, and pine " +
                         "nuts. Pour the dressing and toss to coat.\nSeason to taste with more lemon, salt, pepper, " +
-                        "and/or a drizzle of olive oil, if desired, and serve.",
-                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                        "static/img/data_loader_imgs/pasta-salad-image.txt"), StandardCharsets.US_ASCII))
+                        "and/or a drizzle of olive oil, if desired, and serve."
         );
+        try {
+            recipe6.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                    "static/img/data_loader_imgs/pasta-salad-image.txt"), StandardCharsets.US_ASCII));
+        }
+        catch (NoSuchFileException e) {
+            recipe6.setPhotoData("");
+        }
+
         Recipe recipe7 = new Recipe(
                 "Cornbread Muffins",
                 user1,
@@ -229,10 +268,16 @@ public class DataLoader implements CommandLineRunner {
                         "Divide batter among prepared muffin cups. Top with remaining ½ cup corn, then sprinkle " +
                         "with sea salt.\nBake muffins, rotating pan halfway through, until tops are golden brown " +
                         "and a tester inserted into the center comes out clean, 18–20 minutes. Let cool slightly " +
-                        "in pan. Transfer muffins to a wire rack and eat while warm or let cool completely.",
-                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                        "static/img/data_loader_imgs/corn-muffin-image.txt"), StandardCharsets.US_ASCII))
+                        "in pan. Transfer muffins to a wire rack and eat while warm or let cool completely."
         );
+        try {
+            recipe7.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                    "static/img/data_loader_imgs/corn-muffin-image.txt"), StandardCharsets.US_ASCII));
+        }
+        catch (NoSuchFileException e) {
+            recipe7.setPhotoData("");
+        }
+
         Recipe recipe8 = new Recipe(
                 "Green Curry Lentil Soup",
                 user2,
@@ -261,10 +306,16 @@ public class DataLoader implements CommandLineRunner {
                         "not mushy, 20–25 minutes.\nAdd coconut milk to soup; return to a simmer. Add spinach and " +
                         "fish sauce and cook just until spinach is wilted, about 30 seconds. Taste soup and season " +
                         "with more salt and/or fish sauce if needed.\nLadle soup into bowls and top with cilantro. " +
-                        "Serve with lime wedges.",
-                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                        "static/img/data_loader_imgs/lentil-soup-image.txt"), StandardCharsets.US_ASCII))
+                        "Serve with lime wedges."
         );
+        try {
+            recipe8.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                    "static/img/data_loader_imgs/lentil-soup-image.txt"), StandardCharsets.US_ASCII));
+        }
+        catch (NoSuchFileException e) {
+            recipe8.setPhotoData("");
+        }
+
         Recipe recipe9 = new Recipe(
                 "Yuzu Kosho Deviled Eggs",
                 user3,
@@ -305,10 +356,16 @@ public class DataLoader implements CommandLineRunner {
                         "with pastry tip of choice, or a resealable plastic bag (snip one corner off to pipe), " +
                         "and chill.\nWhen you’re ready to serve, arrange egg whites cut side down on paper towels " +
                         "and let drain. Turn over and pipe in a generous amount of filling. Drain radishes, " +
-                        "pat dry, and place a slice on top of each egg, then sprinkle with more finely chopped herbs.",
-                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                        "static/img/data_loader_imgs/deviled-eggs-image.txt"), StandardCharsets.US_ASCII))
+                        "pat dry, and place a slice on top of each egg, then sprinkle with more finely chopped herbs."
         );
+        try {
+            recipe9.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                    "static/img/data_loader_imgs/deviled-eggs-image.txt"), StandardCharsets.US_ASCII));
+        }
+        catch (NoSuchFileException e) {
+            recipe9.setPhotoData("");
+        }
+
         Recipe recipe10 = new Recipe(
                 "Jackfruit Vegan Tacos",
                 user2,
@@ -326,10 +383,16 @@ public class DataLoader implements CommandLineRunner {
                 "Heat oil in a small saucepan over medium heat. Add jackfruit; cook and stir for 2 to 3 minutes. " +
                         "Add 1 tablespoon water and taco seasoning; stir until well combined, about 1 minute. " +
                         "Add additional water 1 tablespoon at a time as needed.\nPlace a small amount of jackfruit " +
-                        "in each taco shell; add 2 tablespoons salsa.",
-                java.util.Optional.of(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                        "static/img/data_loader_imgs/vegan-tacos-image.txt"), StandardCharsets.US_ASCII))
+                        "in each taco shell; add 2 tablespoons salsa."
+
         );
+        try {
+            recipe10.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
+                    "static/img/data_loader_imgs/vegan-tacos-image.txt"), StandardCharsets.US_ASCII));
+        }
+        catch (NoSuchFileException e) {
+            recipe10.setPhotoData("");
+        }
         recipeService.save(recipe1);
         recipeService.save(recipe2);
         recipeService.save(recipe3);
