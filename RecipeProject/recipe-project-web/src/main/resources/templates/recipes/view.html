@@ -1,83 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title th:text="${recipe.name}"></title>
-  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
-  <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
-</head>
-<body>
-<div id="main" th:insert="fragments/header-auth :: auth-header"></div>
-
-<div class="container-fluid mt-3">
-  <a class="btn btn-outline-dark mt-2" th:href="@{/}">Back To Recipes</a>
-  <div class="row w-100">
-    <div class="col-lg-6 mt-2">
-      <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default-banner.jpg}" th:alt="${recipe.name}" width="100" height="100">
-      <h1 class="mt-2" th:text="${recipe.name}"></h1>
-      <h6 class="mt-2" th:text="${recipe.description}"></h6>
-    </div>
-    <div class="col-lg-3 mt-2">
-      <div>
-        <form th:action="@{/meal-planner}" th:object="${recipeDate}" th:method="post">
-          <label class="d-block" for="date">Meal Date: </label>
-          <input type="date" id="date" name="date" th:field="*{date}" required/>
-          <input type="hidden" id="recipeId" name="recipeId" th:value="${recipe.id}"/>
-          <input type="submit" class="btn btn-dark" value="Add to Meal Planner">
-        </form>
-        <div th:with="methodName=${favourites.contains(recipe) ? '/favourite/delete' : '/favourite/add'}">
-          <form th:action="@{${methodName}}" th:method="post">
-            <input type="hidden" id="id" name="id" th:value="${recipe.id}">
-            <input type="submit" class="btn d-block mt-5" th:classappend="${favourites.contains(recipe)} ? 'btn-danger' : 'btn-dark'" th:value="${favourites.contains(recipe)} ? 'Remove from Favourites' : 'Add to Favourites' ">
-          </form>
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${recipe.name}"></title>
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+        <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
+        <div class="container-fluid mt-3">
+            <a class="btn btn-outline-dark mt-2" th:href="@{/}">Back To Recipes</a>
+            <div class="row w-100">
+                <div class="col-lg-6 mt-2">
+                    <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default-banner.jpg}" th:alt="${recipe.name}" width="100" height="100">
+                    <h1 class="mt-2" th:text="${recipe.name}"></h1>
+                    <h6 class="mt-2" th:text="${recipe.description}"></h6>
+                </div>
+                <div class="col-lg-3 mt-2">
+                    <div>
+                        <form th:action="@{/meal-planner}" th:object="${recipeDate}" th:method="post">
+                            <label class="d-block" for="date">Meal Date: </label>
+                            <input type="date" id="date" name="date" th:field="*{date}" required/>
+                            <input type="hidden" id="recipeId" name="recipeId" th:value="${recipe.id}"/>
+                            <input type="submit" class="btn btn-dark" value="Add to Meal Planner">
+                        </form>
+                        <div th:with="methodName=${favourites.contains(recipe) ? '/favourite/delete' : '/favourite/add'}">
+                            <form th:action="@{${methodName}}" th:method="post">
+                                <input type="hidden" id="id" name="id" th:value="${recipe.id}">
+                                <input type="submit" class="btn d-block mt-5" th:classappend="${favourites.contains(recipe)} ? 'btn-danger' : 'btn-dark'" th:value="${favourites.contains(recipe)} ? 'Remove from Favourites' : 'Add to Favourites' ">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">Details</div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" th:text="${'Prep time: ' + recipe.prepTime + ' min(s)'}"></li>
+                            <li class="list-group-item" th:text="${'Cook time: ' + recipe.cookTime + ' min(s)'}"></li>
+                            <li class="list-group-item" th:text="${'Servings: ' + recipe.serving}"></li>
+                            <li class="list-group-item" th:text="${'Category: ' + recipe.category.getDisplay().toLowerCase()}"></li>
+                            <li class="list-group-item" th:text="${'Created by: ' + recipe.user.firstName + ' ' + recipe.user.lastName}"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-lg-2 mt-2">
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">Details</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" th:text="${'Prep time: ' + recipe.prepTime + ' min(s)'}"></li>
-          <li class="list-group-item" th:text="${'Cook time: ' + recipe.cookTime + ' min(s)'}"></li>
-          <li class="list-group-item" th:text="${'Servings: ' + recipe.serving}"></li>
-          <li class="list-group-item" th:text="${'Category: ' + recipe.category.getDisplay().toLowerCase()}"></li>
-          <li class="list-group-item" th:text="${'Created by: ' + recipe.user.firstName + ' ' + recipe.user.lastName}"></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<hr class="my-5"/>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <h4>Recipe Steps</h4>
-    </div>
-    <div class="col">
-      <h4>Ingredients</h4>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="wrap-text">
-        <ul class="list-group list-group-flush" th:each="step, iterStat : ${steps}">
-          <li class="list-group-item" th:text="${iterStat.index + 1 + '. ' + step}"></li>
-        </ul>
-      </div>
-    </div>
-    <div class="col">
-      <div class="wrap-text">
-        <ul class="list-group list-group-flush" th:each="ingredient : ${ingredients}">
-          <li class="list-group-item" th:text="${ingredient}"></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
-<div th:insert="fragments/footer :: footer"></div>
-</body>
+        <hr class="my-5"/>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <h4>Recipe Steps</h4>
+                </div>
+                <div class="col">
+                    <h4>Ingredients</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="wrap-text">
+                        <ul class="list-group list-group-flush" th:each="step, iterStat : ${steps}">
+                            <li class="list-group-item" th:text="${iterStat.index + 1 + '. ' + step}"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="wrap-text">
+                        <ul class="list-group list-group-flush" th:each="ingredient : ${ingredients}">
+                            <li class="list-group-item" th:text="${ingredient}"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+        <div th:insert="fragments/footer :: footer"></div>
+    </body>
 </html>

@@ -1,3 +1,14 @@
+//*********************************************************************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment #1
+//        * Author(s): Nathan Power
+//        * Student Number: 101247770
+//        * Date: October 24th, 2021
+//        * Description: If an authenticated user tries to access the registration page, it will redirect them to the
+//        * index page for all recipes. New users can also register and the controller will check for various validation
+//        * requests.
+//*********************************************************************************//
+
 package ca.gbc.comp3095.RecipeProject.controllers;
 
 import ca.gbc.comp3095.RecipeProject.model.User;

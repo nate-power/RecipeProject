@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Search Recipes</title>
-  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
-  <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
-</head>
-<body>
-<div id="main" th:insert="fragments/header-auth :: auth-header"></div>
-<div class="jumbotron jumbotron-fluid">
-  <h1 class="mt-2 ml-3">Search for Recipes</h1>
-</div>
-<form class="ml-4" th:action="@{/recipes/search}">
-  <label class="d-block" for="searchBar">Search by Recipe name or description: </label>
-  <input type="text" id="searchBar" maxlength="24" name="query" required placeholder="24 characters or less">
-  <input type="submit" class="btn btn-dark" value="Search Recipes"/>
-</form>
-<hr class="my-3"/>
-<div class="container-fluid">
-  <h6 class="mx-auto text-muted" th:text="${recipes != null} ? 'Search for \'' + ${query} + '\' has returned ' + ${recipes.size()} + ' result(s).'"></h6>
-  <div class="row">
-    <div class="col-auto mb-3" th:each="recipe : ${recipes}">
-      <div class="card h-100" style="width: 14rem;" >
-        <a th:href="@{/recipe/{id}(id=${recipe.id})}">
-          <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default.jpg}" th:alt="${recipe.name}" width="100" height="100"></a>
-        <div class="card-body">
-          <h5 class="card-title"><a th:href="@{/recipe/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
-          <small class="card-text truncate" th:text="${recipe.description}"></small>
-          <small class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></small>
+    <head>
+        <meta charset="UTF-8">
+        <title>Search Recipes</title>
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+        <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
+        <div class="jumbotron jumbotron-fluid">
+            <h1 class="mt-2 ml-3">Search for Recipes</h1>
         </div>
-        <div class="card-footer">
-          <small class="text-muted" th:text="${'Created by: ' + recipe.user.firstName + ' ' + recipe.user.lastName}"></small>
-          <small class="text-muted d-block" th:text="${recipe.dateCreated}"></small>
+        <form class="ml-4" th:action="@{/recipes/search}">
+            <label class="d-block" for="searchBar">Search by Recipe name or description: </label>
+            <input type="text" id="searchBar" maxlength="24" name="query" required placeholder="24 characters or less">
+            <input type="submit" class="btn btn-dark" value="Search Recipes"/>
+        </form>
+        <hr class="my-3"/>
+        <div class="container-fluid">
+            <h6 class="mx-auto text-muted" th:text="${recipes != null} ? 'Search for \'' + ${query} + '\' has returned ' + ${recipes.size()} + ' result(s).'"></h6>
+            <div class="row">
+                <div class="col-auto mb-3" th:each="recipe : ${recipes}">
+                    <div class="card h-100" style="width: 14rem;" >
+                        <a th:href="@{/recipe/{id}(id=${recipe.id})}">
+                            <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default.jpg}" th:alt="${recipe.name}" width="100" height="100"></a>
+                        <div class="card-body">
+                            <h5 class="card-title"><a th:href="@{/recipe/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
+                            <small class="card-text truncate" th:text="${recipe.description}"></small>
+                            <small class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted" th:text="${'Created by: ' + recipe.user.firstName + ' ' + recipe.user.lastName}"></small>
+                            <small class="text-muted d-block" th:text="${recipe.dateCreated}"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
-<div th:insert="fragments/footer :: footer"></div>
-</body>
+        <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+        <div th:insert="fragments/footer :: footer"></div>
+    </body>
 </html>

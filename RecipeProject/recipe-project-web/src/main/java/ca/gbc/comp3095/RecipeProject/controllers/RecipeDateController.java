@@ -1,3 +1,14 @@
+//***************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment 1
+//        * Author(s): Alberto Dos Reis
+//        * Student Number: 101232584
+//        * Date: October 28, 2021
+//        * Description: Will direct user to the meal planner page, allow user to add a Recipe Date and delete a Recipe
+//              Date. Recipe Dates are displayed by current date, for the week, for the future, and for the past, and
+//              passed to Thymeleaf with model attributes.
+//***************************//
+
 package ca.gbc.comp3095.RecipeProject.controllers;
 
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
@@ -67,6 +78,5 @@ public class RecipeDateController {
     public String deleteRecipeDate(@PathVariable Long id) {
         recipeDateService.deleteById(id);
         return "redirect:/meal-planner";
-
     }
 }

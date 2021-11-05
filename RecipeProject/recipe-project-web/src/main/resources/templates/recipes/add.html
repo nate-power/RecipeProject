@@ -1,136 +1,136 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Recipe</title>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
-    <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
-    <h1 class="text-center mt-2">Add a Recipe</h1>
-    <hr class="my-3"/>
-    <div class="container-fluid">
-        <form th:action="@{/recipes/add}" th:object="${recipe}" method="post" autocomplete="off" enctype="multipart/form-data">
-            <h2>Add Recipe Information</h2>
-            <div class="row jumbotron jumbotron-fluid">
-                <div class="col">
-                    <p class="">To add a new recipe, you must first specify the information for the recipe:</p>
-                    <ul>
-                        <li>Your recipe needs a catchy name where you and other users can find it easily.</li>
-                        <li>Your recipe needs a good description so people following it know what they are in for.</li>
-                        <li>Your recipe should specify an accurate prep and cook time for the recipe; time management is important!</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 mx-auto">
-                    <div class="form-group">
-                        <label th:for="name">Name: </label>
-                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{name}" required/>
-                        <div class="alert alert-warning" th:errors="*{name}"></div>
-                    </div>
-                    <div class="form-group">
-                        <label th:for="description">Description: </label>
-                        <textarea class="form-control" th:field="*{description}" required></textarea>
-                        <div class="alert alert-warning" th:errors="*{description}"></div>
-                    </div>
-                    <div class="form-group">
-                        <label th:for="category">Category: </label>
-                        <br/>
-                        <select required th:field="*{category}">
-                            <option th:each="category : ${categories}" th:value="${category}" th:text="${category.getDisplay()}"></option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label th:for="prepTime">Prep Time (in minutes): </label>
-                        <input type="number" class="form-control" value="1" th:field="*{prepTime}" required/>
-                        <div class="alert alert-warning" th:errors="*{prepTime}"></div>
-                    </div>
-                    <div class="form-group">
-                        <label th:for="cookTime">Cook Time (in minutes): </label>
-                        <input type="number" class="form-control" value="1" th:field="*{cookTime}" required/>
-                        <div class="alert alert-warning" th:errors="*{cookTime}"></div>
-                    </div>
-                    <div class="form-group">
-                        <label th:for="serving">Serving: </label>
-                        <input type="number" class="form-control" value="1" th:field="*{serving}" required/>
-                        <div class="alert alert-warning" th:errors="*{serving}"></div>
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Recipe</title>
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+        <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
+        <h1 class="text-center mt-2">Add a Recipe</h1>
+        <hr class="my-3"/>
+        <div class="container-fluid">
+            <form th:action="@{/recipes/add}" th:object="${recipe}" method="post" autocomplete="off" enctype="multipart/form-data">
+                <h2>Add Recipe Information</h2>
+                <div class="row jumbotron jumbotron-fluid">
+                    <div class="col">
+                        <p class="">To add a new recipe, you must first specify the information for the recipe:</p>
+                        <ul>
+                            <li>Your recipe needs a catchy name where you and other users can find it easily.</li>
+                            <li>Your recipe needs a good description so people following it know what they are in for.</li>
+                            <li>Your recipe should specify an accurate prep and cook time for the recipe; time management is important!</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-            <hr class="my-3"/>
-            <h2>Add Ingredients</h2>
-            <div class="row jumbotron jumbotron-fluid">
-                <div class="col">
-                    <p class="">Now, we must include the ingredients to make your masterpiece!</p>
-                    <ul>
-                        <li>Enter ingredients on a separate line in the field below.</li>
-                        <li>You should enter ingredients in the following format: ex. 1 cup flour</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 mx-auto">
-                    <div class="form-group">
-                        <label th:for="ingredients">Ingredients: </label>
-                        <textarea rows="6" class="form-control" th:field="*{ingredients}" placeholder="Put each ingredient on it's own line." required></textarea>
-                        <div class="alert alert-warning" th:errors="*{ingredients}"></div>
-                    </div>
-                </div>
-            </div>
-            <hr class="my-3"/>
-            <h2>Add Steps</h2>
-            <div class="row jumbotron jumbotron-fluid">
-                <div class="col">
-                    <p>Let's show everyone interested in your recipe how to make it!</p>
-                    <ul>
-                        <li>Enter steps on a separate line in the field below, just like you did for ingredients. No need to add step numbers!</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 mx-auto">
-                    <div class="form-group">
-                        <label th:for="steps">Steps: </label>
-                        <textarea rows="6" class="form-control" th:field="*{steps}" placeholder="Put each step on it's own line." required></textarea>
-                        <div class="alert alert-warning" th:errors="*{steps}"></div>
-                    </div>
-                </div>
-            </div>
-            <hr class="my-3"/>
-            <h2>Add Image</h2>
-            <div class="row jumbotron jumbotron-fluid">
-                <div class="col">
-                    <p>Adding an image of your recipe is optional, but it will help generate interest from others!</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 mx-auto">
-                    <div class="form-group">
-                        <label>Photos: </label>
-                        <input type="file" name="image" accept="image/png, image/jpeg" />
-                        <div class="alert alert-warning" th:errors="*{photoData}"></div>
-                    </div>
-                </div>
-            </div>
-            <hr class="my-3"/>
-            <input type="hidden" id="id" name="id" th:field="*{id}">
-            <div class="jumbotron jumbotron-fluid">
                 <div class="row">
-                    <div class="col-sm-4 mx-auto">
-                        <h4 class="text-center">Make sure you double-check your creation!</h4>
-                        <h5 class="text-center">When you are ready, you can submit.</h5>
-                        <input type="submit" name="add-recipe" id="add-recipe" class="form-control btn btn-primary" value="Add Recipe"/>
+                    <div class="col-lg-6 mx-auto">
+                        <div class="form-group">
+                            <label th:for="name">Name: </label>
+                            <input type="text" class="form-control" autofocus="autofocus" th:field="*{name}" required/>
+                            <div class="alert alert-warning" th:errors="*{name}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label th:for="description">Description: </label>
+                            <textarea class="form-control" th:field="*{description}" required></textarea>
+                            <div class="alert alert-warning" th:errors="*{description}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label th:for="category">Category: </label>
+                            <br/>
+                            <select required th:field="*{category}">
+                                <option th:each="category : ${categories}" th:value="${category}" th:text="${category.getDisplay()}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label th:for="prepTime">Prep Time (in minutes): </label>
+                            <input type="number" class="form-control" value="1" th:field="*{prepTime}" required/>
+                            <div class="alert alert-warning" th:errors="*{prepTime}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label th:for="cookTime">Cook Time (in minutes): </label>
+                            <input type="number" class="form-control" value="1" th:field="*{cookTime}" required/>
+                            <div class="alert alert-warning" th:errors="*{cookTime}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label th:for="serving">Serving: </label>
+                            <input type="number" class="form-control" value="1" th:field="*{serving}" required/>
+                            <div class="alert alert-warning" th:errors="*{serving}"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
-    <div th:insert="fragments/footer :: footer"></div>
-</body>
+                <hr class="my-3"/>
+                <h2>Add Ingredients</h2>
+                <div class="row jumbotron jumbotron-fluid">
+                    <div class="col">
+                        <p class="">Now, we must include the ingredients to make your masterpiece!</p>
+                        <ul>
+                            <li>Enter ingredients on a separate line in the field below.</li>
+                            <li>You should enter ingredients in the following format: ex. 1 cup flour</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="form-group">
+                            <label th:for="ingredients">Ingredients: </label>
+                            <textarea rows="6" class="form-control" th:field="*{ingredients}" placeholder="Put each ingredient on it's own line." required></textarea>
+                            <div class="alert alert-warning" th:errors="*{ingredients}"></div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-3"/>
+                <h2>Add Steps</h2>
+                <div class="row jumbotron jumbotron-fluid">
+                    <div class="col">
+                        <p>Let's show everyone interested in your recipe how to make it!</p>
+                        <ul>
+                            <li>Enter steps on a separate line in the field below, just like you did for ingredients. No need to add step numbers!</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="form-group">
+                            <label th:for="steps">Steps: </label>
+                            <textarea rows="6" class="form-control" th:field="*{steps}" placeholder="Put each step on it's own line." required></textarea>
+                            <div class="alert alert-warning" th:errors="*{steps}"></div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-3"/>
+                <h2>Add Image</h2>
+                <div class="row jumbotron jumbotron-fluid">
+                    <div class="col">
+                        <p>Adding an image of your recipe is optional, but it will help generate interest from others!</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="form-group">
+                            <label>Photos: </label>
+                            <input type="file" name="image" accept="image/png, image/jpeg" />
+                            <div class="alert alert-warning" th:errors="*{photoData}"></div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-3"/>
+                <input type="hidden" id="id" name="id" th:field="*{id}">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="row">
+                        <div class="col-sm-4 mx-auto">
+                            <h4 class="text-center">Make sure you double-check your creation!</h4>
+                            <h5 class="text-center">When you are ready, you can submit.</h5>
+                            <input type="submit" name="add-recipe" id="add-recipe" class="form-control btn btn-primary" value="Add Recipe"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+        <div th:insert="fragments/footer :: footer"></div>
+    </body>
 </html>

@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-</head>
-<body>
-<nav id="auth-nav" class="navbar navbar-expand-lg navbar-dark fixed-top" th:fragment="auth-header">
-    <a class="navbar-brand text-muted font-weight-bold" th:href="@{/}">Null Recipes</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Recipes
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" th:href="@{/}">All Recipes</a>
-                    <a class="dropdown-item" th:each="category : ${T(ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories).values()}"
-                       th:href="@{/recipes/{category}(category=${category.getDisplay().toLowerCase()})}" th:text="${category.getDisplay()}"></a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-muted" th:href="@{/search}">Recipe Search</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-muted" th:href="@{/meal-planner}">Meal Planner</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav my-2 my-lg-0 mr-3">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span id="profile-name" class="text-dark" th:text="${#authentication.name}"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                    <p class="dropdown-item disabled" th:text="${'Welcome ' + #authentication.name}"></p>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" th:href="@{/profile/{username}(username=${#authentication.name})}">Your Profile</a>
-                    <div class="dropdown-divider"></div>
-                    <p sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/logout}">Sign out</a></p>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-</nav>
-</body>
+    <body>
+        <nav id="auth-nav" class="navbar navbar-expand-lg navbar-dark fixed-top" th:fragment="auth-header">
+            <a class="navbar-brand text-muted font-weight-bold" th:href="@{/}">Null Recipes</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Recipes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/}">All Recipes</a>
+                            <a class="dropdown-item" th:each="category : ${T(ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories).values()}"
+                               th:href="@{/recipes/{category}(category=${category.getDisplay().toLowerCase()})}" th:text="${category.getDisplay()}"></a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-muted" th:href="@{/search}">Recipe Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-muted" th:href="@{/meal-planner}">Meal Planner</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav my-2 my-lg-0 mr-3">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span id="profile-name" class="text-dark" th:text="${#authentication.name}"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                            <p class="dropdown-item disabled" th:text="${'Welcome ' + #authentication.name}"></p>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/profile/{username}(username=${#authentication.name})}">Your Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <p sec:authorize="isAuthenticated()"><a class="dropdown-item" th:href="@{/logout}">Sign out</a></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </body>
 </html>

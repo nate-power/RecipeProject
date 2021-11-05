@@ -1,3 +1,13 @@
+//*********************************************************************************
+//* Project: < Null Recipes >
+//        * Assignment: assignment #1
+//        * Author(s): Justin Bartlett
+//        * Student Number: 101246661
+//        * Date: October 27 2021
+//        * Description: This is the repository for the RecipeDate entity, which uses JpaRepository functionality to
+//                      define methods which retrieve RecipeDates in certain time ranges to display the meal planner.
+//*********************************************************************************
+
 package ca.gbc.comp3095.RecipeProject.repositories;
 
 import ca.gbc.comp3095.RecipeProject.model.RecipeDate;

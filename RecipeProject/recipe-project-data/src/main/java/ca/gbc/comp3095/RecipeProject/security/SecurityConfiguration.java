@@ -1,3 +1,13 @@
+//*********************************************************************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment #1
+//        * Author(s): Nathan Power
+//        * Student Number: 101247770
+//        * Date: October 24th, 2021
+//        * Description: This file utilizes Spring Security to encrypt the users password, provide authentication to
+//        * logged in users, set limited access to unauth users, and provide redirection for the auth success handler.
+//*********************************************************************************//
+
 package ca.gbc.comp3095.RecipeProject.security;
 
 import ca.gbc.comp3095.RecipeProject.services.UserService;
@@ -50,9 +60,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/css/**",
                 "/img/**",
                 "/webjars/**",
-                "/h2/**" // used for testing only*
+                "/h2/**" // used for testing only by course instructor and our team*
         ).permitAll().anyRequest().authenticated()
-                // next section allows use of H2 console for testing and should be removed for production***
+                // next section allows use of H2 console for testing and would be removed for production in the real world***
                 .and()
                 .headers().frameOptions().disable()
                 .and()

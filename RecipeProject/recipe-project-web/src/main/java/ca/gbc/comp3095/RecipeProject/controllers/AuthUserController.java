@@ -1,3 +1,13 @@
+//*********************************************************************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment #1
+//        * Author(s): Nathan Power
+//        * Student Number: 101247770
+//        * Date: October 26th, 2021
+//        * Description: This controller handles routing to profile of the signed-in user, and handles the calls to the logic
+//        * for adding and deleting favourite recipes for the signed-in user.
+//*********************************************************************************//
+
 package ca.gbc.comp3095.RecipeProject.controllers;
 
 import ca.gbc.comp3095.RecipeProject.model.Recipe;

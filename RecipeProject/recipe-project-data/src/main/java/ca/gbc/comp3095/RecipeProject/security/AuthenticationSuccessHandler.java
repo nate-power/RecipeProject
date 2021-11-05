@@ -1,3 +1,13 @@
+//*********************************************************************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment #1
+//        * Author(s): Nathan Power
+//        * Student Number: 101247770
+//        * Date: October 24th, 2021
+//        * Description: This file is used in tandem with SecurityConfiguration to redirect users of the application
+//        * based on their role (authorized or unauthorized) and utilizes Spring Security.
+//*********************************************************************************//
+
 package ca.gbc.comp3095.RecipeProject.security;
 
 import javax.servlet.http.HttpServletRequest;

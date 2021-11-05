@@ -1,8 +1,17 @@
+//*********************************************************************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment #1
+//        * Author(s): Nathan Power
+//        * Student Number: 101247770
+//        * Date: October 24th, 2021
+//        * Description: This file builds a profile that can access all data members of the User class with the details
+//        * of the logged in user. Essentially, it customizes the UserDetails class to include more data members.
+//*********************************************************************************//
+
 package ca.gbc.comp3095.RecipeProject.security;
 
 import ca.gbc.comp3095.RecipeProject.model.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;

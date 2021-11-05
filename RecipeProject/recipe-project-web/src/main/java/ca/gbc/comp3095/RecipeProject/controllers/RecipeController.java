@@ -1,3 +1,13 @@
+//*********************************************************************************
+//* Project: < Null Recipes >
+//        * Assignment: assignment #1
+//        * Author(s): Justin Bartlett
+//        * Student Number: 101246661
+//        * Date: October 26 2021
+//        * Description: This controller handles routing to pages related to adding, viewing, and searching for recipes.
+//                      It also interacts with the recipeService to handle CRUD operations related to recipes.
+//*********************************************************************************
+
 package ca.gbc.comp3095.RecipeProject.controllers;
 
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
@@ -116,12 +126,6 @@ public class RecipeController {
         } else {
             recipe.setPhotoData(Base64.getEncoder().encodeToString(multipartFile.getBytes()));
         }
-        String ingredients = stringMap.get("ingredients");
-        String steps = stringMap.get("steps");
-        String[] ingredientsArr = ingredients.split("\\n");
-        String[] stepsArr = steps.split("\\n");
-        // REMOVE EMPTY ELEMENTS AND BUILD ARRAY AND STRING BACK UP AGAIN, maybe
-
         recipe.setName(Recipe.uppercaseName(recipe.getName()));
         recipe.setUser(userService.findUser());
         recipe.setDateCreated(LocalDate.now());

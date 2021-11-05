@@ -1,3 +1,14 @@
+//*********************************************************************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment #1
+//        * Author(s): Nathan Power
+//        * Student Number: 101247770
+//        * Date: October 24th, 2021
+//        * Description: This controller handles only login routing so if an authenticated user tries to access the
+//        * login page again, it will redirect them to the index page of recipes (All Created Recipes). If the user
+//        * has not logged in yet, it will redirect them to the login page.
+//*********************************************************************************//
+
 package ca.gbc.comp3095.RecipeProject.controllers;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -11,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/login")
 public class UserLoginController {
 
-    // if authenticated user tries to access login page, it will redirect them to recipes/index.html
     @GetMapping
     public String checkUserAuthLogin() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -1,3 +1,13 @@
+//*********************************************************************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment #1
+//        * Author(s): Nathan Power
+//        * Student Number: 101247770
+//        * Date: October 25th, 2021
+//        * Description: This controller will handle any errors that result from user interaction with the application
+//        * and routes them to the appropriate error template pages.
+//*********************************************************************************//
+
 package ca.gbc.comp3095.RecipeProject.controllers;
 
 import org.springframework.boot.web.servlet.error.ErrorController;

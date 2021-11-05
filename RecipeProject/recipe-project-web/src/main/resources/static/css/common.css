@@ -59,24 +59,22 @@ nav {
     overflow-y: auto;
     max-height: 80vh;
 }
+
 ::-webkit-scrollbar {
     width: 10px;
     margin-right: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 10px;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 10px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
@@ -106,16 +104,19 @@ nav {
     text-decoration: underline;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+::-webkit-input-placeholder {
     font-size: 12px;
 }
-::-moz-placeholder { /* Firefox 19+ */
+
+::-moz-placeholder {
     font-size: 12px;
 }
-:-ms-input-placeholder { /* IE 10+ */
+
+:-ms-input-placeholder {
     font-size: 12px;
 }
-:-moz-placeholder { /* Firefox 18- */
+
+:-moz-placeholder {
     font-size: 12px;
 }
 

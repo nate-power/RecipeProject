@@ -1,3 +1,13 @@
+//*********************************************************************************
+//* Project: < Null Recipes >
+//        * Assignment: assignment #1
+//        * Author(s): Justin Bartlett
+//        * Student Number: 101246661
+//        * Date: October 24 2021
+//        * Description: This is the entity model for Recipe, which extends the BaseEntity. It defines the properties
+//                      that will be stored in the database, as well as getters and setters for those properties.
+//*********************************************************************************
+
 package ca.gbc.comp3095.RecipeProject.model;
 
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
@@ -6,7 +16,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.nio.file.NoSuchFileException;
 import java.time.LocalDate;
 import java.util.*;
 

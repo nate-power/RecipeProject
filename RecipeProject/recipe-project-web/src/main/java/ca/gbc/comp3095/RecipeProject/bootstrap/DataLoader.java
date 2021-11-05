@@ -1,3 +1,14 @@
+//***************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment 1
+//        * Author(s): Alberto Dos Reis
+//        * Student Number: 101232584
+//        * Date: November 1, 2021
+//        * Description: Creates test user accounts and several complete recipes for the purpose of testing and
+// demonstrating website functionality. Recipe images are added by reading text files which hold Base64 representations
+// of images.
+//***************************//
+
 package ca.gbc.comp3095.RecipeProject.bootstrap;
 
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;

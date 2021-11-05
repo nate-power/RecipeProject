@@ -1,3 +1,13 @@
+//*********************************************************************************
+//* Project: < Null Recipes >
+//        * Assignment: assignment #1
+//        * Author(s): Justin Bartlett
+//        * Student Number: 101246661
+//        * Date: October 26 2021
+//        * Description: This is the concrete implementation of the Recipe Service interface. It is used primarily
+//                      by the RecipeController in order to perform CRUD operations with the Recipe table in database.
+//*********************************************************************************
+
 package ca.gbc.comp3095.RecipeProject.services;
 
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
@@ -8,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class RecipeServiceImpl implements RecipeService{
@@ -50,6 +59,4 @@ public class RecipeServiceImpl implements RecipeService{
     public List<Recipe> findAllByUser(User user) {
         return recipeRepository.findAllByUserOrderByDateCreatedDesc(user);
     }
-
-
 }

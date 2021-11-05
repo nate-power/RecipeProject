@@ -1,3 +1,13 @@
+//*********************************************************************************
+//* Project: < Null Recipes >
+//        * Assignment: assignment #1
+//        * Author(s): Justin Bartlett
+//        * Student Number: 101246661
+//        * Date: October 24 2021
+//        * Description: This is the base entity which other entities extend. It currently contains logic for getting
+//                      and setting auto-generated Long-type entity IDs.
+//*********************************************************************************
+
 package ca.gbc.comp3095.RecipeProject.model;
 
 import javax.persistence.GeneratedValue;

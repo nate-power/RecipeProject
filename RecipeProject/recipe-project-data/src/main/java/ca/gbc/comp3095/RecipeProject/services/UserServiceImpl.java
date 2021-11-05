@@ -1,3 +1,13 @@
+//*********************************************************************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment #1
+//        * Author(s): Alberto Dos Reis, Justin Bartlett, Nathan Power
+//        * Student Number(s): 101232584, 101246661, 101247770 (respectively)
+//        * Date: October 27th, 2021
+//        * Description: Saves a user, uses CrudService, attempts to find an authorized user for login page, uses User
+//        * Principal to give current logged in user to Controllers, and validation helpers for registration page.
+//*********************************************************************************//
+
 package ca.gbc.comp3095.RecipeProject.services;
 
 import ca.gbc.comp3095.RecipeProject.model.User;

@@ -1,3 +1,13 @@
+//***************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment 1
+//        * Author(s): Alberto Dos Reis
+//        * Student Number: 101232584
+//        * Date: October 24, 2021
+//        * Description: Model entity for registered users. Defines properties to be held in USER database table. Also
+// defines relationship to joining tables for the user's created recipes, favourite recipes, and planned meals.
+//***************************//
+
 package ca.gbc.comp3095.RecipeProject.model;
 
 import javax.persistence.*;
@@ -7,30 +17,25 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = {"email", "username"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email", "username"}))
 public class User extends BaseEntity {
 
-    @Column(name = "username")
     @NotEmpty
     @Size(min = 5, max = 20, message = "Username must be between 5 and 20 characters long.")
     private String username;
 
-    @Column(name = "password")
     @NotEmpty
     private String password;
 
-    @Column(name = "email")
     @Email(message = "Please enter valid email format.")
     @NotEmpty
     @Size(min = 5, max = 70, message = "Email must be between 5 and 70 characters long.")
     private String email;
 
-    @Column(name = "firstname")
     @NotEmpty
     @Size(min = 2, max = 24, message = "First name must be between 2 and 24 characters long.")
     private String firstName;
 
-    @Column(name = "lastname")
     @NotEmpty
     @Size(min = 2, max = 24, message = "Last name must be between 2 and 24 characters long.")
     private String lastName;
@@ -46,6 +51,7 @@ public class User extends BaseEntity {
 
     public User() { }
 
+    // used for dataloader
     public User(String username, String password, String email, String firstName, String lastName) {
         this.username = username;
         this.password = password;

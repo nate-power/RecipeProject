@@ -1,3 +1,13 @@
+//***************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment 1
+//        * Author(s): Alberto Dos Reis
+//        * Student Number: 101232584
+//        * Date: October 28, 2021
+//        * Description: This service will be recognized by Spring to provide the functionality for the
+//              the methods contracted in the Service interface for RecipeDate object and for the CrudService.
+//***************************//
+
 package ca.gbc.comp3095.RecipeProject.services;
 
 import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
