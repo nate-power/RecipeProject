@@ -32,7 +32,7 @@
                                         <p class="card-text truncate" th:text="${meal_today.recipe.description}"></p>
                                         <p class="card-text" th:text="${'Prep Time: ' + meal_today.recipe.prepTime + ' min(s)'}"></p>
                                         <p class="card-text" th:text="${'Cook Time: ' + meal_today.recipe.cookTime + ' min(s)'}"></p>
-                                        <form th:action="@{/meal-planner/delete/{id}(id=${meal_today.recipe.id})}" th:method="post">
+                                        <form th:action="@{/meal-planner/delete/{id}(id=${meal_today.id})}" th:method="post">
                                             <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_today.recipe.id})}">Go To Recipe</a>
                                             <input type="submit" class="btn btn-danger" th:value="Remove">
                                         </form>
@@ -64,7 +64,7 @@
                                         <p class="card-text truncate" th:text="${meal_this_week.recipe.description}"></p>
                                         <p class="card-text" th:text="${'Prep Time: ' + meal_this_week.recipe.prepTime + ' min(s)'}"></p>
                                         <p class="card-text" th:text="${'Cook Time: ' + meal_this_week.recipe.cookTime + ' min(s)'}"></p>
-                                        <form th:action="@{/meal-planner/delete/{id}(id=${meal_this_week.recipe.id})}" th:method="post">
+                                        <form th:action="@{/meal-planner/delete/{id}(id=${meal_this_week.id})}" th:method="post">
                                             <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_this_week.recipe.id})}">Go To Recipe</a>
                                             <input type="submit" class="btn btn-danger" th:value="Remove">
                                         </form>
@@ -94,7 +94,7 @@
                                         <p class="card-text truncate" th:text="${meal_future.recipe.description}"></p>
                                         <p class="card-text" th:text="${'Prep Time: ' + meal_future.recipe.prepTime + ' min(s)'}"></p>
                                         <p class="card-text" th:text="${'Cook Time: ' + meal_future.recipe.cookTime + ' min(s)'}"></p>
-                                        <form th:action="@{/meal-planner/delete/{id}(id=${meal_future.recipe.id})}" th:method="post">
+                                        <form th:action="@{/meal-planner/delete/{id}(id=${meal_future.id})}" th:method="post">
                                             <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_future.recipe.id})}">Go To Recipe</a>
                                             <input type="submit" class="btn btn-danger" th:value="Remove">
                                         </form>
@@ -124,7 +124,7 @@
                                         <p class="card-text truncate" th:text="${meal_past.recipe.description}"></p>
                                         <p class="card-text" th:text="${'Prep Time: ' + meal_past.recipe.prepTime + ' min(s)'}"></p>
                                         <p class="card-text" th:text="${'Cook Time: ' + meal_past.recipe.cookTime + ' min(s)'}"></p>
-                                        <form th:action="@{/meal-planner/delete/{id}(id=${meal_past.recipe.id})}" th:method="post">
+                                        <form th:action="@{/meal-planner/delete/{id}(id=${meal_past.id})}" th:method="post">
                                             <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_past.recipe.id})}">Go To Recipe</a>
                                             <input type="submit" class="btn btn-danger" th:value="Remove">
                                         </form>
