@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Map;
-import java.util.Objects;
 
 @Controller
 public class RecipeController {
@@ -36,7 +35,7 @@ public class RecipeController {
         if (category != null) {
             boolean isCategory = false;
             for (RecipeCategories categoryName : RecipeCategories.values()) {
-                if (categoryName.getDisplay().toLowerCase().equals(category.toLowerCase())) {
+                if (categoryName.getDisplay().equalsIgnoreCase(category)) {
                     isCategory = true;
                     model.addAttribute("recipes", recipeService.findAllByCategory(categoryName));
                     break;
@@ -55,7 +54,7 @@ public class RecipeController {
         return "recipes/index";
     }
 
-    @GetMapping("recipe/{name}/{id}")
+    @GetMapping("recipe/{id}")
     public String viewRecipe(Model model, @PathVariable Long id)
     {
         Recipe recipe = recipeService.findById(id);

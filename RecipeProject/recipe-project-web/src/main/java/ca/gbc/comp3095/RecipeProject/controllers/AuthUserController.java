@@ -37,7 +37,7 @@ public class AuthUserController {
         recipe.getUserFavourites().add(user);
         userService.save(user);
         recipeService.save(recipe);
-        return "redirect:/recipe/" + Recipe.hyphenateName(recipe.getName()) + '/' + recipe.getId();
+        return "redirect:/recipe/" + recipe.getId();
     }
 
     @PostMapping("/favourite/delete")
@@ -48,6 +48,6 @@ public class AuthUserController {
         recipe.getUserFavourites().remove(user);
         userService.save(user);
         recipeService.save(recipe);
-        return "redirect:/recipe/" + Recipe.hyphenateName(recipe.getName()) + '/' + recipe.getId();
+        return "redirect:/recipe/" + recipe.getId();
     }
 }

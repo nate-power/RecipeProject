@@ -188,10 +188,4 @@ public class Recipe extends BaseEntity{
         }
         return uppercaseWord.trim();
     }
-
-    public static String hyphenateName(String name) {
-        String word = "";
-        String[] words = name.toLowerCase().split(" ");
-        return String.join("-", words);
-    }
 }

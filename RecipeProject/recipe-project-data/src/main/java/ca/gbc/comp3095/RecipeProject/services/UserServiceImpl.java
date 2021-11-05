@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,7 +27,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         String password = user.getPassword();
-        user.setPassword(passwordEncoder.encode(password));
+        Pattern BCRYPT_PATTERN = Pattern.compile("\\A\\$2a?\\$\\d\\d\\$[./0-9A-Za-z]{53}");
+        if (!BCRYPT_PATTERN.matcher(password).matches()) {
+            user.setPassword(passwordEncoder.encode(password));
+        }
         userRepository.save(user);
         return user;
     }

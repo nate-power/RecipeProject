@@ -31,7 +31,7 @@ public class UserRegistrationController {
         }
         else {
             model.addAttribute("user", new User());
-            return "registration";
+            return "/registration";
         }
     }
 

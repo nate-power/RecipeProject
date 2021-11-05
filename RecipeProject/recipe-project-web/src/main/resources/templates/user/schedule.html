@@ -32,9 +32,8 @@
                     <p class="card-text truncate" th:text="${meal_today.recipe.description}"></p>
                     <p class="card-text" th:text="${'Prep Time: ' + meal_today.recipe.prepTime + ' min(s)'}"></p>
                     <p class="card-text" th:text="${'Cook Time: ' + meal_today.recipe.cookTime + ' min(s)'}"></p>
-                    <form th:action="@{/meal-planner/delete/{id}(id=${meal_today.getId()})}" th:method="post">
-                      <a class="btn btn-dark" th:href="@{/recipe/{name}/{id}(id = ${meal_today.recipe.getId()},
-                       name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_today.recipe.name)})}">Go To Recipe</a>
+                    <form th:action="@{/meal-planner/delete/{id}(id=${meal_today.id})}" th:method="post">
+                      <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_today.id})}">Go To Recipe</a>
                       <input type="submit" class="btn btn-danger" th:value="Remove">
                     </form>
                   </div>
@@ -65,9 +64,8 @@
                     <p class="card-text truncate" th:text="${meal_this_week.recipe.description}"></p>
                     <p class="card-text" th:text="${'Prep Time: ' + meal_this_week.recipe.prepTime + ' min(s)'}"></p>
                     <p class="card-text" th:text="${'Cook Time: ' + meal_this_week.recipe.cookTime + ' min(s)'}"></p>
-                    <form th:action="@{/meal-planner/delete/{id}(id=${meal_this_week.getId()})}" th:method="post">
-                      <a class="btn btn-dark" th:href="@{/recipe/{name}/{id}(id = ${meal_this_week.recipe.getId()},
-                       name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_this_week.recipe.name)})}">Go To Recipe</a>
+                    <form th:action="@{/meal-planner/delete/{id}(id=${meal_this_week.id})}" th:method="post">
+                      <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_this_week.id})}">Go To Recipe</a>
                       <input type="submit" class="btn btn-danger" th:value="Remove">
                     </form>
                   </div>
@@ -96,9 +94,8 @@
                     <p class="card-text truncate" th:text="${meal_future.recipe.description}"></p>
                     <p class="card-text" th:text="${'Prep Time: ' + meal_future.recipe.prepTime + ' min(s)'}"></p>
                     <p class="card-text" th:text="${'Cook Time: ' + meal_future.recipe.cookTime + ' min(s)'}"></p>
-                    <form th:action="@{/meal-planner/delete/{id}(id=${meal_future.getId()})}" th:method="post">
-                      <a class="btn btn-dark" th:href="@{/recipe/{name}/{id}(id = ${meal_future.recipe.getId()},
-                       name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_future.recipe.name)})}">Go To Recipe</a>
+                    <form th:action="@{/meal-planner/delete/{id}(id=${meal_future.id})}" th:method="post">
+                      <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_future.id})}">Go To Recipe</a>
                       <input type="submit" class="btn btn-danger" th:value="Remove">
                     </form>
                   </div>
@@ -127,9 +124,8 @@
                     <p class="card-text truncate" th:text="${meal_past.recipe.description}"></p>
                     <p class="card-text" th:text="${'Prep Time: ' + meal_past.recipe.prepTime + ' min(s)'}"></p>
                     <p class="card-text" th:text="${'Cook Time: ' + meal_past.recipe.cookTime + ' min(s)'}"></p>
-                    <form th:action="@{/meal-planner/delete/{id}(id=${meal_past.getId()})}" th:method="post">
-                      <a class="btn btn-dark" th:href="@{/recipe/{name}/{id}(id = ${meal_past.recipe.getId()},
-                       name = ${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(meal_past.recipe.name)})}">Go To Recipe</a>
+                    <form th:action="@{/meal-planner/delete/{id}(id=${meal_past.id})}" th:method="post">
+                      <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_past.id})}">Go To Recipe</a>
                       <input type="submit" class="btn btn-danger" th:value="Remove">
                     </form>
                   </div>

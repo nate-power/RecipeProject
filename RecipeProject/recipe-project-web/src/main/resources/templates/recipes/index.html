@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Recipes</title>
@@ -25,10 +25,10 @@
             </div>
             <div class="col-auto mb-3" th:each="recipe : ${recipes}">
                 <div class="card h-100" style="width: 14rem;" >
-                    <a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}">
+                    <a th:href="@{/recipe/{id}(id=${recipe.id})}">
                         <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default.jpg}" th:alt="${recipe.name}" width="100" height="100"></a>
                     <div class="card-body">
-                        <h5 class="card-title"><a th:href="@{/recipe/{name}/{id}(name=${T(ca.gbc.comp3095.RecipeProject.model.Recipe).hyphenateName(recipe.name)}, id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
+                        <h5 class="card-title"><a th:href="@{/recipe/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
                         <small class="card-text truncate" th:text="${recipe.description}"></small>
                         <small class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></small>
                     </div>
