@@ -15,6 +15,7 @@ import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
 import ca.gbc.comp3095.RecipeProject.model.User;
 import ca.gbc.comp3095.RecipeProject.services.*;
+import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,11 +45,25 @@ public class RecipeDateController {
     @GetMapping("/meal-planner")
     public String getMealPlanner(Model model) {
         User user = userService.findUser();
+        LocalDate sunday;
+        LocalDate saturday;
 
-        LocalDate sunday = LocalDate.now().with(previous(SUNDAY));
+        // set correct sunday for week planner
+        if (LocalDate.now().getDayOfWeek() == SUNDAY) {
+            sunday = LocalDate.now().with(SUNDAY);
+        }
+        else {
+            sunday = LocalDate.now().with(previous(SUNDAY));
+        }
         String sundayStr = sunday.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
 
-        LocalDate saturday = LocalDate.now().with(next(SATURDAY));
+        // set correct saturday for week planner
+        if (LocalDate.now().getDayOfWeek() == SATURDAY) {
+            saturday = LocalDate.now().with(SATURDAY);
+        }
+        else {
+            saturday = LocalDate.now().with(next(SATURDAY));
+        }
         String saturdayStr = saturday.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
 
         model.addAttribute("current_day", LocalDate.now());
