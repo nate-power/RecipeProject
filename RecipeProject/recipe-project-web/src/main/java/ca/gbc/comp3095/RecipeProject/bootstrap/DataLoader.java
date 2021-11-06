@@ -11,12 +11,14 @@
 
 package ca.gbc.comp3095.RecipeProject.bootstrap;
 
+import ca.gbc.comp3095.RecipeProject.RecipeProjectApplication;
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
 import ca.gbc.comp3095.RecipeProject.model.User;
 import ca.gbc.comp3095.RecipeProject.services.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -24,6 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.time.LocalDate;
+
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -40,19 +43,16 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        ApplicationHome applicationHome = new ApplicationHome(RecipeProjectApplication.class);
+        String image_path = applicationHome.getSource().getParentFile().getParentFile() + "/src/main/resources/static/img/data_loader_imgs/";
 
         //Test user Accounts
         User user1 = new User("bob-ruthers", "test", "bob_ruthers@test.com",
                 "Bob", "Ruthers");
-        userService.save(user1);
-
         User user2 = new User("mollyringwald123", "test", "molly_ringwald@test.com",
                 "Molly", "Ringwald");
-        userService.save(user2);
-
         User user3 = new User("ana-is-cool", "test", "ana_de_armas@test.com",
                 "Ana de", "Armas");
-        userService.save(user3);
 
         //Recipes
         Recipe recipe1 = new Recipe(
@@ -85,8 +85,7 @@ public class DataLoader implements CommandLineRunner {
                         "serve with parmesan sprinkled on top."
         );
         try {
-            recipe1.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                    "static/img/data_loader_imgs/spaghetti-image.txt"), StandardCharsets.US_ASCII));
+            recipe1.setPhotoData(Files.readString(Path.of(image_path + "spaghetti-image.txt"), StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe1.setPhotoData("");
@@ -130,8 +129,7 @@ public class DataLoader implements CommandLineRunner {
                         "stone or pan. Bake for 15 minutes, or until the crust and cheese are golden brown.\n"
         );
         try {
-            recipe2.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                    "static/img/data_loader_imgs/pizza-image.txt"), StandardCharsets.US_ASCII));
+            recipe2.setPhotoData(Files.readString(Path.of(image_path + "pizza-image.txt"), StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe2.setPhotoData("");
@@ -155,8 +153,7 @@ public class DataLoader implements CommandLineRunner {
                         "in the freezer."
         );
         try {
-            recipe3.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                    "static/img/data_loader_imgs/ice-cream-image.txt"), StandardCharsets.US_ASCII));
+            recipe3.setPhotoData(Files.readString(Path.of(image_path + "ice-cream-image.txt"), StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe3.setPhotoData("");
@@ -188,8 +185,7 @@ public class DataLoader implements CommandLineRunner {
                         "sesame seeds and finely chopped green shallots."
         );
         try {
-            recipe4.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                    "static/img/data_loader_imgs/miso-salmon-image.txt"), StandardCharsets.US_ASCII));
+            recipe4.setPhotoData(Files.readString(Path.of(image_path + "miso-salmon-image.txt"), StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe4.setPhotoData("");
@@ -215,8 +211,7 @@ public class DataLoader implements CommandLineRunner {
                         "lots of syrup and love."
         );
         try {
-            recipe5.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                    "static/img/data_loader_imgs/pancakes-image.txt"), StandardCharsets.US_ASCII));
+            recipe5.setPhotoData(Files.readString(Path.of(image_path + "pancakes-image.txt"), StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe5.setPhotoData("");
@@ -249,8 +244,7 @@ public class DataLoader implements CommandLineRunner {
                         "and/or a drizzle of olive oil, if desired, and serve."
         );
         try {
-            recipe6.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                    "static/img/data_loader_imgs/pasta-salad-image.txt"), StandardCharsets.US_ASCII));
+            recipe6.setPhotoData(Files.readString(Path.of(image_path + "pasta-salad-image.txt"), StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe6.setPhotoData("");
@@ -282,8 +276,7 @@ public class DataLoader implements CommandLineRunner {
                         "in pan. Transfer muffins to a wire rack and eat while warm or let cool completely."
         );
         try {
-            recipe7.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                    "static/img/data_loader_imgs/corn-muffin-image.txt"), StandardCharsets.US_ASCII));
+            recipe7.setPhotoData(Files.readString(Path.of(image_path + "corn-muffin-image.txt"), StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe7.setPhotoData("");
@@ -320,8 +313,7 @@ public class DataLoader implements CommandLineRunner {
                         "Serve with lime wedges."
         );
         try {
-            recipe8.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                    "static/img/data_loader_imgs/lentil-soup-image.txt"), StandardCharsets.US_ASCII));
+            recipe8.setPhotoData(Files.readString(Path.of(image_path + "lentil-soup-image.txt"), StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe8.setPhotoData("");
@@ -370,8 +362,7 @@ public class DataLoader implements CommandLineRunner {
                         "pat dry, and place a slice on top of each egg, then sprinkle with more finely chopped herbs."
         );
         try {
-            recipe9.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                    "static/img/data_loader_imgs/deviled-eggs-image.txt"), StandardCharsets.US_ASCII));
+            recipe9.setPhotoData(Files.readString(Path.of(image_path + "deviled-eggs-image.txt"), StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe9.setPhotoData("");
@@ -398,12 +389,39 @@ public class DataLoader implements CommandLineRunner {
 
         );
         try {
-            recipe10.setPhotoData(Files.readString(Path.of("RecipeProject/recipe-project-web/src/main/resources/" +
-                    "static/img/data_loader_imgs/vegan-tacos-image.txt"), StandardCharsets.US_ASCII));
+            recipe10.setPhotoData(Files.readString(Path.of(image_path + "vegan-tacos-image.txt"), StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe10.setPhotoData("");
         }
+
+        // Favourite Recipes
+        user1.getFavouriteRecipes().add(recipe1);
+        recipe1.getUserFavourites().add(user1);
+        user1.getFavouriteRecipes().add(recipe2);
+        recipe2.getUserFavourites().add(user1);
+        user1.getFavouriteRecipes().add(recipe3);
+        recipe3.getUserFavourites().add(user1);
+
+        user2.getFavouriteRecipes().add(recipe4);
+        recipe4.getUserFavourites().add(user2);
+        user2.getFavouriteRecipes().add(recipe5);
+        recipe5.getUserFavourites().add(user2);
+        user2.getFavouriteRecipes().add(recipe6);
+        recipe6.getUserFavourites().add(user2);
+
+        user3.getFavouriteRecipes().add(recipe7);
+        recipe7.getUserFavourites().add(user3);
+        user3.getFavouriteRecipes().add(recipe8);
+        recipe8.getUserFavourites().add(user3);
+        user3.getFavouriteRecipes().add(recipe9);
+        recipe9.getUserFavourites().add(user3);
+
+        // User and Recipe Saves
+        userService.save(user1);
+        userService.save(user2);
+        userService.save(user3);
+
         recipeService.save(recipe1);
         recipeService.save(recipe2);
         recipeService.save(recipe3);
@@ -415,13 +433,30 @@ public class DataLoader implements CommandLineRunner {
         recipeService.save(recipe9);
         recipeService.save(recipe10);
 
-        //Recipe Dates
-        RecipeDate recipeDate1 = new RecipeDate(LocalDate.now().plusDays(3), recipe1, user3);
+        //Recipe Dates and Saves
+        RecipeDate recipeDate1 = new RecipeDate(LocalDate.now().plusDays(3), recipe1, user1);
         recipeDateService.save(recipeDate1);
-        RecipeDate recipeDate2 = new RecipeDate(LocalDate.now(), recipe2, user3);
+        RecipeDate recipeDate2 = new RecipeDate(LocalDate.now(), recipe2, user1);
         recipeDateService.save(recipeDate2);
-        RecipeDate recipeDate3 = new RecipeDate(LocalDate.now().plusDays(10), recipe3, user3);
+        RecipeDate recipeDate3 = new RecipeDate(LocalDate.now().plusDays(10), recipe3, user1);
         recipeDateService.save(recipeDate3);
-
+        RecipeDate recipeDate4 = new RecipeDate(LocalDate.now().minusDays(10), recipe10, user1);
+        recipeDateService.save(recipeDate4);
+        RecipeDate recipeDate5 = new RecipeDate(LocalDate.now().plusDays(3), recipe4, user2);
+        recipeDateService.save(recipeDate5);
+        RecipeDate recipeDate6 = new RecipeDate(LocalDate.now(), recipe5, user2);
+        recipeDateService.save(recipeDate6);
+        RecipeDate recipeDate7 = new RecipeDate(LocalDate.now().plusDays(10), recipe6, user2);
+        recipeDateService.save(recipeDate7);
+        RecipeDate recipeDate8 = new RecipeDate(LocalDate.now().minusDays(10), recipe10, user2);
+        recipeDateService.save(recipeDate8);
+        RecipeDate recipeDate9 = new RecipeDate(LocalDate.now().plusDays(3), recipe7, user3);
+        recipeDateService.save(recipeDate9);
+        RecipeDate recipeDate10 = new RecipeDate(LocalDate.now(), recipe8, user3);
+        recipeDateService.save(recipeDate10);
+        RecipeDate recipeDate11 = new RecipeDate(LocalDate.now().plusDays(10), recipe9, user3);
+        recipeDateService.save(recipeDate11);
+        RecipeDate recipeDate12 = new RecipeDate(LocalDate.now().minusDays(10), recipe10, user3);
+        recipeDateService.save(recipeDate12);
     }
 }
