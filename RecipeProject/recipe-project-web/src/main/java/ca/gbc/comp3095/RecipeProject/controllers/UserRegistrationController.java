@@ -40,10 +40,8 @@ public class UserRegistrationController {
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             return "redirect:/recipes";
         }
-        else {
-            model.addAttribute("user", new User());
-            return "/registration";
-        }
+        model.addAttribute("user", new User());
+        return "/registration";
     }
 
     @PostMapping

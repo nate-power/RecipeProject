@@ -17,25 +17,26 @@
       <div class="form-group">
         <label class="control-label" for="firstname">First Name: </label>
         <input type="text" class="form-control" autofocus="autofocus" id="firstname" th:field="*{firstName}" required/>
-        <div class="alert alert-warning"  th:errors="*{firstName}"></div>
+        <div class="alert alert-warning" th:errors="*{firstName}"></div>
       </div>
       <div class="form-group">
         <label class="control-label" for="lastName">Last Name: </label>
         <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required/>
-        <div class="alert alert-warning"  th:errors="*{lastName}"></div>
+        <div class="alert alert-warning" th:errors="*{lastName}"></div>
       </div>
       <div class="form-group">
         <label class="control-label" for="email">Email: </label>
         <input type="text" class="form-control" id="email" th:field="*{email}" required/>
-        <div class="alert alert-warning"  th:errors="*{email}"></div>
+        <div class="alert alert-warning" th:errors="*{email}"></div>
       </div>
       <div class="form-group">
         <label class="control-label" for="username">Username: </label>
         <input type="text" class="form-control" id="username" th:field="*{username}" required/>
-        <div class="alert alert-warning"  th:errors="*{username}"></div>
+        <div class="alert alert-warning" th:errors="*{username}"></div>
       </div>
-      <input type="hidden" id="id" name="id" th:field="*{id}">
-      <input type="hidden" id="password" name="password" th:field="*{password}">
+      <input type="hidden" id="id" name="id" th:field="*{id}"/>
+      <input type="hidden" id="password" name="password" th:field="*{password}"/>
+      <input type="hidden" id="favourites" name="favourites" th:field="*{favouriteRecipes}"/>
       <div class="form-group">
         <div class="row">
           <div class="col-sm-4 mt-2">

@@ -21,4 +21,5 @@ public interface UserService extends UserDetailsService, CrudService<User, Long>
     boolean userExistsUsername(String username);
     boolean userExistsEmail(String email);
     void setResetPasswordToken(String token, String email);
+    User findUserByResetPasswordToken(String token);
 }

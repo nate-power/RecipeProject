@@ -49,9 +49,9 @@ public class DataLoader implements CommandLineRunner {
         //Test user Accounts
         User user1 = new User("bob-ruthers", "test", "bob_ruthers@test.com",
                 "Bob", "Ruthers");
-        User user2 = new User("mollyringwald123", "test", "molly_ringwald@test.com",
+        User user2 = new User("mollyringwald123", "test", "justin.bartlett@georgebrown.ca",
                 "Molly", "Ringwald");
-        User user3 = new User("ana-is-cool", "test", "ana_de_armas@test.com",
+        User user3 = new User("ana-is-cool", "test", "power2677247@gmail.com",
                 "Ana de", "Armas");
 
         //Recipes

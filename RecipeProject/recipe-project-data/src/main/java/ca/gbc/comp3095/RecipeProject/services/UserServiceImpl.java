@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
         if (!BCRYPT_PATTERN.matcher(password).matches()) {
             user.setPassword(passwordEncoder.encode(password));
         }
+        user.setResetPasswordToken(null);
         userRepository.save(user);
         return user;
     }
@@ -79,18 +80,35 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean userExistsUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        return user.getUsername().equals(username);
+        for (User user : userRepository.findAll()) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean userExistsEmail(String email) {
-        User user = userRepository.findByEmail(email);
-        return user.getEmail().equals(email);
+        for (User user : userRepository.findAll()) {
+            if (user.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void setResetPasswordToken(String token, String email) {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            user.setResetPasswordToken(token);
+            userRepository.save(user);
+        }
+    }
 
+    @Override
+    public User findUserByResetPasswordToken(String token) {
+        return userRepository.findByResetPasswordToken(token);
     }
 }

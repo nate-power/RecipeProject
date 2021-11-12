@@ -13,10 +13,7 @@ package ca.gbc.comp3095.RecipeProject.controllers;
 import ca.gbc.comp3095.RecipeProject.model.Recipe;
 import ca.gbc.comp3095.RecipeProject.model.User;
 import ca.gbc.comp3095.RecipeProject.services.*;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,10 +27,12 @@ public class AuthUserController {
 
     private final UserService userService;
     private final RecipeService recipeService;
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthUserController(UserService userService, RecipeService recipeService) {
+    public AuthUserController(UserService userService, RecipeService recipeService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.recipeService = recipeService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/profile/{username}")
@@ -61,9 +60,31 @@ public class AuthUserController {
 
     @PostMapping("profile/change-password")
     public String changePassword(@RequestParam("old-password") String oldPassword, @RequestParam("new-password") String newPassword,
-                                 @RequestParam("confirm-password") String confirmPassword, BindingResult result) {
+                                 @RequestParam("confirm-password") String confirmPassword, Model model) {
         User user = userService.findUser();
-        return "k";
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            model.addAttribute("message", "Old Password is incorrect.");
+            return "/user/change-password";
+        }
+        if (passwordEncoder.matches(newPassword, user.getPassword())) {
+            model.addAttribute("message", "Please create a new password different than the old one.");
+            return "/user/change-password";
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("message", "New Password amd Confirmed Password do not match.");
+            return "/user/change-password";
+        }
+        if (newPassword.length() > 16 || newPassword.length() < 4) {
+            model.addAttribute("message", "Password must be between 4 and 16 characters.");
+            return "/user/change-password";
+        }
+        if (newPassword.contains(" ")) {
+            model.addAttribute("message", "Password cannot contain spaces.");
+            return "/user/change-password";
+        }
+        user.setPassword(newPassword);
+        userService.save(user);
+        return "redirect:/logout";
     }
 
     @PostMapping("/profile/edit")
