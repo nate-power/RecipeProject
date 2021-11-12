@@ -20,6 +20,8 @@
                         <h3 class="text-capitalize font-weight-bold" th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h3>
                         <h4 class="text-muted" th:text="${user.getUsername()}"></h4>
                         <h4 class="text-muted" th:text="${user.getEmail()}"></h4>
+                        <a class="btn btn-dark" th:href="@{/profile/edit}">Edit Profile</a>
+                        <a class="btn btn-dark" th:href="@{/profile/change-password}">Change Password</a>
                     </div>
                 </div>
                 <div class="col-lg-7">

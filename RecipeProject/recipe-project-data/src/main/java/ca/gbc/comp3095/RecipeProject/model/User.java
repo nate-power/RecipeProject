@@ -49,6 +49,8 @@ public class User extends BaseEntity {
     @ManyToMany(mappedBy = "userFavourites", fetch = FetchType.EAGER)
     private Set<Recipe> favouriteRecipes = new HashSet<>();
 
+    private String resetPasswordToken;
+
     public User() { }
 
     // used for dataloader
@@ -111,6 +113,10 @@ public class User extends BaseEntity {
     public Set<Recipe> getFavouriteRecipes() { return favouriteRecipes; }
 
     public void setFavouriteRecipes(Set<Recipe> favouriteRecipes) { this.favouriteRecipes = favouriteRecipes; }
+
+    public String getResetPasswordToken() { return resetPasswordToken; }
+
+    public void setResetPasswordToken(String resetPasswordToken) { this.resetPasswordToken = resetPasswordToken; }
 
     @Override
     public boolean equals(Object o) {

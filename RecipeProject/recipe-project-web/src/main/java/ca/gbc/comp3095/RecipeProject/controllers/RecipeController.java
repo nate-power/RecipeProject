@@ -102,8 +102,8 @@ public class RecipeController {
 
     @PostMapping("/recipes/add" )
     public String saveRecipe(@ModelAttribute("recipe") @Valid Recipe recipe, BindingResult result,
-                             @RequestParam Map<String, String> stringMap, @RequestParam("category") RecipeCategories category,
-                             Model model, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+                             @RequestParam("category") RecipeCategories category, Model model,
+                             @RequestParam("image") MultipartFile multipartFile) throws IOException {
         if (multipartFile.getContentType().equals("image/jpeg") || multipartFile.getContentType().equals("image/jpg")
                 || multipartFile.getContentType().equals("image/png")) {
             if (multipartFile.getSize() > 2097152) {

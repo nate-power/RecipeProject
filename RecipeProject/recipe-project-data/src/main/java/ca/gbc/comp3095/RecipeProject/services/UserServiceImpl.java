@@ -72,22 +72,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void setUser(User user) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ((UserPrincipal) principal).setUser(user);
+    }
+
+    @Override
     public boolean userExistsUsername(String username) {
-        for (User user : userRepository.findAll()) {
-            if (user.getUsername().equals(username)) {
-                return true;
-            }
-        }
-        return false;
+        User user = userRepository.findByUsername(username);
+        return user.getUsername().equals(username);
     }
 
     @Override
     public boolean userExistsEmail(String email) {
-        for (User user : userRepository.findAll()) {
-            if (user.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
+        User user = userRepository.findByEmail(email);
+        return user.getEmail().equals(email);
+    }
+
+    @Override
+    public void setResetPasswordToken(String token, String email) {
+
     }
 }

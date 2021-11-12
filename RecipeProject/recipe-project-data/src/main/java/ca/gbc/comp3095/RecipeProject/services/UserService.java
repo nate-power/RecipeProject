@@ -17,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserService extends UserDetailsService, CrudService<User, Long> {
     UserDetails loadUserByUsername(String username);
     User findUser();
+    void setUser(User user);
     boolean userExistsUsername(String username);
     boolean userExistsEmail(String email);
+    void setResetPasswordToken(String token, String email);
 }
