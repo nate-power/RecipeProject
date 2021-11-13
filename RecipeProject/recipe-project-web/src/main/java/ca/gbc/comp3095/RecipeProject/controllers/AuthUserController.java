@@ -41,6 +41,7 @@ public class AuthUserController {
             model.addAttribute("user", userService.findUser());
             model.addAttribute("recipes", recipeService.findAllByUser(userService.findUser()));
             model.addAttribute("favourites", userService.findUser().getFavouriteRecipes());
+            model.addAttribute("shoppinglist", userService.findUser().getShoppingList().split("\n"));
             return "/user/profile";
         }
         return "errors/error-404";
@@ -131,5 +132,25 @@ public class AuthUserController {
         userService.save(user);
         recipeService.save(recipe);
         return "redirect:/recipe/" + recipe.getId();
+    }
+
+    @PostMapping("/profile/shoppinglist/add")
+    public String addToShoppingList(@RequestParam("ingredients") String[] ingredients, @RequestParam("recipeId") long recipeId) {
+        User user = userService.findUser();
+
+        for (String ingredient:
+                ingredients) {
+            userService.addToShoppingList(user, ingredient);
+        }
+        userService.save(user);
+        return "redirect:/recipe/" + recipeId;
+    }
+
+    @PostMapping("/profile/shoppinglist/edit")
+    public String editShoppingList(@RequestParam("shoppingEdit") String shoppingList) {
+        User user = userService.findUser();
+        user.setShoppingList(shoppingList.trim() + "\n");
+
+        return "redirect:/profile/" + user.getUsername();
     }
 }

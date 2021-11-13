@@ -49,6 +49,9 @@ public class User extends BaseEntity {
     @ManyToMany(mappedBy = "userFavourites", fetch = FetchType.EAGER)
     private Set<Recipe> favouriteRecipes = new HashSet<>();
 
+    @Column(columnDefinition = "TEXT")
+    private String shoppingList;
+
     private String resetPasswordToken;
 
     public User() { }
@@ -60,6 +63,7 @@ public class User extends BaseEntity {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.shoppingList = "";
     }
 
     public String getUsername() {
@@ -113,6 +117,14 @@ public class User extends BaseEntity {
     public Set<Recipe> getFavouriteRecipes() { return favouriteRecipes; }
 
     public void setFavouriteRecipes(Set<Recipe> favouriteRecipes) { this.favouriteRecipes = favouriteRecipes; }
+
+    public String getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(String shoppingList) {
+        this.shoppingList = shoppingList;
+    }
 
     public String getResetPasswordToken() { return resetPasswordToken; }
 

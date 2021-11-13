@@ -108,6 +108,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void addToShoppingList(User user, String ingredient) {
+        if (user.getShoppingList() == null) {
+            user.setShoppingList(ingredient + "\n");
+        } else {
+            user.setShoppingList(user.getShoppingList() + ingredient + "\n");
+        }
+    }
+
+    @Override
     public User findUserByResetPasswordToken(String token) {
         return userRepository.findByResetPasswordToken(token);
     }

@@ -67,9 +67,16 @@
                 </div>
                 <div class="col">
                     <div class="wrap-text">
-                        <ul class="list-group list-group-flush" th:each="ingredient : ${ingredients}">
-                            <li class="list-group-item" th:text="${ingredient}"></li>
-                        </ul>
+                        <form th:action="@{/profile/shoppinglist/add}" th:method="post">
+                            <ul class="list-group list-group-flush" th:each="ingredient : ${ingredients}">
+                                <li class="list-group-item">
+                                    <input type="checkbox" name="ingredients" th:value="${ingredient}">
+                                    <label th:text="${ingredient}"></label>
+                                </li>
+                            </ul>
+                            <input type="hidden" name="recipeId" th:value="${recipe.getId()}">
+                            <input type="submit" value="Add Ingredients to Shopping List" class="btn btn-primary">
+                        </form>
                     </div>
                 </div>
             </div>
