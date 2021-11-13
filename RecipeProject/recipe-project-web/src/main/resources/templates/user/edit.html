@@ -13,43 +13,50 @@
     <h1 class="ml-4">Edit Profile</h1>
   </div>
   <div class="container-fluid">
-    <form th:action="@{/profile/edit}" th:object="${user}" method="post" autocomplete="off" enctype="multipart/form-data">
-      <div class="form-group">
-        <label class="control-label" for="firstname">First Name: </label>
-        <input type="text" class="form-control" autofocus="autofocus" id="firstname" th:field="*{firstName}" required/>
-        <div class="alert alert-warning" th:errors="*{firstName}"></div>
-      </div>
-      <div class="form-group">
-        <label class="control-label" for="lastName">Last Name: </label>
-        <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required/>
-        <div class="alert alert-warning" th:errors="*{lastName}"></div>
-      </div>
-      <div class="form-group">
-        <label class="control-label" for="email">Email: </label>
-        <input type="text" class="form-control" id="email" th:field="*{email}" required/>
-        <div class="alert alert-warning" th:errors="*{email}"></div>
-      </div>
-      <div class="form-group">
-        <label class="control-label" for="username">Username: </label>
-        <input type="text" class="form-control" id="username" th:field="*{username}" required/>
-        <div class="alert alert-warning" th:errors="*{username}"></div>
-      </div>
-      <input type="hidden" id="id" name="id" th:field="*{id}"/>
-      <input type="hidden" id="password" name="password" th:field="*{password}"/>
-      <input type="hidden" id="favourites" name="favourites" th:field="*{favouriteRecipes}"/>
-      <div class="form-group">
-        <div class="row">
-          <div class="col-sm-4 mt-2">
-            <input type="submit" name="edit-profile" id="edit-profile" class="form-control btn btn-primary" value="Edit Profile"/>
+    <a class="btn btn-outline-dark" th:href="@{/profile/{username}(username=${user.username})}">Back To Profile</a>
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <form th:action="@{/profile/edit}" th:object="${user}" method="post" autocomplete="off" enctype="multipart/form-data">
+          <div class="form-group">
+            <label class="control-label" for="firstname">First Name: </label>
+            <input type="text" class="form-control" autofocus="autofocus" id="firstname" th:field="*{firstName}" required/>
+            <div class="alert alert-warning" th:errors="*{firstName}"></div>
           </div>
-          <div class="col-sm-4 mt-2">
-            <input type="button" name="cancel" id="cancel" th:href="@{/profile/{username}(username=${user.username})}" class="form-control btn btn-danger" value="Cancel"/>
+          <div class="form-group">
+            <label class="control-label" for="lastName">Last Name: </label>
+            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required/>
+            <div class="alert alert-warning" th:errors="*{lastName}"></div>
           </div>
-        </div>
+          <div class="form-group">
+            <label class="control-label" for="email">Email: </label>
+            <input type="text" class="form-control" id="email" th:field="*{email}" required/>
+            <div class="alert alert-warning" th:errors="*{email}"></div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="username">Username: </label>
+            <input type="text" class="form-control" id="username" th:field="*{username}" required/>
+            <div class="alert alert-warning" th:errors="*{username}"></div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="image">Profile Picture: </label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg" />
+            <div class="alert alert-warning" th:errors="*{photoData}"></div>
+          </div>
+          <input type="hidden" id="id" name="id" th:field="*{id}"/>
+          <input type="hidden" id="password" name="password" th:field="*{password}"/>
+          <input type="hidden" id="favourites" name="favourites" th:field="*{favouriteRecipes}"/>
+          <input type="hidden" id="shoppinglist" name="shoppinglist" th:field="*{shoppingList}"/>
+          <div class="form-group">
+            <div class="row justify-content-end">
+              <div class="col-sm-4 mt-2">
+                <input type="submit" name="edit-profile" id="edit-profile" class="form-control btn btn-primary" value="Edit Profile"/>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
-
   <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
   <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
   <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>

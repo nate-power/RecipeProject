@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addToShoppingList(User user, String ingredient) {
-        if (user.getShoppingList() == null) {
+        if (user.getShoppingList().equals("")) {
             user.setShoppingList(ingredient + "\n");
         } else {
             user.setShoppingList(user.getShoppingList() + ingredient + "\n");

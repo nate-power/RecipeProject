@@ -40,6 +40,10 @@ public class User extends BaseEntity {
     @Size(min = 2, max = 24, message = "Last name must be between 2 and 24 characters long.")
     private String lastName;
 
+    @Lob
+    @Column(nullable=true)
+    private String photoData;
+
     @OneToMany(mappedBy = "user")
     private Set<RecipeDate> recipeDates = new HashSet<>();
 
@@ -104,6 +108,14 @@ public class User extends BaseEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPhotoData() {
+        return Objects.equals(photoData, null) ? null : "data:image/jpeg;charset=utf-8;base64," + photoData;
+    }
+
+    public void setPhotoData(String photoData) {
+        this.photoData = photoData;
     }
 
     public Set<RecipeDate> getRecipeDates() { return recipeDates; }

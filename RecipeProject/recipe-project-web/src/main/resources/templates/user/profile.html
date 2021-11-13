@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="container-fluid wrap-text">
-                        <img th:src="@{/img/user-icon.png}" alt="mdo" width="250" height="250" class="rounded-circle">
+                        <img th:src="${user.photoData != null} ? ${user.photoData} : @{/img/user-icon.png}" alt="mdo" width="250" height="250" class="rounded-circle">
                         <h3 class="text-capitalize font-weight-bold" th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h3>
                         <h4 class="text-muted" th:text="${user.getUsername()}"></h4>
                         <h4 class="text-muted" th:text="${user.getEmail()}"></h4>
@@ -97,10 +97,14 @@
                                 </div>
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#profileAccordion">
                                     <div class="wrap-text">
-                                        <ul class="list-group list-group-flush" th:each="ingredient : ${shoppinglist}">
-                                            <li class="list-group-item" th:text="${ingredient}"></li>
-                                        </ul>
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</button>
+                                        <h5 class="d-inline">Current Shopping List:</h5>
+                                        <button class="btn btn-dark ml-2" data-toggle="modal" data-target="#editModal">Edit List</button>
+                                        <h2 class="text-muted text-center" th:classappend="${shoppinglist.isEmpty()} ? 'mx-auto'" th:text="${shoppinglist.isEmpty()} ? 'Your shopping list is empty!'"></h2>
+                                        <span th:if="${!shoppinglist.isEmpty()}">
+                                            <ul class="list-group list-group-flush" th:each="ingredient : ${shoppinglist}">
+                                                <li class="list-group-item" th:text="${ingredient}"></li>
+                                            </ul>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

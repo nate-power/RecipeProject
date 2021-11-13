@@ -19,8 +19,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 @Controller
 public class AuthUserController {
@@ -38,10 +44,12 @@ public class AuthUserController {
     @GetMapping("/profile/{username}")
     public String getProfile(Model model, @PathVariable String username) {
         if (userService.findUser().getUsername().equals(username)) {
+            String list = userService.findUser().getShoppingList();
+            List<String> shoppingList = list.equals("") ? new ArrayList<>() : Arrays.asList(list.split("\n"));
             model.addAttribute("user", userService.findUser());
             model.addAttribute("recipes", recipeService.findAllByUser(userService.findUser()));
             model.addAttribute("favourites", userService.findUser().getFavouriteRecipes());
-            model.addAttribute("shoppinglist", userService.findUser().getShoppingList().split("\n"));
+            model.addAttribute("shoppinglist", shoppingList);
             return "/user/profile";
         }
         return "errors/error-404";
@@ -89,8 +97,23 @@ public class AuthUserController {
     }
 
     @PostMapping("/profile/edit")
-    public String editProfile(@ModelAttribute("user") @Valid User user, BindingResult result) {
+    public String editProfile(@ModelAttribute("user") @Valid User user, BindingResult result,
+                              @RequestParam("image") MultipartFile multipartFile) throws IOException {
         assert user != null;
+        if (multipartFile.getContentType().equals("image/jpeg") || multipartFile.getContentType().equals("image/jpg")
+                || multipartFile.getContentType().equals("image/png")) {
+            if (multipartFile.getSize() > 2097152) {
+                result.addError(new FieldError("user", "photoData", "Please upload an image that is less than 2MB!"));
+            }
+            else {
+                user.setPhotoData(Base64.getEncoder().encodeToString(multipartFile.getBytes()));
+            }
+        }
+        else {
+            if (!multipartFile.isEmpty()) {
+                result.addError(new FieldError("user", "photoData", "Uploaded image must be a jpeg or png."));
+            }
+        }
         // check if username already exists
         if (userService.userExistsUsername(user.getUsername()) && !user.getUsername().equals(userService.findUser().getUsername())) {
             result.addError(new FieldError("user", "username", "Username already exists for another account."));
@@ -150,7 +173,7 @@ public class AuthUserController {
     public String editShoppingList(@RequestParam("shoppingEdit") String shoppingList) {
         User user = userService.findUser();
         user.setShoppingList(shoppingList.trim() + "\n");
-
+        userService.save(user);
         return "redirect:/profile/" + user.getUsername();
     }
 }
