@@ -4,11 +4,11 @@
 //        * Author(s): Justin Bartlett
 //        * Student Number: 101246661
 //        * Date: October 24 2021
-//        * Description: This is the entity model for Recipe, which extends the BaseEntity. It defines the properties
+//        * Description: This is the entity models for Recipe, which extends the BaseEntity. It defines the properties
 //                      that will be stored in the database, as well as getters and setters for those properties.
 //*********************************************************************************
 
-package ca.gbc.comp3095.RecipeProject.model;
+package ca.gbc.comp3095.RecipeProject.models;
 
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
 

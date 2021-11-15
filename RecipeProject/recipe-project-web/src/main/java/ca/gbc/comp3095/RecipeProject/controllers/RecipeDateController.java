@@ -6,16 +6,15 @@
 //        * Date: October 28, 2021
 //        * Description: Will direct user to the meal planner page, allow user to add a Recipe Date and delete a Recipe
 //              Date. Recipe Dates are displayed by current date, for the week, for the future, and for the past, and
-//              passed to Thymeleaf with model attributes.
+//              passed to Thymeleaf with models attributes.
 //***************************//
 
 package ca.gbc.comp3095.RecipeProject.controllers;
 
-import ca.gbc.comp3095.RecipeProject.model.Recipe;
-import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
-import ca.gbc.comp3095.RecipeProject.model.User;
+import ca.gbc.comp3095.RecipeProject.models.Recipe;
+import ca.gbc.comp3095.RecipeProject.models.RecipeDate;
+import ca.gbc.comp3095.RecipeProject.models.User;
 import ca.gbc.comp3095.RecipeProject.services.*;
-import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

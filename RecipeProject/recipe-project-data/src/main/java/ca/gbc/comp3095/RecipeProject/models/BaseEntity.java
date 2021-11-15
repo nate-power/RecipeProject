@@ -8,7 +8,7 @@
 //                      and setting auto-generated Long-type entity IDs.
 //*********************************************************************************
 
-package ca.gbc.comp3095.RecipeProject.model;
+package ca.gbc.comp3095.RecipeProject.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

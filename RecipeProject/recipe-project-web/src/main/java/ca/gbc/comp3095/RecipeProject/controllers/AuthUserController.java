@@ -10,8 +10,8 @@
 
 package ca.gbc.comp3095.RecipeProject.controllers;
 
-import ca.gbc.comp3095.RecipeProject.model.Recipe;
-import ca.gbc.comp3095.RecipeProject.model.User;
+import ca.gbc.comp3095.RecipeProject.models.Recipe;
+import ca.gbc.comp3095.RecipeProject.models.User;
 import ca.gbc.comp3095.RecipeProject.services.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -34,11 +35,13 @@ public class AuthUserController {
     private final UserService userService;
     private final RecipeService recipeService;
     private final PasswordEncoder passwordEncoder;
+    private final EventService eventService;
 
-    public AuthUserController(UserService userService, RecipeService recipeService, PasswordEncoder passwordEncoder) {
+    public AuthUserController(UserService userService, RecipeService recipeService, PasswordEncoder passwordEncoder, EventService eventService) {
         this.userService = userService;
         this.recipeService = recipeService;
         this.passwordEncoder = passwordEncoder;
+        this.eventService = eventService;
     }
 
     @GetMapping("/profile/{username}")
@@ -50,6 +53,8 @@ public class AuthUserController {
             model.addAttribute("recipes", recipeService.findAllByUser(userService.findUser()));
             model.addAttribute("favourites", userService.findUser().getFavouriteRecipes());
             model.addAttribute("shoppinglist", shoppingList);
+            model.addAttribute("events", eventService.findAllByUser(userService.findUser()));
+            model.addAttribute("today", LocalDate.now());
             return "/user/profile";
         }
         return "errors/error-404";

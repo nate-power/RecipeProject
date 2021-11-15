@@ -13,9 +13,10 @@ package ca.gbc.comp3095.RecipeProject.bootstrap;
 
 import ca.gbc.comp3095.RecipeProject.RecipeProjectApplication;
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
-import ca.gbc.comp3095.RecipeProject.model.Recipe;
-import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
-import ca.gbc.comp3095.RecipeProject.model.User;
+import ca.gbc.comp3095.RecipeProject.models.Event;
+import ca.gbc.comp3095.RecipeProject.models.Recipe;
+import ca.gbc.comp3095.RecipeProject.models.RecipeDate;
+import ca.gbc.comp3095.RecipeProject.models.User;
 import ca.gbc.comp3095.RecipeProject.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.system.ApplicationHome;
@@ -34,11 +35,13 @@ public class DataLoader implements CommandLineRunner {
     private final RecipeService recipeService;
     private final UserService userService;
     private final RecipeDateService recipeDateService;
+    private final EventService eventService;
 
-    public DataLoader(RecipeService recipeService, UserService userService, RecipeDateService recipeDateService) {
+    public DataLoader(RecipeService recipeService, UserService userService, RecipeDateService recipeDateService, EventService eventService) {
         this.recipeService = recipeService;
         this.userService = userService;
         this.recipeDateService = recipeDateService;
+        this.eventService = eventService;
     }
 
     @Override
@@ -458,5 +461,9 @@ public class DataLoader implements CommandLineRunner {
         recipeDateService.save(recipeDate11);
         RecipeDate recipeDate12 = new RecipeDate(LocalDate.now().minusDays(10), recipe10, user3);
         recipeDateService.save(recipeDate12);
+
+        //Events and Saves
+        Event event1 = new Event(user1, "Dinner with Friends", "Dinner at 8pm", LocalDate.now().plusDays(10));
+        eventService.save(event1);
     }
 }

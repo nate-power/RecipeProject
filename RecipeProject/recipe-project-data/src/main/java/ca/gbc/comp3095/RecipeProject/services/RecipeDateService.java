@@ -10,8 +10,8 @@
 
 package ca.gbc.comp3095.RecipeProject.services;
 
-import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
-import ca.gbc.comp3095.RecipeProject.model.User;
+import ca.gbc.comp3095.RecipeProject.models.RecipeDate;
+import ca.gbc.comp3095.RecipeProject.models.User;
 
 import java.time.LocalDate;
 import java.util.List;

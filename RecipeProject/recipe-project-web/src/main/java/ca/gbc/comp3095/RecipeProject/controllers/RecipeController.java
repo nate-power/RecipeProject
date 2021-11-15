@@ -11,8 +11,8 @@
 package ca.gbc.comp3095.RecipeProject.controllers;
 
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
-import ca.gbc.comp3095.RecipeProject.model.Recipe;
-import ca.gbc.comp3095.RecipeProject.model.RecipeDate;
+import ca.gbc.comp3095.RecipeProject.models.Recipe;
+import ca.gbc.comp3095.RecipeProject.models.RecipeDate;
 import ca.gbc.comp3095.RecipeProject.services.RecipeService;
 import ca.gbc.comp3095.RecipeProject.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,6 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Base64;
-import java.util.Map;
 
 @Controller
 public class RecipeController {

@@ -10,7 +10,7 @@
 
 package ca.gbc.comp3095.RecipeProject.security;
 
-import ca.gbc.comp3095.RecipeProject.model.User;
+import ca.gbc.comp3095.RecipeProject.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

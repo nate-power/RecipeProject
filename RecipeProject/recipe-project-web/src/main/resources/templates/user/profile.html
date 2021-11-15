@@ -109,6 +109,33 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="card w-100 mx-auto">
+                                <div class="card-header" id="headingFour">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                            <strong>My Events</strong>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#profileAccordion">
+                                    <div class="card-body">
+                                        <h3 class="mb-2">
+                                            <button class="btn btn-primary btn-link btn-block text-left text-dark" type="button">
+                                                <strong>+ Add an Event</strong>
+                                            </button>
+                                        </h3>
+                                        <span th:each="event : ${events}">
+                                            <h4 class="mb-2">
+                                                <button class="btn btn-dark btn-link btn-block text-left text-dark" type="button">
+                                                    <strong th:text="${event.name}"></strong>
+                                                </button>
+                                            </h4>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

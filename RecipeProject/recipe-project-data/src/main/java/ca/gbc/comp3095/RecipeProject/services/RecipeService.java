@@ -11,8 +11,8 @@
 package ca.gbc.comp3095.RecipeProject.services;
 
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
-import ca.gbc.comp3095.RecipeProject.model.Recipe;
-import ca.gbc.comp3095.RecipeProject.model.User;
+import ca.gbc.comp3095.RecipeProject.models.Recipe;
+import ca.gbc.comp3095.RecipeProject.models.User;
 
 import java.util.List;
 

@@ -11,8 +11,8 @@
 package ca.gbc.comp3095.RecipeProject.repositories;
 
 import ca.gbc.comp3095.RecipeProject.enumerations.RecipeCategories;
-import ca.gbc.comp3095.RecipeProject.model.Recipe;
-import ca.gbc.comp3095.RecipeProject.model.User;
+import ca.gbc.comp3095.RecipeProject.models.Recipe;
+import ca.gbc.comp3095.RecipeProject.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

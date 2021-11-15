@@ -4,11 +4,11 @@
 //        * Author(s): Justin Bartlett
 //        * Student Number: 101246661
 //        * Date: October 27 2021
-//        * Description: This is the entity model that represents a planned meal for the meal planner functionality.
+//        * Description: This is the entity models that represents a planned meal for the meal planner functionality.
 //          It holds a recipe, the user who has added it to their schedule, and the date that the user plans to make the recipe.
 //*********************************************************************************
 
-package ca.gbc.comp3095.RecipeProject.model;
+package ca.gbc.comp3095.RecipeProject.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

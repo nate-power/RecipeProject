@@ -8,7 +8,7 @@
 // defines relationship to joining tables for the user's created recipes, favourite recipes, and planned meals.
 //***************************//
 
-package ca.gbc.comp3095.RecipeProject.model;
+package ca.gbc.comp3095.RecipeProject.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -49,6 +49,9 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private Set<Recipe> recipeSet = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Event> events = new HashSet<>();
 
     @ManyToMany(mappedBy = "userFavourites", fetch = FetchType.EAGER)
     private Set<Recipe> favouriteRecipes = new HashSet<>();
@@ -125,6 +128,10 @@ public class User extends BaseEntity {
     public Set<Recipe> getRecipeSet() { return recipeSet; }
 
     public void setRecipeSet(Set<Recipe> recipeSet) { this.recipeSet = recipeSet; }
+
+    public Set<Event> getEvents() { return events; }
+
+    public void setEvents(Set<Event> events) { this.events = events; }
 
     public Set<Recipe> getFavouriteRecipes() { return favouriteRecipes; }
 

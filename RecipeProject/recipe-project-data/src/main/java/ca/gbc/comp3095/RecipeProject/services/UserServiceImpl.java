@@ -10,7 +10,7 @@
 
 package ca.gbc.comp3095.RecipeProject.services;
 
-import ca.gbc.comp3095.RecipeProject.model.User;
+import ca.gbc.comp3095.RecipeProject.models.User;
 import ca.gbc.comp3095.RecipeProject.repositories.UserRepository;
 import ca.gbc.comp3095.RecipeProject.security.UserPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
