@@ -132,4 +132,13 @@ public class RecipeController {
         recipeService.save(recipe);
         return "redirect:/recipes/" + category.getDisplay().toLowerCase();
     }
+
+    @PostMapping("recipes/edit/{id}")
+    public String editRecipe(@RequestParam("ingredientsEdit") String ingredients, @RequestParam("stepsEdit") String steps, @PathVariable("id") long recipeId) {
+        Recipe recipe = recipeService.findById(recipeId);
+        recipe.setIngredients(ingredients);
+        recipe.setSteps(steps);
+        recipeService.save(recipe);
+        return "redirect:/recipe/" + recipe.getId();
+    }
 }

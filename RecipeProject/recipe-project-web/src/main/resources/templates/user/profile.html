@@ -99,6 +99,7 @@
                                     <div class="wrap-text">
                                         <h5 class="d-inline">Current Shopping List:</h5>
                                         <button class="btn btn-dark ml-2" data-toggle="modal" data-target="#editModal">Edit List</button>
+                                        <a download="Shopping List.txt" th:href="@{/profile/shoppinglist/download}" class="btn btn-dark ml-2">Download List</a>
                                         <h2 class="text-muted text-center" th:classappend="${shoppinglist.isEmpty()} ? 'mx-auto'" th:text="${shoppinglist.isEmpty()} ? 'Your shopping list is empty!'"></h2>
                                         <span th:if="${!shoppinglist.isEmpty()}">
                                             <ul class="list-group list-group-flush" th:each="ingredient : ${shoppinglist}">
@@ -143,7 +144,7 @@
 
         <!-- Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <form th:action="@{/profile/shoppinglist/edit}" th:method="post">
                         <div class="modal-header">
@@ -154,7 +155,7 @@
                         </div>
                         <div class="modal-body">
                             <label for="shoppingEdit">Enter each item on a new line</label>
-                            <textarea name="shoppingEdit" id="shoppingEdit" cols="45" rows="10" th:text="${user.getShoppingList()}"></textarea>
+                            <textarea name="shoppingEdit" id="shoppingEdit" cols="45" rows="10" th:text="${user.shoppingList}"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
