@@ -10,9 +10,11 @@
 
 package ca.gbc.comp3095.RecipeProject.controllers;
 
+import ca.gbc.comp3095.RecipeProject.models.Event;
 import ca.gbc.comp3095.RecipeProject.models.Recipe;
 import ca.gbc.comp3095.RecipeProject.models.User;
 import ca.gbc.comp3095.RecipeProject.services.*;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +22,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class AuthUserController {
@@ -54,8 +56,8 @@ public class AuthUserController {
             model.addAttribute("favourites", userService.findUser().getFavouriteRecipes());
             model.addAttribute("shoppinglist", shoppingList);
             model.addAttribute("events", eventService.findAllByUser(userService.findUser()));
-            model.addAttribute("today", LocalDate.now());
-            return "/user/profile";
+            model.addAttribute("event", new Event());
+            return "user/profile";
         }
         return "errors/error-404";
     }
@@ -163,14 +165,16 @@ public class AuthUserController {
     }
 
     @PostMapping("/profile/shoppinglist/add")
-    public String addToShoppingList(@RequestParam("ingredients") String[] ingredients, @RequestParam("recipeId") long recipeId) {
+    public String addToShoppingList(@RequestParam("ingredients") Optional<String[]> ingredients, @RequestParam("recipeId") long recipeId) {
         User user = userService.findUser();
 
-        for (String ingredient:
-                ingredients) {
-            userService.addToShoppingList(user, ingredient);
+        if (ingredients.isPresent()) {
+            for (String ingredient :
+                    ingredients.get()) {
+                userService.addToShoppingList(user, ingredient);
+            }
+            userService.save(user);
         }
-        userService.save(user);
         return "redirect:/recipe/" + recipeId;
     }
 
@@ -180,5 +184,24 @@ public class AuthUserController {
         user.setShoppingList(shoppingList.trim() + "\n");
         userService.save(user);
         return "redirect:/profile/" + user.getUsername();
+    }
+
+    @GetMapping("/profile/shoppinglist/download")
+    @ResponseBody
+    public FileSystemResource download() throws IOException {
+        User user = userService.findUser();
+        File list_file = new File("Shopping List.txt");
+        FileOutputStream outputStream = new FileOutputStream(list_file);
+        outputStream.write(user.getShoppingList().getBytes());
+        outputStream.close();
+
+        return new FileSystemResource(list_file);
+    }
+
+    @GetMapping("/profile/search")
+    public String retrieveRecipeSearch(@RequestParam("query") String query, RedirectAttributes attributes) {
+        attributes.addFlashAttribute("query_recipes", recipeService.findByQuery(query));
+        attributes.addFlashAttribute("query", true);
+        return "redirect:/profile/";
     }
 }

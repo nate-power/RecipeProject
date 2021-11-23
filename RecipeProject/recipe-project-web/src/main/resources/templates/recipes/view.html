@@ -11,6 +11,7 @@
         <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
         <div class="container-fluid mt-3">
             <a class="btn btn-outline-dark mt-2" th:href="@{/}">Back To Recipes</a>
+            <a class="btn btn-outline-primary mt-2" th:if="${recipe.user == user}" data-toggle="modal" data-target="#editModal">Edit Recipe</a>
             <div class="row w-100">
                 <div class="col-lg-6 mt-2">
                     <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default-banner.jpg}" th:alt="${recipe.name}" width="100" height="100">
@@ -81,6 +82,37 @@
                 </div>
             </div>
         </div>
+
+        <!-- Edit Recipe Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form th:action="@{/recipes/edit/{id}(id = ${recipe.id})}" th:method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Edit Recipe</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="stepsEdit">Enter each step on a new line</label>
+                                <textarea name="stepsEdit" id="stepsEdit" cols="80" rows="10" th:text="${recipe.steps}" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="ingredientsEdit">Enter each ingredient on a new line</label>
+                                <textarea name="ingredientsEdit" id="ingredientsEdit" cols="80" rows="10" th:text="${recipe.ingredients}" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Save Changes">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>

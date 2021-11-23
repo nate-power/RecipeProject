@@ -12,7 +12,7 @@
         <div class="jumbotron jumbotron-fluid">
             <h1 class="mt-2 ml-3">Search for Recipes</h1>
         </div>
-        <form class="ml-4" th:action="@{/recipes/search}">
+        <form class="ml-4" th:action="@{/search}" method="post">
             <label class="d-block" for="searchBar">Search by Recipe name or description: </label>
             <input type="text" id="searchBar" maxlength="24" name="query" required placeholder="24 characters or less">
             <input type="submit" class="btn btn-dark" value="Search Recipes"/>

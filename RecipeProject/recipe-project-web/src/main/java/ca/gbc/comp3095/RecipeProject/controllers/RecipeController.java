@@ -76,7 +76,6 @@ public class RecipeController {
         model.addAttribute("user", userService.findUser());
         model.addAttribute("recipeDate", new RecipeDate());
         model.addAttribute("favourites", userService.findUser().getFavouriteRecipes());
-
         return "recipes/view";
     }
 
@@ -92,10 +91,12 @@ public class RecipeController {
         return "recipes/search";
     }
 
-    @GetMapping("/recipes/search")
-    public String retrieveRecipeSearch(@RequestParam("query") String query, Model model) {
-        model.addAttribute("recipes", recipeService.findByQuery(query));
-        model.addAttribute("query", query);
+    @PostMapping("/search")
+    public String retrieveRecipeSearch(@RequestParam(value = "query", required = false) String query, Model model) {
+        if (query != null) {
+            model.addAttribute("recipes", recipeService.findByQuery(query));
+            model.addAttribute("query", query);
+        }
         return "recipes/search";
     }
 
@@ -106,12 +107,14 @@ public class RecipeController {
         if (multipartFile.getContentType().equals("image/jpeg") || multipartFile.getContentType().equals("image/jpg")
                 || multipartFile.getContentType().equals("image/png")) {
             if (multipartFile.getSize() > 2097152) {
-                result.addError(new FieldError("recipe", "photoData", "Please upload an image that is less than 2MB!"));
+                result.addError(new FieldError("recipe", "photoData", "Please upload an " +
+                        "image that is less than 2MB!"));
             }
         }
         else {
             if (!multipartFile.isEmpty()) {
-                result.addError(new FieldError("recipe", "photoData", "Uploaded image must be a jpeg or png."));
+                result.addError(new FieldError("recipe", "photoData", "Uploaded image " +
+                        "must be a jpeg or png."));
             }
         }
 
@@ -131,5 +134,15 @@ public class RecipeController {
 
         recipeService.save(recipe);
         return "redirect:/recipes/" + category.getDisplay().toLowerCase();
+    }
+
+    @PostMapping("recipes/edit/{id}")
+    public String editRecipe(@RequestParam("ingredientsEdit") String ingredients,
+                             @RequestParam("stepsEdit") String steps, @PathVariable("id") long recipeId) {
+        Recipe recipe = recipeService.findById(recipeId);
+        recipe.setIngredients(ingredients);
+        recipe.setSteps(steps);
+        recipeService.save(recipe);
+        return "redirect:/recipe/" + recipe.getId();
     }
 }

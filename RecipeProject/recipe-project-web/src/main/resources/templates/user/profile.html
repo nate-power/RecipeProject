@@ -36,6 +36,7 @@
                                     </h2>
                                 </div>
                                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#profileAccordion">
+                                    <hr class="my-2"/>
                                     <div class="row profile-recipe-view">
                                         <h2 class="text-muted text-center" th:classappend="${recipes.size() == 0} ? 'mx-auto'" th:text="${recipes.size() == 0} ? 'You have not created any recipes yet!'"></h2>
                                         <div class="col-auto mb-1 mt-1" th:each="recipe : ${recipes}">
@@ -99,6 +100,7 @@
                                     <div class="wrap-text">
                                         <h5 class="d-inline">Current Shopping List:</h5>
                                         <button class="btn btn-dark ml-2" data-toggle="modal" data-target="#editModal">Edit List</button>
+                                        <a download="Shopping List.txt" th:href="@{/profile/shoppinglist/download}" class="btn btn-dark ml-2">Download List</a>
                                         <h2 class="text-muted text-center" th:classappend="${shoppinglist.isEmpty()} ? 'mx-auto'" th:text="${shoppinglist.isEmpty()} ? 'Your shopping list is empty!'"></h2>
                                         <span th:if="${!shoppinglist.isEmpty()}">
                                             <ul class="list-group list-group-flush" th:each="ingredient : ${shoppinglist}">
@@ -119,19 +121,28 @@
                                     </h2>
                                 </div>
                                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#profileAccordion">
-                                    <div class="card-body">
-                                        <h3 class="mb-2">
-                                            <button class="btn btn-primary btn-link btn-block text-left text-dark" type="button">
-                                                <strong>+ Add an Event</strong>
-                                            </button>
-                                        </h3>
-                                        <span th:each="event : ${events}">
-                                            <h4 class="mb-2">
-                                                <button class="btn btn-dark btn-link btn-block text-left text-dark" type="button">
-                                                    <strong th:text="${event.name}"></strong>
-                                                </button>
-                                            </h4>
-                                        </span>
+                                    <hr class="my-2"/>
+                                    <div class="row profile-recipe-view">
+                                        <div class="col-auto mb-1 mt-1">
+                                            <div class="card" style="width: 14rem;" >
+                                                <a th:href="@{/event/add}"><img class="card-img-top" th:src="@{/img/add.png}" alt="Add Event" width="100" height="100"></a>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Create an Event</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto mb-1 mt-1" th:each="event : ${events}">
+                                            <div class="card h-100" style="width: 14rem;">
+                                                <a href="#" data-toggle="modal" th:attr="data-target='#eventModal' + ${event.id}"><img class="card-img-top" th:src="@{/img/event.jpg}" th:alt="${event.name}" width="50" height="50"></a>
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><a href="#" data-toggle="modal" th:attr="data-target='#eventModal' + ${event.id}" th:text="${event.name}"></a></h5>
+                                                    <small class="card-text truncate" th:text="${event.description}"></small>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <small class="text-muted d-block" th:text="${'Scheduled for: ' + event.date}"></small>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +152,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Edit Shopping List Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -161,6 +172,57 @@
                             <input type="submit" class="btn btn-primary" value="Save Changes">
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event View Modal -->
+        <div th:each="event : ${events}">
+            <div class="modal fade" th:id="'eventModal' + ${event.id}" tabindex="-1" role="dialog" th:attr="aria-labelledby='eventModal' + ${event.id} + 'Label'" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" th:id="'eventModal' + ${event.id} + 'Label'" th:text="${event.name}"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h6>Event Description:</h6>
+                            <p class="ml-2" th:text="${event.description}"></p>
+                            <h6>Event Date: </h6>
+                            <p class="ml-2" th:text="${event.date}"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-dark" th:href="@{/event/edit/{id}(id=${event.id})}"></a>Edit</button>
+                            <button class="btn btn-danger" data-dismiss="modal" aria-label="Close" data-toggle="modal" th:attr="data-target='#eventDeleteModal' + ${event.id}">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:each="event : ${events}">
+            <div class="modal fade" th:id="'eventDeleteModal' + ${event.id}" tabindex="-1" role="dialog" th:attr="aria-labelledby='eventDeleteModal' + ${event.id} + 'Label'" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" th:id="'eventDeleteModal' + ${event.id} + 'Label'" th:text="${'Delete ' + event.name}"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5 th:text="${'Are you sure you want to delete ''' + event.name + ''''}"></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <form th:action="@{/event/delete/{id}(id=${event.id})}" method="post">
+                                <input type="hidden" id="id" name="id" th:value="${event.id}"/>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input class="btn btn-danger" type="submit" id="submit" name="submit" value="Delete">
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
