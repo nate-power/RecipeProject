@@ -101,9 +101,10 @@
                                         <h5 class="d-inline">Current Shopping List:</h5>
                                         <button class="btn btn-dark ml-2" data-toggle="modal" data-target="#editModal">Edit List</button>
                                         <a download="Shopping List.txt" th:href="@{/profile/shoppinglist/download}" class="btn btn-dark ml-2">Download List</a>
-                                        <h2 class="text-muted text-center" th:classappend="${shoppinglist.isEmpty()} ? 'mx-auto'" th:text="${shoppinglist.isEmpty()} ? 'Your shopping list is empty!'"></h2>
-                                        <span th:if="${!shoppinglist.isEmpty()}">
-                                            <ul class="list-group list-group-flush" th:each="ingredient : ${shoppinglist}">
+                                        <button class="btn btn-dark ml-2" onClick="printList()" type="button">Print</button>
+                                        <h2 class="text-muted text-center" th:classappend="${shoppingList.isEmpty()} ? 'mx-auto'" th:text="${shoppingList.isEmpty()} ? 'Your shopping list is empty!'"></h2>
+                                        <span th:if="${!shoppingList.isEmpty()}">
+                                            <ul class="list-group list-group-flush" th:each="ingredient : ${shoppingList}">
                                                 <li class="list-group-item" th:text="${ingredient}"></li>
                                             </ul>
                                         </span>
@@ -125,7 +126,7 @@
                                     <div class="row profile-recipe-view">
                                         <div class="col-auto mb-1 mt-1">
                                             <div class="card" style="width: 14rem;" >
-                                                <a th:href="@{/event/add}"><img class="card-img-top" th:src="@{/img/add.png}" alt="Add Event" width="100" height="100"></a>
+                                                <a href="#" data-toggle="modal" data-target="#addEventModal"><img class="card-img-top" th:src="@{/img/add.png}" alt="Add Event" width="100" height="100"></a>
                                                 <div class="card-body">
                                                     <h5 class="card-title">Create an Event</h5>
                                                 </div>
@@ -176,6 +177,36 @@
             </div>
         </div>
 
+        <!-- Add Event Modal -->
+        <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addEventModalLabel">Add Event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form th:action="@{/event/add}" th:object="${event}" method="post">
+                        <div class="modal-body">
+                            <label for="name">Event Name: </label>
+                            <input class="form-control" type="text" id="name" name="name" th:field="*{name}" />
+                            <br/>
+                            <label for="description">Event Description: </label>
+                            <textarea class="form-control" id="description" name="description" th:field="*{description}"></textarea>
+                            <br/>
+                            <label for="date">Event Date: </label>
+                            <input class="form-control" type="date" id="date" name="date" th:field="*{date}" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" id="submit-event" name="submit-event" value="Submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- Event View Modal -->
         <div th:each="event : ${events}">
             <div class="modal fade" th:id="'eventModal' + ${event.id}" tabindex="-1" role="dialog" th:attr="aria-labelledby='eventModal' + ${event.id} + 'Label'" aria-hidden="true">
@@ -194,7 +225,7 @@
                             <p class="ml-2" th:text="${event.date}"></p>
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-dark" th:href="@{/event/edit/{id}(id=${event.id})}"></a>Edit</button>
+                            <button class="btn btn-dark" data-dismiss="modal" aria-label="Close" data-toggle="modal" th:attr="data-target='#eventEditModal' + ${event.id}">Edit</button>
                             <button class="btn btn-danger" data-dismiss="modal" aria-label="Close" data-toggle="modal" th:attr="data-target='#eventDeleteModal' + ${event.id}">Delete</button>
                         </div>
                     </div>
@@ -226,6 +257,61 @@
                 </div>
             </div>
         </div>
+
+        <!-- Edit Event Modal -->
+        <div th:each="event : ${events}">
+            <div class="modal fade" th:id="'eventEditModal' + ${event.id}" tabindex="-1" role="dialog" th:attr="aria-labelledby='eventEditModal' + ${event.id} + 'Label'" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="eventEditModalLabel" th:text="'Edit ' + ${event.name}"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form th:action="@{/event/add}" th:object="${event}" method="post">
+                            <div class="modal-body">
+                                <label for="name">Event Name: </label>
+                                <input class="form-control" type="text" name="name" th:value="${event.name}" />
+                                <br/>
+                                <label for="description">Event Description: </label>
+                                <textarea class="form-control" name="description" th:text="${event.description}"></textarea>
+                                <br/>
+                                <label for="date">Event Date: </label>
+                                <input class="form-control" type="date" name="date" th:value="${event.date}" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="hidden" name="id" id="edit-id" th:value="${event.id}" />
+                                <input type="submit" class="btn btn-primary" id="submit-edit" name="submit-edit" value="Submit" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="printList" class="d-none">
+            <h2 class="text-center">My Shopping List</h2>
+            <span th:if="${!shoppingList.isEmpty()}">
+                <ul th:each="item : ${shoppingList}">
+                    <li th:text="${item}"></li>
+                </ul>
+            </span>
+        </div>
+
+        <script>
+            function printList() {
+                let prtContent = document.getElementById("printList");
+                let WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+                WinPrint.document.write(prtContent.innerHTML);
+                WinPrint.document.close();
+                WinPrint.focus();
+                WinPrint.print();
+                WinPrint.close();
+            }
+
+        </script>
 
         <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>

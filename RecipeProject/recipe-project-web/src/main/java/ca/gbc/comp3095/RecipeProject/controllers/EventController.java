@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -25,21 +26,18 @@ public class EventController {
         this.userService = userService;
     }
 
-    @GetMapping("/event/add")
-    public String addEvent(Model model) {
-        model.addAttribute("event", new Event());
-        return "user/events/add";
-    }
-
     @PostMapping("/event/add")
-    public String addEvent(@ModelAttribute("event") @Valid Event event, BindingResult result, Model model) {
+    public String addEvent(@ModelAttribute("event") @Valid Event event, BindingResult result, RedirectAttributes attributes) {
         if (event.getDate().isBefore(LocalDate.now())) {
             result.addError(new FieldError("event", "date", "Event cannot be scheduled" +
                     " for a date that has already passed."));
         }
         if (result.hasErrors()) {
-            return "/user/events/add";
+            attributes.addFlashAttribute("errors", true);
+            return "redirect:/profile/" + userService.findUser().getUsername();
         }
+        event.setUser(userService.findUser());
+        eventService.save(event);
         return "redirect:/profile/" + userService.findUser().getUsername();
     }
 

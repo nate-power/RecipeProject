@@ -54,7 +54,7 @@ public class AuthUserController {
             model.addAttribute("user", userService.findUser());
             model.addAttribute("recipes", recipeService.findAllByUser(userService.findUser()));
             model.addAttribute("favourites", userService.findUser().getFavouriteRecipes());
-            model.addAttribute("shoppinglist", shoppingList);
+            model.addAttribute("shoppingList", shoppingList);
             model.addAttribute("events", eventService.findAllByUser(userService.findUser()));
             model.addAttribute("event", new Event());
             return "user/profile";
