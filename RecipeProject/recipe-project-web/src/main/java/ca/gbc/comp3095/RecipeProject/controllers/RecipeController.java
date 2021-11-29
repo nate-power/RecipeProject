@@ -25,7 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 @Controller
 public class RecipeController {
@@ -92,10 +94,35 @@ public class RecipeController {
     }
 
     @PostMapping("/search")
-    public String retrieveRecipeSearch(@RequestParam(value = "query", required = false) String query, Model model) {
+    public String retrieveRecipeSearch(@RequestParam(value = "query", required = false) String query, @RequestParam("selector") String selector, Model model) {
         if (query != null) {
-            model.addAttribute("recipes", recipeService.findByQuery(query));
+            List<Recipe> searchQuery = new ArrayList<>();
+            switch (selector) {
+                case "My Recipes": {
+                    for (Recipe recipe : recipeService.findByQuery(query)) {
+                        if (recipe.getUser().getId().equals(userService.findUser().getId())) {
+                            searchQuery.add(recipe);
+                        }
+                    }
+                    model.addAttribute("recipes", searchQuery);
+                    break;
+                }
+                case "Favourite Recipes": {
+                    for (Recipe recipe : recipeService.findByQuery(query)) {
+                        if (userService.findUser().getFavouriteRecipes().contains(recipe)) {
+                            searchQuery.add(recipe);
+                        }
+                    }
+                    model.addAttribute("recipes", searchQuery);
+                    break;
+                }
+                default: {
+                    model.addAttribute("recipes", recipeService.findByQuery(query));
+                    break;
+                }
+            }
             model.addAttribute("query", query);
+            model.addAttribute("selector", selector);
         }
         return "recipes/search";
     }

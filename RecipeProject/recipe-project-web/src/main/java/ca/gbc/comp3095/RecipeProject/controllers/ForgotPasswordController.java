@@ -4,6 +4,7 @@ import ca.gbc.comp3095.RecipeProject.models.User;
 import ca.gbc.comp3095.RecipeProject.services.UserService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.data.repository.query.Param;
+import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -44,7 +45,7 @@ public class ForgotPasswordController {
     }
 
     @PostMapping("/forgotpassword")
-    public String forgotPassword(Model model, @RequestParam("email") String email, HttpServletRequest request) {
+    public String forgotPassword(Model model, @RequestParam("email") String email, HttpServletRequest request) throws MessagingException {
         String regex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
@@ -59,6 +60,7 @@ public class ForgotPasswordController {
 
         String token = RandomString.make(60);
         try {
+            userService.setResetPasswordToken(null, email);
             userService.setResetPasswordToken(token, email);
             String resetLink = request.getHeader("host") + "/resetpassword?token=" + token;
             MimeMessage message = mailSender.createMimeMessage();
@@ -76,8 +78,9 @@ public class ForgotPasswordController {
             helper.setText(content, true);
             mailSender.send(message);
             model.addAttribute("confirmed", "We have sent a reset password link to your email. " +
-                    "Please check spam if you do not see it in your Inbox.");
-        } catch (MessagingException | UnsupportedEncodingException e) {
+                    "Please check your spam folder if you do not see it in your Inbox.");
+            model.addAttribute("email", email);
+        } catch (MessagingException | UnsupportedEncodingException | MailAuthenticationException e) {
             model.addAttribute("message", "There has been an error trying to send your password" +
                     " recovery email. Please try again later.");
         }

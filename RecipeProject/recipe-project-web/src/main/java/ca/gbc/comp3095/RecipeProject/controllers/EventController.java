@@ -7,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -26,15 +23,32 @@ public class EventController {
         this.userService = userService;
     }
 
+    @GetMapping("/event/add")
+    public String addEvent(Model model) {
+        model.addAttribute("event", new Event());
+        model.addAttribute("eventAction", "Add");
+        return "/user/events/add";
+    }
+
+    @GetMapping("/event/edit/{id}")
+    public String editEvent(Model model, @PathVariable Long id) {
+        if (eventService.findAllByUser(userService.findUser()).contains(eventService.findById(id))) {
+            model.addAttribute("event", eventService.findById(id));
+            model.addAttribute("eventAction", "Edit");
+            return "/user/events/add";
+        }
+        return "errors/error-404";
+    }
+
     @PostMapping("/event/add")
-    public String addEvent(@ModelAttribute("event") @Valid Event event, BindingResult result, RedirectAttributes attributes) {
+    public String addEvent(@ModelAttribute("event") @Valid Event event, BindingResult result, @RequestParam("eventAction") String eventAction, Model model) {
         if (event.getDate().isBefore(LocalDate.now())) {
             result.addError(new FieldError("event", "date", "Event cannot be scheduled" +
                     " for a date that has already passed."));
         }
         if (result.hasErrors()) {
-            attributes.addFlashAttribute("errors", true);
-            return "redirect:/profile/" + userService.findUser().getUsername();
+            model.addAttribute("eventAction", eventAction);
+            return "/user/events/add";
         }
         event.setUser(userService.findUser());
         eventService.save(event);

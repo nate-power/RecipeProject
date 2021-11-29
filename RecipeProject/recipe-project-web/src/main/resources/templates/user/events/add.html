@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${eventAction + ' Event'}"></title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/css/common.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="main" th:insert="fragments/header-auth :: auth-header"></div>
+    <div class="jumbotron jumbotron-fluid">
+        <h1 class="mt-2 ml-3" th:text="${eventAction + ' Event'}"></h1>
+        <div class="mt-4 ml-5">
+            <h5>Events in Null Recipes are a way to keep track of all the important happenings in your life!
+                When creating or editing an event, make sure that you:</h5>
+            <ul>
+                <li>Include a name for your event; this will be shown in the My Event section of your Profile Page.</li>
+                <li>Include a description for your event so you don't forget what the event entails.</li>
+                <li>Include a date for your event so you don't miss it!</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <form th:action="@{/event/add}" th:object="${event}" method="post" autocomplete="off">
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            <label for="name">Event Name: </label>
+                            <input class="form-control" type="text" id="name" name="name" th:value="${event.name}" th:field="*{name}" required />
+                            <div class="alert alert-warning" th:errors="*{name}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            <label for="description">Event Description: </label>
+                            <textarea class="form-control" id="description" name="description" th:text="${event.description}" th:field="*{description}" required></textarea>
+                            <div class="alert alert-warning" th:errors="*{description}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <label for="date">Event Date: </label>
+                            <input class="form-control" type="date" id="date" name="date" th:value="${event.date}" th:field="*{date}" required />
+                            <div class="alert alert-warning" th:errors="*{date}"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-secondary" th:href="@{/profile/{username}(username=${#authentication.name})}">Back to Profile</a>
+                        <input type="hidden" name="eventAction" id="eventAction" th:value="${eventAction}" />
+                        <input type="hidden" name="id" id="edit-id" th:value="${event.id}" />
+                        <input type="submit" class="btn btn-primary" id="submit-event" name="submit-event" value="Submit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+    <div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

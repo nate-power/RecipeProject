@@ -50,11 +50,11 @@ public class DataLoader implements CommandLineRunner {
         String image_path = applicationHome.getSource().getParentFile().getParentFile() + "/src/main/resources/static/img/data_loader_imgs/";
 
         //Test user Accounts
-        User user1 = new User("bob-ruthers", "test", "bob_ruthers@test.com",
+        User user1 = new User("bob-ruthers", "test", "bob.ruthers@test.com",
                 "Bob", "Ruthers");
-        User user2 = new User("mollyringwald123", "test", "justin.bartlett@georgebrown.ca",
+        User user2 = new User("mollyringwald123", "test", "molly.ringwald@test.com",
                 "Molly", "Ringwald");
-        User user3 = new User("ana-is-cool", "test", "power2677247@gmail.com",
+        User user3 = new User("ana-is-cool", "test", "ana.de.armas@test.com",
                 "Ana de", "Armas");
 
         //Recipes

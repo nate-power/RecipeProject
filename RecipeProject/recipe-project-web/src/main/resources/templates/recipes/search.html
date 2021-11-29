@@ -12,14 +12,30 @@
         <div class="jumbotron jumbotron-fluid">
             <h1 class="mt-2 ml-3">Search for Recipes</h1>
         </div>
-        <form class="ml-4" th:action="@{/search}" method="post">
-            <label class="d-block" for="searchBar">Search by Recipe name or description: </label>
-            <input type="text" id="searchBar" maxlength="24" name="query" required placeholder="24 characters or less">
-            <input type="submit" class="btn btn-dark" value="Search Recipes"/>
-        </form>
+        <div class="container-fluid">
+            <form class="ml-4" th:action="@{/search}" method="post">
+                <div class="row">
+                    <div class="col-auto">
+                        <label class="d-block" for="searchBar">Search by Recipe name or description: </label>
+                        <input class="search-text" type="text" id="searchBar" maxlength="24" name="query" required placeholder="24 characters or less" th:value="${query}">
+                    </div>
+                    <div class="col-auto">
+                        <label class="d-block" for="selector">Search through: </label>
+                        <select class="custom-select" required name="selector" id="selector">
+                            <option value="All Recipes">All Recipes</option>
+                            <option th:selected="${selector == 'My Recipes'}" value="My Recipes">My Recipes</option>
+                            <option th:selected="${selector == 'Favourite Recipes'}" value="Favourite Recipes">Favourite Recipes</option>
+                        </select>
+                    </div>
+                    <div class="col-auto align-self-end">
+                        <input type="submit" class="btn btn-dark" value="Search Recipes"/>
+                    </div>
+                </div>
+            </form>
+        </div>
         <hr class="my-3"/>
         <div class="container-fluid">
-            <h6 class="mx-auto text-muted" th:text="${recipes != null} ? 'Search for \'' + ${query} + '\' has returned ' + ${recipes.size()} + ' result(s).'"></h6>
+            <h6 class="mx-auto text-muted" th:text="${recipes != null} ? 'Search for \'' + ${query} + '\' in ' + ${selector} + ' has returned ' + ${recipes.size()} + ' result(s).'"></h6>
             <div class="row">
                 <div class="col-auto mb-3" th:each="recipe : ${recipes}">
                     <div class="card h-100" style="width: 14rem;" >
