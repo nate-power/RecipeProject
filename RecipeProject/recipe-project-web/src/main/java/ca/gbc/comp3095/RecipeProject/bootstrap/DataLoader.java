@@ -37,7 +37,8 @@ public class DataLoader implements CommandLineRunner {
     private final RecipeDateService recipeDateService;
     private final EventService eventService;
 
-    public DataLoader(RecipeService recipeService, UserService userService, RecipeDateService recipeDateService, EventService eventService) {
+    public DataLoader(RecipeService recipeService, UserService userService, RecipeDateService recipeDateService,
+                      EventService eventService) {
         this.recipeService = recipeService;
         this.userService = userService;
         this.recipeDateService = recipeDateService;
@@ -47,7 +48,8 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         ApplicationHome applicationHome = new ApplicationHome(RecipeProjectApplication.class);
-        String image_path = applicationHome.getSource().getParentFile().getParentFile() + "/src/main/resources/static/img/data_loader_imgs/";
+        String image_path = applicationHome.getSource().getParentFile().getParentFile() +
+                "/src/main/resources/static/img/data_loader_imgs/";
 
         //Test user Accounts
         User user1 = new User("bob-ruthers", "test", "bob.ruthers@test.com",
@@ -56,6 +58,8 @@ public class DataLoader implements CommandLineRunner {
                 "Molly", "Ringwald");
         User user3 = new User("ana-is-cool", "test", "ana.de.armas@test.com",
                 "Ana de", "Armas");
+        User user4 = new User("email-test", "test", "nullrecipes@gmail.com",
+                "Email", "Test");
 
         //Recipes
         Recipe recipe1 = new Recipe(
@@ -88,7 +92,8 @@ public class DataLoader implements CommandLineRunner {
                         "serve with parmesan sprinkled on top."
         );
         try {
-            recipe1.setPhotoData(Files.readString(Path.of(image_path + "spaghetti-image.txt"), StandardCharsets.US_ASCII));
+            recipe1.setPhotoData(Files.readString(Path.of(image_path + "spaghetti-image.txt"),
+                    StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe1.setPhotoData("");
@@ -132,7 +137,8 @@ public class DataLoader implements CommandLineRunner {
                         "stone or pan. Bake for 15 minutes, or until the crust and cheese are golden brown.\n"
         );
         try {
-            recipe2.setPhotoData(Files.readString(Path.of(image_path + "pizza-image.txt"), StandardCharsets.US_ASCII));
+            recipe2.setPhotoData(Files.readString(Path.of(image_path + "pizza-image.txt"),
+                    StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe2.setPhotoData("");
@@ -156,7 +162,8 @@ public class DataLoader implements CommandLineRunner {
                         "in the freezer."
         );
         try {
-            recipe3.setPhotoData(Files.readString(Path.of(image_path + "ice-cream-image.txt"), StandardCharsets.US_ASCII));
+            recipe3.setPhotoData(Files.readString(Path.of(image_path + "ice-cream-image.txt"),
+                    StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe3.setPhotoData("");
@@ -188,7 +195,8 @@ public class DataLoader implements CommandLineRunner {
                         "sesame seeds and finely chopped green shallots."
         );
         try {
-            recipe4.setPhotoData(Files.readString(Path.of(image_path + "miso-salmon-image.txt"), StandardCharsets.US_ASCII));
+            recipe4.setPhotoData(Files.readString(Path.of(image_path + "miso-salmon-image.txt"),
+                    StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe4.setPhotoData("");
@@ -214,7 +222,8 @@ public class DataLoader implements CommandLineRunner {
                         "lots of syrup and love."
         );
         try {
-            recipe5.setPhotoData(Files.readString(Path.of(image_path + "pancakes-image.txt"), StandardCharsets.US_ASCII));
+            recipe5.setPhotoData(Files.readString(Path.of(image_path + "pancakes-image.txt"),
+                    StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe5.setPhotoData("");
@@ -247,7 +256,8 @@ public class DataLoader implements CommandLineRunner {
                         "and/or a drizzle of olive oil, if desired, and serve."
         );
         try {
-            recipe6.setPhotoData(Files.readString(Path.of(image_path + "pasta-salad-image.txt"), StandardCharsets.US_ASCII));
+            recipe6.setPhotoData(Files.readString(Path.of(image_path + "pasta-salad-image.txt"),
+                    StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe6.setPhotoData("");
@@ -279,7 +289,8 @@ public class DataLoader implements CommandLineRunner {
                         "in pan. Transfer muffins to a wire rack and eat while warm or let cool completely."
         );
         try {
-            recipe7.setPhotoData(Files.readString(Path.of(image_path + "corn-muffin-image.txt"), StandardCharsets.US_ASCII));
+            recipe7.setPhotoData(Files.readString(Path.of(image_path + "corn-muffin-image.txt"),
+                    StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe7.setPhotoData("");
@@ -316,7 +327,8 @@ public class DataLoader implements CommandLineRunner {
                         "Serve with lime wedges."
         );
         try {
-            recipe8.setPhotoData(Files.readString(Path.of(image_path + "lentil-soup-image.txt"), StandardCharsets.US_ASCII));
+            recipe8.setPhotoData(Files.readString(Path.of(image_path + "lentil-soup-image.txt"),
+                    StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe8.setPhotoData("");
@@ -365,7 +377,8 @@ public class DataLoader implements CommandLineRunner {
                         "pat dry, and place a slice on top of each egg, then sprinkle with more finely chopped herbs."
         );
         try {
-            recipe9.setPhotoData(Files.readString(Path.of(image_path + "deviled-eggs-image.txt"), StandardCharsets.US_ASCII));
+            recipe9.setPhotoData(Files.readString(Path.of(image_path + "deviled-eggs-image.txt"),
+                    StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe9.setPhotoData("");
@@ -392,7 +405,8 @@ public class DataLoader implements CommandLineRunner {
 
         );
         try {
-            recipe10.setPhotoData(Files.readString(Path.of(image_path + "vegan-tacos-image.txt"), StandardCharsets.US_ASCII));
+            recipe10.setPhotoData(Files.readString(Path.of(image_path + "vegan-tacos-image.txt"),
+                    StandardCharsets.US_ASCII));
         }
         catch (NoSuchFileException e) {
             recipe10.setPhotoData("");
@@ -424,6 +438,7 @@ public class DataLoader implements CommandLineRunner {
         userService.save(user1);
         userService.save(user2);
         userService.save(user3);
+        userService.save(user4);
 
         recipeService.save(recipe1);
         recipeService.save(recipe2);
@@ -463,7 +478,14 @@ public class DataLoader implements CommandLineRunner {
         recipeDateService.save(recipeDate12);
 
         //Events and Saves
-        Event event1 = new Event(user1, "Dinner with Friends", "Dinner at 8pm", LocalDate.now().plusDays(10));
+        Event event1 = new Event(user1, "Dinner with Friends", "Dinner at 8pm",
+                LocalDate.now().plusDays(10));
         eventService.save(event1);
+        Event event2 = new Event(user2, "Dinner with Family", "Dinner at 5pm",
+                LocalDate.now().plusDays(14));
+        eventService.save(event2);
+        Event event3 = new Event(user3, "Lunch Date with Jim", "Lunch at Arpeggios for 1pm",
+                LocalDate.now().plusDays(8));
+        eventService.save(event3);
     }
 }

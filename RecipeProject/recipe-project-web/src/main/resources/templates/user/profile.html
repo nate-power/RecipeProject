@@ -16,8 +16,10 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="container-fluid wrap-text">
-                        <img th:src="${user.photoData != null} ? ${user.photoData} : @{/img/user-icon.png}" alt="mdo" width="250" height="250" class="rounded-circle">
-                        <h3 class="text-capitalize font-weight-bold" th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h3>
+                        <img th:src="${user.photoData != null} ? ${user.photoData} : @{/img/user-icon.png}"
+                             alt="mdo" width="250" height="250" class="rounded-circle">
+                        <h3 class="text-capitalize font-weight-bold"
+                            th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h3>
                         <h4 class="text-muted" th:text="${user.getUsername()}"></h4>
                         <h4 class="text-muted" th:text="${user.getEmail()}"></h4>
                         <a class="btn btn-dark" th:href="@{/profile/edit}">Edit Profile</a>
@@ -30,27 +32,41 @@
                             <div class="card w-100 mx-auto">
                                 <div class="card-header" id="headingOne">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <button class="btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
                                             <strong>My Recipes</strong>
                                             <small class="text-muted"> - Click to open/close</small>
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#profileAccordion">
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                     data-parent="#profileAccordion">
                                     <hr class="my-2"/>
                                     <div class="row profile-card-view">
-                                        <h2 class="text-muted text-center" th:classappend="${recipes.size() == 0} ? 'mx-auto'" th:text="${recipes.size() == 0} ? 'You have not created any recipes yet!'"></h2>
+                                        <h2 class="text-muted text-center"
+                                            th:classappend="${recipes.size() == 0} ?
+                                            'mx-auto'" th:text="${recipes.size() == 0} ?
+                                            'You have not created any recipes yet!'"></h2>
                                         <div class="col-auto mb-1 mt-1" th:each="recipe : ${recipes}">
                                             <div class="card h-100" style="width: 14rem;">
                                                 <a th:href="@{/recipe/{id}(id=${recipe.id})}">
-                                                    <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default.jpg}" th:alt="${recipe.name}" width="50" height="50"></a>
+                                                    <img class="card-img-top" th:src="${recipe.photoData != ''} ?
+                                                    ${recipe.photoData} : @{/img/img-default.jpg}" th:alt="${recipe.name}"
+                                                         width="50" height="50"></a>
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><a th:href="@{/recipe/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
-                                                    <small class="card-text truncate" th:text="${recipe.description}"></small>
-                                                    <small class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></small>
+                                                    <h5 class="card-title"><a th:href="@{/recipe/{id}(id=${recipe.id})}"
+                                                                              th:text="${recipe.name}"></a></h5>
+                                                    <small class="card-text truncate"
+                                                           th:text="${recipe.description}">
+                                                    </small>
+                                                    <small class="card-text"
+                                                           th:text="${'Category - ' + recipe.category.getDisplay()}">
+                                                    </small>
                                                 </div>
                                                 <div class="card-footer">
-                                                    <small class="text-muted d-block" th:text="${'Created on: ' + recipe.dateCreated}"></small>
+                                                    <small class="text-muted d-block"
+                                                           th:text="${'Created on: ' + recipe.dateCreated}"></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,26 +78,39 @@
                             <div class="card w-100 mx-auto">
                                 <div class="card-header" id="headingTwo">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <button class="btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
                                             <strong>My Favourites</strong>
                                             <small class="text-muted"> - Click to open/close</small>
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#profileAccordion">
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                     data-parent="#profileAccordion">
                                     <div class="row profile-card-view">
-                                        <h2 class="text-muted text-center" th:classappend="${favourites.size() == 0} ? 'mx-auto'" th:text="${favourites.size() == 0} ? 'You have no favourite recipes!'"></h2>
+                                        <h2 class="text-muted text-center"
+                                            th:classappend="${favourites.size() == 0} ?
+                                            'mx-auto'" th:text="${favourites.size() == 0} ?
+                                            'You have no favourite recipes!'"></h2>
                                         <div class="col-auto mb-1 mt-1" th:each="favourite : ${favourites}">
                                             <div class="card h-100" style="width: 14rem;">
                                                 <a th:href="@{/recipe/{id}(id=${favourite.id})}">
-                                                    <img class="card-img-top" th:src="${favourite.photoData != ''} ? ${favourite.photoData} : @{/img/img-default.jpg}" th:alt="${favourite.name}" width="50" height="50"></a>
+                                                    <img class="card-img-top" th:src="${favourite.photoData != ''} ?
+                                                    ${favourite.photoData} : @{/img/img-default.jpg}"
+                                                         th:alt="${favourite.name}" width="50" height="50"></a>
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><a th:href="@{/recipe/{id}(id=${favourite.id})}" th:text="${favourite.name}"></a></h5>
-                                                    <small class="card-text truncate" th:text="${favourite.description}"></small>
-                                                    <small class="card-text" th:text="${'Category - ' + favourite.category.getDisplay()}"></small>
+                                                    <h5 class="card-title"><a th:href="@{/recipe/{id}(id=${favourite.id})}"
+                                                                              th:text="${favourite.name}"></a></h5>
+                                                    <small class="card-text truncate" th:text="${favourite.description}">
+                                                    </small>
+                                                    <small class="card-text"
+                                                           th:text="${'Category - ' + favourite.category.getDisplay()}">
+                                                    </small>
                                                 </div>
                                                 <div class="card-footer">
-                                                    <small class="text-muted d-block" th:text="${'Created on: ' + favourite.dateCreated}"></small>
+                                                    <small class="text-muted d-block"
+                                                           th:text="${'Created on: ' + favourite.dateCreated}"></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,18 +122,28 @@
                             <div class="card w-100 mx-auto">
                                 <div class="card-header" id="headingThree">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <button class="btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree">
                                             <strong>My Shopping List</strong>
                                             <small class="text-muted"> - Click to open/close</small>
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#profileAccordion">
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                     data-parent="#profileAccordion">
                                     <div class="wrap-text">
                                         <h5 class="d-inline ml-2">Current Shopping List:</h5>
-                                        <button class="btn btn-dark ml-2" data-toggle="modal" data-target="#editModal">Edit List</button>
-                                        <button class="btn btn-dark ml-2" onClick="printList()" type="button">Print List</button>
-                                        <h2 class="text-muted text-center" th:classappend="${shoppingList.isEmpty()} ? 'mx-auto'" th:text="${shoppingList.isEmpty()} ? 'Your shopping list is empty!'"></h2>
+                                        <button class="btn btn-primary ml-2" data-toggle="modal"
+                                                data-target="#editModal">Edit List</button>
+                                        <button class="btn btn-dark ml-2" onClick="printList()">Print List</button>
+                                        <button class="btn btn-danger ml-2"
+                                                th:classappend="${shoppingList.isEmpty()} ?
+                                                'disabled empty-list'" data-toggle="modal"
+                                                data-target="#listDeleteModal">Empty List</button>
+                                        <h2 class="text-muted text-center" th:classappend="${shoppingList.isEmpty()} ?
+                                        'mx-auto mt-3'" th:text="${shoppingList.isEmpty()} ?
+                                        'Your shopping list is empty!'"></h2>
                                         <div class="profile-list-view">
                                             <span th:if="${!shoppingList.isEmpty()}">
                                                 <ul class="list-group list-group-flush" th:each="ingredient : ${shoppingList}">
@@ -120,18 +159,23 @@
                             <div class="card w-100 mx-auto">
                                 <div class="card-header" id="headingFour">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        <button class="btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#collapseFour"
+                                                aria-expanded="false" aria-controls="collapseFour">
                                             <strong>My Events</strong>
                                             <small class="text-muted"> - Click to open/close</small>
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#profileAccordion">
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                                     data-parent="#profileAccordion">
                                     <hr class="my-2"/>
                                     <div class="row profile-card-view">
                                         <div class="col-auto mb-1 mt-1">
                                             <div class="card" style="width: 14rem;">
-                                                <a th:href="@{/event/add}"><img class="card-img-top" th:src="@{/img/add.png}" alt="Add Event" width="100" height="100"></a>
+                                                <a th:href="@{/event/add}"><img class="card-img-top"
+                                                                                th:src="@{/img/add.png}" alt="Add Event"
+                                                                                width="100" height="100"></a>
                                                 <div class="card-body">
                                                     <a th:href="@{/event/add}"><h5 class="card-title">Create an Event</h5></a>
                                                 </div>
@@ -139,13 +183,20 @@
                                         </div>
                                         <div class="col-auto mb-1 mt-1" th:each="event : ${events}">
                                             <div class="card h-100" style="width: 14rem;">
-                                                <a href="#" data-toggle="modal" th:attr="data-target='#eventModal' + ${event.id}"><img class="card-img-top" th:src="@{/img/event.jpg}" th:alt="${event.name}" width="50" height="50"></a>
+                                                <a href="#" data-toggle="modal"
+                                                   th:attr="data-target='#eventModal' + ${event.id}">
+                                                    <img class="card-img-top" th:src="@{/img/event.jpg}"
+                                                         th:alt="${event.name}" width="50" height="50"></a>
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><a href="#" data-toggle="modal" th:attr="data-target='#eventModal' + ${event.id}" th:text="${event.name}"></a></h5>
+                                                    <h5 class="card-title"><a href="#" data-toggle="modal"
+                                                                              th:attr="data-target='#eventModal' +
+                                                                              ${event.id}" th:text="${event.name}">
+                                                    </a></h5>
                                                     <small class="card-text truncate" th:text="${event.description}"></small>
                                                 </div>
                                                 <div class="card-footer">
-                                                    <small class="text-muted d-block" th:text="${'Scheduled for: ' + event.date}"></small>
+                                                    <small class="text-muted d-block"
+                                                           th:text="${'Scheduled for: ' + event.date}"></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -171,7 +222,8 @@
                         </div>
                         <div class="modal-body">
                             <label for="shoppingEdit">Enter each item on a new line</label>
-                            <textarea name="shoppingEdit" id="shoppingEdit" cols="45" rows="10" th:text="${user.getShoppingList()}"></textarea>
+                            <textarea name="shoppingEdit" id="shoppingEdit" cols="45" rows="10"
+                                      th:text="${user.getShoppingList()}"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -185,11 +237,13 @@
 
         <!-- Event View Modal -->
         <div th:each="event : ${events}">
-            <div class="modal fade" th:id="'eventModal' + ${event.id}" tabindex="-1" role="dialog" th:attr="aria-labelledby='eventModal' + ${event.id} + 'Label'" aria-hidden="true">
+            <div class="modal fade" th:id="'eventModal' + ${event.id}" tabindex="-1" role="dialog"
+                 th:attr="aria-labelledby='eventModal' + ${event.id} + 'Label'" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" th:id="'eventModal' + ${event.id} + 'Label'" th:text="${event.name}"></h5>
+                            <h5 class="modal-title" th:id="'eventModal' + ${event.id} + 'Label'"
+                                th:text="${event.name}"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -204,7 +258,8 @@
                         </div>
                         <div class="modal-footer">
                             <a class="btn btn-secondary" th:href="@{/event/edit/{id}(id=${event.id})}">Edit</a>
-                            <button class="btn btn-danger" data-dismiss="modal" aria-label="Close" data-toggle="modal" th:attr="data-target='#eventDeleteModal' + ${event.id}">Delete</button>
+                            <button class="btn btn-danger" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                    th:attr="data-target='#eventDeleteModal' + ${event.id}">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -213,11 +268,13 @@
 
         <!-- Delete Event Modal -->
         <div th:each="event : ${events}">
-            <div class="modal fade" th:id="'eventDeleteModal' + ${event.id}" tabindex="-1" role="dialog" th:attr="aria-labelledby='eventDeleteModal' + ${event.id} + 'Label'" aria-hidden="true">
+            <div class="modal fade" th:id="'eventDeleteModal' + ${event.id}" tabindex="-1" role="dialog"
+                 th:attr="aria-labelledby='eventDeleteModal' + ${event.id} + 'Label'" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" th:id="'eventDeleteModal' + ${event.id} + 'Label'" th:text="${'Delete ' + event.name}"></h5>
+                            <h5 class="modal-title" th:id="'eventDeleteModal' + ${event.id} + 'Label'"
+                                th:text="${'Delete ' + event.name}"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -237,8 +294,32 @@
             </div>
         </div>
 
+        <!-- Delete List Modal -->
+        <div class="modal fade" id="listDeleteModal" tabindex="-1" role="dialog" aria-labelledby="listDeleteModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="listDeleteModalLabel">Empty Shopping List</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Are you sure you want to remove all items from your shopping list?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <form th:action="@{/profile/shoppinglist/empty}" method="post">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input class="btn btn-danger" type="submit" id="submit-delete-list" name="submit"
+                                   value="Empty List">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
+        <!-- Printing shopping list -->
         <div id="printList" class="d-none">
             <h2 class="text-center">My Shopping List</h2>
             <span th:if="${!shoppingList.isEmpty()}">
@@ -250,15 +331,14 @@
 
         <script>
             function printList() {
-                let prtContent = document.getElementById("printList");
-                let WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-                WinPrint.document.write(prtContent.innerHTML);
-                WinPrint.document.close();
-                WinPrint.focus();
-                WinPrint.print();
-                WinPrint.close();
+                let content = document.getElementById("printList");
+                let printView = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+                printView.document.write(content.innerHTML);
+                printView.document.close();
+                printView.focus();
+                printView.print();
+                printView.close();
             }
-
         </script>
 
         <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>

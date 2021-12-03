@@ -94,7 +94,8 @@ public class RecipeController {
     }
 
     @PostMapping("/search")
-    public String retrieveRecipeSearch(@RequestParam(value = "query", required = false) String query, @RequestParam("selector") String selector, Model model) {
+    public String retrieveRecipeSearch(@RequestParam(value = "query", required = false) String query,
+                                       @RequestParam("selector") String selector, Model model) {
         if (query != null) {
             List<Recipe> searchQuery = new ArrayList<>();
             switch (selector) {

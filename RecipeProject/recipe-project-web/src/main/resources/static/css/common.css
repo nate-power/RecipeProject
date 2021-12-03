@@ -162,3 +162,7 @@ nav {
     max-height: 36vh;
     overflow-x: hidden;
 }
+
+.empty-list {
+    pointer-events: none;
+}

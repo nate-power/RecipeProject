@@ -4,17 +4,15 @@
 //        * Author(s): Nathan Power
 //        * Student Number: 101247770
 //        * Date: October 26th, 2021
-//        * Description: This controller handles routing to profile of the signed-in user, and handles the calls to the logic
-//        * for adding and deleting favourite recipes for the signed-in user.
+//        * Description: This controller handles routing to profile of the signed-in user, and handles the calls to the
+//        * logic for adding and deleting favourite recipes for the signed-in user.
 //*********************************************************************************//
 
 package ca.gbc.comp3095.RecipeProject.controllers;
 
-import ca.gbc.comp3095.RecipeProject.models.Event;
 import ca.gbc.comp3095.RecipeProject.models.Recipe;
 import ca.gbc.comp3095.RecipeProject.models.User;
 import ca.gbc.comp3095.RecipeProject.services.*;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +20,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
 
 @Controller
@@ -39,7 +33,8 @@ public class AuthUserController {
     private final PasswordEncoder passwordEncoder;
     private final EventService eventService;
 
-    public AuthUserController(UserService userService, RecipeService recipeService, PasswordEncoder passwordEncoder, EventService eventService) {
+    public AuthUserController(UserService userService, RecipeService recipeService, PasswordEncoder passwordEncoder,
+                              EventService eventService) {
         this.userService = userService;
         this.recipeService = recipeService;
         this.passwordEncoder = passwordEncoder;
@@ -77,7 +72,8 @@ public class AuthUserController {
     }
 
     @PostMapping("profile/change-password")
-    public String changePassword(@RequestParam("old-password") String oldPassword, @RequestParam("new-password") String newPassword,
+    public String changePassword(@RequestParam("old-password") String oldPassword,
+                                 @RequestParam("new-password") String newPassword,
                                  @RequestParam("confirm-password") String confirmPassword, Model model) {
         User user = userService.findUser();
         if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
@@ -112,7 +108,8 @@ public class AuthUserController {
         if (multipartFile.getContentType().equals("image/jpeg") || multipartFile.getContentType().equals("image/jpg")
                 || multipartFile.getContentType().equals("image/png")) {
             if (multipartFile.getSize() > 2097152) {
-                result.addError(new FieldError("user", "photoData", "Please upload an image that is less than 2MB!"));
+                result.addError(new FieldError("user", "photoData",
+                        "Please upload an image that is less than 2MB!"));
             }
             else {
                 user.setPhotoData(Base64.getEncoder().encodeToString(multipartFile.getBytes()));
@@ -120,20 +117,25 @@ public class AuthUserController {
         }
         else {
             if (!multipartFile.isEmpty()) {
-                result.addError(new FieldError("user", "photoData", "Uploaded image must be a jpeg or png."));
+                result.addError(new FieldError("user", "photoData",
+                        "Uploaded image must be a jpeg or png."));
             }
         }
         // check if username already exists
-        if (userService.userExistsUsername(user.getUsername()) && !user.getUsername().equals(userService.findUser().getUsername())) {
-            result.addError(new FieldError("user", "username", "Username already exists for another account."));
+        if (userService.userExistsUsername(user.getUsername()) &&
+                !user.getUsername().equals(userService.findUser().getUsername())) {
+            result.addError(new FieldError("user", "username",
+                    "Username already exists for another account."));
         }
         // check if username has any spaces
         if (user.getUsername().contains(" ")) {
-            result.addError(new FieldError("user", "username", "Username cannot contain any spaces."));
+            result.addError(new FieldError("user", "username",
+                    "Username cannot contain any spaces."));
         }
         // check if email already exists
         if (userService.userExistsEmail(user.getEmail()) && !user.getEmail().equals(userService.findUser().getEmail())) {
-            result.addError(new FieldError("user", "email", "Email already in use by another account."));
+            result.addError(new FieldError("user", "email",
+                    "Email already in use by another account."));
         }
 
         if (result.hasErrors()) {
@@ -167,7 +169,8 @@ public class AuthUserController {
     }
 
     @PostMapping("/profile/shoppinglist/add")
-    public String addToShoppingList(@RequestParam("ingredients") Optional<String[]> ingredients, @RequestParam("recipeId") long recipeId) {
+    public String addToShoppingList(@RequestParam("ingredients") Optional<String[]> ingredients,
+                                    @RequestParam("recipeId") long recipeId) {
         User user = userService.findUser();
 
         if (ingredients.isPresent()) {
@@ -184,6 +187,14 @@ public class AuthUserController {
     public String editShoppingList(@RequestParam("shoppingEdit") String shoppingList) {
         User user = userService.findUser();
         user.setShoppingList(shoppingList.trim() + "\n");
+        userService.save(user);
+        return "redirect:/profile/" + user.getUsername();
+    }
+
+    @PostMapping("/profile/shoppinglist/empty")
+    public String emptyShoppingList() {
+        User user = userService.findUser();
+        user.setShoppingList("");
         userService.save(user);
         return "redirect:/profile/" + user.getUsername();
     }

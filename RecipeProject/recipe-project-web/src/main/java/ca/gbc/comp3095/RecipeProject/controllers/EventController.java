@@ -1,3 +1,13 @@
+//*********************************************************************************
+//* Project: < Null Recipes >
+//        * Assignment: assignment #2
+//        * Author(s): Justin Bartlett
+//        * Student Number: 101246661
+//        * Date: November 24 2021
+//        * Description: This controller handles routing to pages related to adding, editing, and deleting events.
+//                      It also interacts with the eventService to handle CRUD operations related to events.
+//*********************************************************************************
+
 package ca.gbc.comp3095.RecipeProject.controllers;
 
 import ca.gbc.comp3095.RecipeProject.models.Event;
@@ -8,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -41,7 +50,8 @@ public class EventController {
     }
 
     @PostMapping("/event/add")
-    public String addEvent(@ModelAttribute("event") @Valid Event event, BindingResult result, @RequestParam("eventAction") String eventAction, Model model) {
+    public String addEvent(@ModelAttribute("event") @Valid Event event, BindingResult result,
+                           @RequestParam("eventAction") String eventAction, Model model) {
         if (event.getDate().isBefore(LocalDate.now())) {
             result.addError(new FieldError("event", "date", "Event cannot be scheduled" +
                     " for a date that has already passed."));

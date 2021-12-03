@@ -16,7 +16,8 @@
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <strong>Today's Meals</strong>
                             <small class="text-muted"> - Click to open/close</small>
                         </button>
@@ -29,12 +30,17 @@
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">
                                         <h3 class="card-title" th:text="${meal_today.recipe.name}"></h3>
-                                        <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_today.date}"></h6>
-                                        <p class="card-text truncate" th:text="${meal_today.recipe.description}"></p>
-                                        <p class="card-text" th:text="${'Prep Time: ' + meal_today.recipe.prepTime + ' min(s)'}"></p>
-                                        <p class="card-text" th:text="${'Cook Time: ' + meal_today.recipe.cookTime + ' min(s)'}"></p>
+                                        <h6 class="card-subtitle mb-2 text-muted"
+                                            th:text="'Planned for ' + ${meal_today.date}"></h6>
+                                        <p class="card-text truncate"
+                                           th:text="${meal_today.recipe.description}"></p>
+                                        <p class="card-text"
+                                           th:text="${'Prep Time: ' + meal_today.recipe.prepTime + ' min(s)'}"></p>
+                                        <p class="card-text"
+                                           th:text="${'Cook Time: ' + meal_today.recipe.cookTime + ' min(s)'}"></p>
                                         <form th:action="@{/meal-planner/delete/{id}(id=${meal_today.id})}" th:method="post">
-                                            <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_today.recipe.id})}">Go To Recipe</a>
+                                            <a class="btn btn-dark"
+                                               th:href="@{/recipe/{id}(id=${meal_today.recipe.id})}">Go To Recipe</a>
                                             <input type="submit" class="btn btn-danger" th:value="Remove">
                                         </form>
                                     </div>
@@ -47,7 +53,9 @@
             <div class="card">
                 <div class="card-header" id="headingTwo">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                aria-controls="collapseTwo">
                             <strong>This Week's Meals</strong>
                             <small class="text-muted"> - Click to open/close</small>
                             <small class="d-block" th:text="${sunday +  ' to ' + saturday}"></small>
@@ -59,15 +67,23 @@
                         <ul class="list-group" th:each="meal_this_week : ${meals_this_week}">
                             <li class="list-group-item">
                                 <div class="card" style="width: 18rem;">
-                                    <div class="card-body" th:classappend="${meal_this_week.date == current_day} ? 'bg-light'">
-                                        <h3 class="card-title" th:text="${meal_this_week.recipe.name}"></h3>
-                                        <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_this_week.date}"></h6>
-                                        <h6 class="card-subtitle mb-2 text-muted" th:text="${meal_this_week.date == current_day} ? '(today)'"></h6>
-                                        <p class="card-text truncate" th:text="${meal_this_week.recipe.description}"></p>
-                                        <p class="card-text" th:text="${'Prep Time: ' + meal_this_week.recipe.prepTime + ' min(s)'}"></p>
-                                        <p class="card-text" th:text="${'Cook Time: ' + meal_this_week.recipe.cookTime + ' min(s)'}"></p>
+                                    <div class="card-body"
+                                         th:classappend="${meal_this_week.date == current_day} ? 'bg-light'">
+                                        <h3 class="card-title"
+                                            th:text="${meal_this_week.recipe.name}"></h3>
+                                        <h6 class="card-subtitle mb-2 text-muted"
+                                            th:text="'Planned for ' + ${meal_this_week.date}"></h6>
+                                        <h6 class="card-subtitle mb-2 text-muted"
+                                            th:text="${meal_this_week.date == current_day} ? '(today)'"></h6>
+                                        <p class="card-text truncate"
+                                           th:text="${meal_this_week.recipe.description}"></p>
+                                        <p class="card-text"
+                                           th:text="${'Prep Time: ' + meal_this_week.recipe.prepTime + ' min(s)'}"></p>
+                                        <p class="card-text"
+                                           th:text="${'Cook Time: ' + meal_this_week.recipe.cookTime + ' min(s)'}"></p>
                                         <form th:action="@{/meal-planner/delete/{id}(id=${meal_this_week.id})}" th:method="post">
-                                            <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_this_week.recipe.id})}">Go To Recipe</a>
+                                            <a class="btn btn-dark"
+                                               th:href="@{/recipe/{id}(id=${meal_this_week.recipe.id})}">Go To Recipe</a>
                                             <input type="submit" class="btn btn-danger" th:value="Remove">
                                         </form>
                                     </div>
@@ -80,7 +96,9 @@
             <div class="card">
                 <div class="card-header" id="headingThree">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
+                                aria-controls="collapseThree">
                             <strong>Upcoming Meals</strong>
                             <small class="text-muted"> - Click to open/close</small>
                         </button>
@@ -92,13 +110,19 @@
                             <li class="list-group-item">
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">
-                                        <h3 class="card-title" th:text="${meal_future.recipe.name}"></h3>
-                                        <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_future.date}"></h6>
-                                        <p class="card-text truncate" th:text="${meal_future.recipe.description}"></p>
-                                        <p class="card-text" th:text="${'Prep Time: ' + meal_future.recipe.prepTime + ' min(s)'}"></p>
-                                        <p class="card-text" th:text="${'Cook Time: ' + meal_future.recipe.cookTime + ' min(s)'}"></p>
+                                        <h3 class="card-title"
+                                            th:text="${meal_future.recipe.name}"></h3>
+                                        <h6 class="card-subtitle mb-2 text-muted"
+                                            th:text="'Planned for ' + ${meal_future.date}"></h6>
+                                        <p class="card-text truncate"
+                                           th:text="${meal_future.recipe.description}"></p>
+                                        <p class="card-text"
+                                           th:text="${'Prep Time: ' + meal_future.recipe.prepTime + ' min(s)'}"></p>
+                                        <p class="card-text"
+                                           th:text="${'Cook Time: ' + meal_future.recipe.cookTime + ' min(s)'}"></p>
                                         <form th:action="@{/meal-planner/delete/{id}(id=${meal_future.id})}" th:method="post">
-                                            <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_future.recipe.id})}">Go To Recipe</a>
+                                            <a class="btn btn-dark"
+                                               th:href="@{/recipe/{id}(id=${meal_future.recipe.id})}">Go To Recipe</a>
                                             <input type="submit" class="btn btn-danger" th:value="Remove">
                                         </form>
                                     </div>
@@ -111,7 +135,9 @@
             <div class="card">
                 <div class="card-header" id="headingFour">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                data-toggle="collapse" data-target="#collapseFour" aria-expanded="false"
+                                aria-controls="collapseFour">
                             <strong>Past Meals</strong>
                             <small class="text-muted"> - Click to open/close</small>
                         </button>
@@ -123,13 +149,19 @@
                             <li class="list-group-item">
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">
-                                        <h3 class="card-title" th:text="${meal_past.recipe.name}"></h3>
-                                        <h6 class="card-subtitle mb-2 text-muted" th:text="'Planned for ' + ${meal_past.date}"></h6>
-                                        <p class="card-text truncate" th:text="${meal_past.recipe.description}"></p>
-                                        <p class="card-text" th:text="${'Prep Time: ' + meal_past.recipe.prepTime + ' min(s)'}"></p>
-                                        <p class="card-text" th:text="${'Cook Time: ' + meal_past.recipe.cookTime + ' min(s)'}"></p>
+                                        <h3 class="card-title"
+                                            th:text="${meal_past.recipe.name}"></h3>
+                                        <h6 class="card-subtitle mb-2 text-muted"
+                                            th:text="'Planned for ' + ${meal_past.date}"></h6>
+                                        <p class="card-text truncate"
+                                           th:text="${meal_past.recipe.description}"></p>
+                                        <p class="card-text"
+                                           th:text="${'Prep Time: ' + meal_past.recipe.prepTime + ' min(s)'}"></p>
+                                        <p class="card-text"
+                                           th:text="${'Cook Time: ' + meal_past.recipe.cookTime + ' min(s)'}"></p>
                                         <form th:action="@{/meal-planner/delete/{id}(id=${meal_past.id})}" th:method="post">
-                                            <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_past.recipe.id})}">Go To Recipe</a>
+                                            <a class="btn btn-dark" th:href="@{/recipe/{id}(id=${meal_past.recipe.id})}">
+                                                Go To Recipe</a>
                                             <input type="submit" class="btn btn-danger" th:value="Remove">
                                         </form>
                                     </div>

@@ -1,3 +1,13 @@
+//*********************************************************************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment #2
+//        * Author(s): Nathan Power
+//        * Student Number: 101247770
+//        * Date: November 20th, 2021
+//        * Description: Event is an entity model that extends BaseEntity to get an ID. It contains properties
+//        * for Event object in the system, such as name, description and date of event, and the getters/setters.
+//*********************************************************************************//
+
 package ca.gbc.comp3095.RecipeProject.models;
 
 import org.springframework.format.annotation.DateTimeFormat;

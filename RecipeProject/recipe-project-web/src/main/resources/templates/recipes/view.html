@@ -77,7 +77,7 @@
                                 </li>
                             </ul>
                             <input type="hidden" name="recipeId" th:value="${recipe.getId()}">
-                            <input type="submit" value="Add Ingredients to Shopping List" class="btn btn-primary mt-3">
+                            <input type="submit" value="Add Ingredients to Shopping List" class="btn btn-primary my-3">
                         </form>
                     </div>
                 </div>
@@ -85,7 +85,8 @@
         </div>
 
         <!-- Edit Recipe Modal -->
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <form th:action="@{/recipes/edit/{id}(id = ${recipe.id})}" th:method="post">
@@ -99,12 +100,14 @@
                             <div class="form-group">
                                 <label for="stepsEdit">Enter each step on a new line</label>
                                 <br/>
-                                <textarea name="stepsEdit" id="stepsEdit" cols="80" rows="10" th:text="${recipe.steps}" required></textarea>
+                                <textarea name="stepsEdit" id="stepsEdit" cols="80" rows="10"
+                                          th:text="${recipe.steps}" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="ingredientsEdit">Enter each ingredient on a new line</label>
                                 <br/>
-                                <textarea name="ingredientsEdit" id="ingredientsEdit" cols="80" rows="10" th:text="${recipe.ingredients}" required></textarea>
+                                <textarea name="ingredientsEdit" id="ingredientsEdit" cols="80" rows="10"
+                                          th:text="${recipe.ingredients}" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">

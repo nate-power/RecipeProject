@@ -17,7 +17,8 @@
             <div class="row">
                 <div class="col-auto mb-3">
                     <div class="card" style="width: 14rem;" >
-                        <a th:href="@{/recipes/add}"><img class="card-img-top" th:src="@{/img/add.png}" alt="Create a Recipe" width="100" height="100"></a>
+                        <a th:href="@{/recipes/add}"><img class="card-img-top" th:src="@{/img/add.png}"
+                                                          alt="Create a Recipe" width="100" height="100"></a>
                         <div class="card-body">
                             <a th:href="@{/recipes/add}"><h5 class="card-title">Create a Recipe</h5></a>
                         </div>
@@ -26,14 +27,19 @@
                 <div class="col-auto mb-3" th:each="recipe : ${recipes}">
                     <div class="card h-100" style="width: 14rem;" >
                         <a th:href="@{/recipe/{id}(id=${recipe.id})}">
-                            <img class="card-img-top" th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default.jpg}" th:alt="${recipe.name}" width="100" height="100"></a>
+                            <img class="card-img-top"
+                                 th:src="${recipe.photoData != ''} ? ${recipe.photoData} : @{/img/img-default.jpg}"
+                                 th:alt="${recipe.name}" width="100" height="100"></a>
                         <div class="card-body">
-                            <h5 class="card-title"><a th:href="@{/recipe/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a></h5>
+                            <h5 class="card-title"><a th:href="@{/recipe/{id}(id=${recipe.id})}"
+                                                      th:text="${recipe.name}"></a></h5>
                             <small class="card-text truncate" th:text="${recipe.description}"></small>
                             <small class="card-text" th:text="${'Category - ' + recipe.category.getDisplay()}"></small>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted" th:text="${'Created by: ' + recipe.user.firstName + ' ' + recipe.user.lastName}"></small>
+                            <small class="text-muted"
+                                   th:text="${'Created by: ' + recipe.user.firstName + ' ' + recipe.user.lastName}">
+                            </small>
                             <small class="text-muted d-block" th:text="${recipe.dateCreated}"></small>
                         </div>
                     </div>

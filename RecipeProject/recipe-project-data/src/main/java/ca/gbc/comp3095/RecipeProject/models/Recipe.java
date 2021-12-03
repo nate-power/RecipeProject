@@ -62,7 +62,8 @@ public class Recipe extends BaseEntity{
     private Set<RecipeDate> recipeDates = new HashSet<>();
 
     @ManyToMany()
-    @JoinTable(name = "favourite_recipes", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "favourite_recipes", joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> userFavourites = new HashSet<>();
 
     @Lob

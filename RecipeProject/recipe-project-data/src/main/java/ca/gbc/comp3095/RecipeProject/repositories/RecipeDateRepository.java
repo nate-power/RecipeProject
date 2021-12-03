@@ -21,7 +21,8 @@ import java.util.List;
 @Repository
 public interface RecipeDateRepository extends JpaRepository<RecipeDate, Long> {
     List<RecipeDate> findAllByUserAndDateOrderByDate(User user, LocalDate date);
-    List<RecipeDate> findAllByUserAndDateGreaterThanEqualAndDateLessThanEqualOrderByDate(User user, LocalDate date1, LocalDate date2);
+    List<RecipeDate> findAllByUserAndDateGreaterThanEqualAndDateLessThanEqualOrderByDate(User user, LocalDate date1,
+                                                                                         LocalDate date2);
     List<RecipeDate> findAllByUserAndDateLessThanOrderByDate(User user, LocalDate date);
     List<RecipeDate> findAllByUserAndDateGreaterThanOrderByDate(User user, LocalDate date);
 }

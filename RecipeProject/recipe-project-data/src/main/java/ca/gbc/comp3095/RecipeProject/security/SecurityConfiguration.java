@@ -64,7 +64,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/webjars/**",
                 "/h2/**" // used for testing only by course instructor and our team*
         ).permitAll().anyRequest().authenticated()
-                // next section allows use of H2 console for testing and would be removed for production in the real world***
+                // next section allows use of H2 console for testing and would be removed for production in the
+                // real world***
                 .and()
                 .headers().frameOptions().disable()
                 .and()

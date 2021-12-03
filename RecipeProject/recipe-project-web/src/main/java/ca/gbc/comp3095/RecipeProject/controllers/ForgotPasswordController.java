@@ -1,3 +1,13 @@
+//*********************************************************************************//
+//* Project: Null Recipes
+//        * Assignment: Assignment #2
+//        * Author(s): Nathan Power
+//        * Student Number: 101247770
+//        * Date: November 16th, 2021
+//        * Description: This controller handles forgot password functionality before login. It sends an email to an
+//        * account in the to perform password recovery and resets their password.
+//*********************************************************************************//
+
 package ca.gbc.comp3095.RecipeProject.controllers;
 
 import ca.gbc.comp3095.RecipeProject.models.User;
@@ -45,7 +55,8 @@ public class ForgotPasswordController {
     }
 
     @PostMapping("/forgotpassword")
-    public String forgotPassword(Model model, @RequestParam("email") String email, HttpServletRequest request) throws MessagingException {
+    public String forgotPassword(Model model, @RequestParam("email") String email,
+                                 HttpServletRequest request) throws MessagingException {
         String regex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
@@ -68,7 +79,8 @@ public class ForgotPasswordController {
             helper.setFrom("admin@nullrecipes.com", "Null Recipes Support");
             helper.setTo(email);
             String subject = "Null Recipes - Reset Password";
-            String link = "<a href=\"http://" + resetLink + "\" name=\"http://" + resetLink + "\" id=\"http://" + resetLink + "\">Change my password</a>";
+            String link = "<a href=\"http://" + resetLink + "\" name=\"http://" + resetLink +
+                    "\" id=\"http://" + resetLink + "\">Change my password</a>";
             String content = "<p>Hello User,</p>" +
                     "<p>You have requested to reset your password.</p>" +
                     "<p>Click the link below to change your password:</p>" +
@@ -105,7 +117,8 @@ public class ForgotPasswordController {
     }
 
     @PostMapping("/resetpassword")
-    public String resetPassword(Model model, RedirectAttributes redirectAttributes, @RequestParam("password") String password,
+    public String resetPassword(Model model, RedirectAttributes redirectAttributes,
+                                @RequestParam("password") String password,
                                 @RequestParam("Cpassword") String cPassword, @RequestParam("token") String token) {
         User user = userService.findUserByResetPasswordToken(token);
         if (!password.equals(cPassword)) {
@@ -114,7 +127,8 @@ public class ForgotPasswordController {
         }
 
         if (password.length() > 16 || password.length() < 4) {
-            redirectAttributes.addFlashAttribute("message", "Password must be more than 4 characters and less than 16 characters.");
+            redirectAttributes.addFlashAttribute("message",
+                    "Password must be more than 4 characters and less than 16 characters.");
             return "redirect:/resetpassword" + "?token=" + token;
         }
 
