@@ -16,7 +16,8 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="container-fluid wrap-text">
-                        <img th:src="${user.photoData != null} ? ${user.photoData} : @{/img/user-icon.png}"
+                        <img th:src="${user.photoData != null} ? ${'data:image/jpeg;charset=utf-8;base64,' +
+                        user.photoData} : @{/img/user-icon.png}"
                              alt="mdo" width="250" height="250" class="rounded-circle">
                         <h3 class="text-capitalize font-weight-bold"
                             th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h3>

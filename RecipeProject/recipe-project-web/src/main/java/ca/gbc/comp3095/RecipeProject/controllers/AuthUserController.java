@@ -118,6 +118,9 @@ public class AuthUserController {
                         "Uploaded image must be a jpeg or png."));
             }
         }
+        if (multipartFile.isEmpty()) {
+            user.setPhotoData(user.getPhotoData());
+        }
         // check if username already exists
         if (userService.userExistsUsername(user.getUsername()) &&
                 !user.getUsername().equals(userService.findUser().getUsername())) {

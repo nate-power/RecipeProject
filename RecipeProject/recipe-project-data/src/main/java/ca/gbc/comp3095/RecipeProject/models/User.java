@@ -113,7 +113,7 @@ public class User extends BaseEntity {
     }
 
     public String getPhotoData() {
-        return Objects.equals(photoData, null) ? null : "data:image/jpeg;charset=utf-8;base64," + photoData;
+        return Objects.equals(photoData, null) ? null : photoData;
     }
 
     public void setPhotoData(String photoData) {
