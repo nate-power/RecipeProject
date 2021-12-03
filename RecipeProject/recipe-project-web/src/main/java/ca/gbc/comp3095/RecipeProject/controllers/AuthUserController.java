@@ -44,9 +44,6 @@ public class AuthUserController {
     @GetMapping("/profile/{username}")
     public String getProfile(Model model, @PathVariable String username) {
         if (userService.findUser().getUsername().equals(username)) {
-            if (userService.findUser().getShoppingList() == null) {
-                userService.findUser().setShoppingList("");
-            }
             String list = userService.findUser().getShoppingList();
             List<String> shoppingList = list.equals("") ? new ArrayList<>() : Arrays.asList(list.split("\n"));
             model.addAttribute("user", userService.findUser());

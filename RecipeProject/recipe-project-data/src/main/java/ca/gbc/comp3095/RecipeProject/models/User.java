@@ -57,7 +57,7 @@ public class User extends BaseEntity {
     private Set<Recipe> favouriteRecipes = new HashSet<>();
 
     @Column(columnDefinition = "TEXT")
-    private String shoppingList;
+    private String shoppingList = "";
 
     private String resetPasswordToken;
 
@@ -70,7 +70,6 @@ public class User extends BaseEntity {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.shoppingList = "";
     }
 
     public String getUsername() {
