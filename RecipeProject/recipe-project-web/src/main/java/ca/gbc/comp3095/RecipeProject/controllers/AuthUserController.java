@@ -63,8 +63,7 @@ public class AuthUserController {
     }
 
     @GetMapping("profile/change-password")
-    public String changePassword(Model model) {
-        model.addAttribute("user", userService.findUser());
+    public String changePassword() {
         return "/user/change-password";
     }
 
