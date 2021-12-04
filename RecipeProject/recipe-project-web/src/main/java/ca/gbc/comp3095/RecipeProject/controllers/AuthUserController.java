@@ -119,7 +119,12 @@ public class AuthUserController {
             }
         }
         if (multipartFile.isEmpty()) {
-            user.setPhotoData(user.getPhotoData());
+            if (user.getPhotoData().equals("")) {
+                user.setPhotoData(null);
+            }
+            else {
+                user.setPhotoData(user.getPhotoData());
+            }
         }
         // check if username already exists
         if (userService.userExistsUsername(user.getUsername()) &&
