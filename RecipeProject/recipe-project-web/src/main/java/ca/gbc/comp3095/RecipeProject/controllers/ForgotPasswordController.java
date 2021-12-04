@@ -90,7 +90,7 @@ public class ForgotPasswordController {
             helper.setText(content, true);
             mailSender.send(message);
             model.addAttribute("confirmed", "We have sent a reset password link to your email. " +
-                    "Please check your spam folder if you do not see it in your Inbox.");
+                    "Please check your spam folder if you do not see it in your Inbox. You may close this tab.");
             model.addAttribute("email", email);
         } catch (MessagingException | UnsupportedEncodingException | MailAuthenticationException e) {
             model.addAttribute("message", "There has been an error trying to send your password" +
